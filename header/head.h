@@ -9,8 +9,7 @@
 #include<string.h>
 #include"./header/SVGA.h"
 
-typedef struct        //鼠标结构
-{
+typedef struct {
     short far * save_mouse;          //保存鼠标指针覆盖区域
     int pos_x, pos_y;
     int oldx, oldy;
