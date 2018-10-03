@@ -8,8 +8,10 @@
 #include<stdlib.h>
 #include<string.h>
 #include"./header/SVGA.h"
+#define Null 0
 
-typedef struct {
+typedef struct        //鼠标结构
+{
     short far * save_mouse;          //保存鼠标指针覆盖区域
     int pos_x, pos_y;
     int oldx, oldy;
@@ -45,5 +47,39 @@ typedef struct {
 
 } ANGLE;
 
+class Button{
+    char *fun;      //按钮被点击后触发的事件接口
+    char *name;     //按钮的名字
+    int x1;         //左上角横坐标
+    int y1;         //左上角纵坐标
+    int x2;         //右下角横坐标
+    int y2;         //右下角纵坐标
+public:
+    Button(int xx1,int yy1,int xx2,int yy2,char *Fun=Null, char *n=Null);
+    bool IsClick(MOUSE *mouse);
+    virtual void Show(void);
+    virtual void OnClick(void);
+};
+
+class Simple:Button{
+    static int i=0;
+public:
+    Simple(int xx1,int yy1,int xx2,int yy2,char *Fun=Null, char *n=Null);
+    void Show(void);
+    void Onclick(void);
+};
+
+class Tweet:public Button{
+    char *picture;     //图片路径
+    char *title;    //文章标题
+    char *essay;    //文章内容
+    char *author;   //作者
+    char *tag;      //标签
+public:
+    Tweet(chao *p,char *t,char *e);
+    virtual void Show(void);
+};
+
+enum State{MAINLOG,SPORT,FIND,CIRCLE,THINGS,MINE};
 
 #endif
