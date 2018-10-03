@@ -15,7 +15,7 @@ void main() {
     Set_SVGA();
     set_mouse();
     mouse.save_mouse = (short
-    far *)malloc(320);    //¸øÊó±ê·ÖÅä´æ´¢¿Õ¼ä
+    far *)malloc(320);    //ç»™é¼ æ ‡åˆ†é…å­˜å‚¨ç©ºé—´
     mouse.oldx = mouse.pos_x = 512;
     mouse.oldy = mouse.pos_y = 384;
 

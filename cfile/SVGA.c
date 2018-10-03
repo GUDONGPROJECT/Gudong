@@ -1,17 +1,17 @@
 #include "./header/SVGA.h"
 /**************************************
-   SVGAµÄ¹¦ÄÜºÅaxËµÃ÷
-   0x4f00  ¶ÁSVGA¿¨ĞÅÏ¢
-   0x4f01  ¶ÁÏÔÊ¾Ä£Ê½ĞÅÏ¢
-   0x4f02  ÉèÖÃÏÔÊ¾Ä£Ê½
-   0x4f03  ¶Áµ±Ç°ÏÔÊ¾Ä£Ê½
-   0x4f04  ´æ´¢»ò»Ö¸´SVGAµÄÊÓÆµ×´Ì¬
-   0x4f05  ¿ØÖÆÄÚ´æÒ³ÇøÓòÇĞ»»
-   0x4f06  ÉèÖÃ»ò¶ÁÈ¡Âß¼­É¨ÃèÏß¿í¶È
-   0x4f07  ÉèÖÃ»ò¶ÁÈ¡ÊÓÆµÄÚ´æÓëÆÁÄ»µÄ³õÊ¼¶ÔÓ¦Î»ÖÃ
-   0x4f08  ÉèÖÃ»ò¶ÁÈ¡DAC¸÷Ô­É«ÓĞĞ§Î»Êı
-   SVGAÏÔÊ¾Ä£Ê½ºÅbx£º
-		Ä£Ê½ºÅ		·Ö±æÂÊ		ÑÕÉ«Êı		ÑÕÉ«Î»¶¨Òå
+   SVGAçš„åŠŸèƒ½å·axè¯´æ˜
+   0x4f00  è¯»SVGAå¡ä¿¡æ¯
+   0x4f01  è¯»æ˜¾ç¤ºæ¨¡å¼ä¿¡æ¯
+   0x4f02  è®¾ç½®æ˜¾ç¤ºæ¨¡å¼
+   0x4f03  è¯»å½“å‰æ˜¾ç¤ºæ¨¡å¼
+   0x4f04  å­˜å‚¨æˆ–æ¢å¤SVGAçš„è§†é¢‘çŠ¶æ€
+   0x4f05  æ§åˆ¶å†…å­˜é¡µåŒºåŸŸåˆ‡æ¢
+   0x4f06  è®¾ç½®æˆ–è¯»å–é€»è¾‘æ‰«æçº¿å®½åº¦
+   0x4f07  è®¾ç½®æˆ–è¯»å–è§†é¢‘å†…å­˜ä¸å±å¹•çš„åˆå§‹å¯¹åº”ä½ç½®
+   0x4f08  è®¾ç½®æˆ–è¯»å–DACå„åŸè‰²æœ‰æ•ˆä½æ•°
+   SVGAæ˜¾ç¤ºæ¨¡å¼å·bxï¼š
+		æ¨¡å¼å·		åˆ†è¾¨ç‡		é¢œè‰²æ•°		é¢œè‰²ä½å®šä¹‰
 		0x101		640*480		256				-
 		0x103		800*600		256				-
 		0x104		1024*768	16				-
@@ -30,99 +30,99 @@
 Copyright (C) 2017 .
 File name:		SVGA.c
 Author:
-Description£º	ÓÃÓÚÏÔÊ¾Í¼Ïñ
+Descriptionï¼š	ç”¨äºæ˜¾ç¤ºå›¾åƒ
 
-Function List£º
+Function Listï¼š
 	1.void Set_SVGA(void);
-	ÉèÖÃÏÔÊ¾Ä£Ê½
+	è®¾ç½®æ˜¾ç¤ºæ¨¡å¼
     2.void selectpage(register char page);
-	ÓÃÓÚ¿ØÖÆÄÚ´æÒ³ÇøÓòÇĞ»»
+	ç”¨äºæ§åˆ¶å†…å­˜é¡µåŒºåŸŸåˆ‡æ¢
     3.void PartBmp(const int top,const int bottom,const int left,const int right,const int x,const int y,const char *path);
-	ÓÃÓÚÏÔÊ¾Í¼ÏñÄÚ²¿·ÖÍ¼Ïñ
+	ç”¨äºæ˜¾ç¤ºå›¾åƒå†…éƒ¨åˆ†å›¾åƒ
     4.void readbmp(int x, int y,char*path);
-	ÓÃÓÚ¶ÁÈ¡bmpÎÄ¼ş
+	ç”¨äºè¯»å–bmpæ–‡ä»¶
     5.void put_pixel(int x,int y,int color); 
-    »­µãº¯Êı
+    ç”»ç‚¹å‡½æ•°
     6.void SVGA_Horizon(const int x1,const int y1,const int length,const int color);
-	»­Ë®Æ½Ïßº¯Êı
+	ç”»æ°´å¹³çº¿å‡½æ•°
     7.void SVGA_Line( int x1, int x2, int y1, int y2, int color);
-	ÔİÎ´ÊµÏÖÈ«²¿¹¦ÄÜ
+	æš‚æœªå®ç°å…¨éƒ¨åŠŸèƒ½
     8.void SVGA_Rectangular(const int x1,const int x2,const int y1, const int y2,const int color );
-	»­·½¿òº¯Êı
+	ç”»æ–¹æ¡†å‡½æ•°
     9.void SVGA_Bar(const int x1,const int x2,const int y1, const int y2,const int color );
-	»­ÊµĞÄ¾ØĞÎº¯Êı
+	ç”»å®å¿ƒçŸ©å½¢å‡½æ•°
     10.void SVGA_Cricle(const int x1,const int y1,const int r,const int color);
-	»­¿ÕĞÄÔ²º¯Êı
+	ç”»ç©ºå¿ƒåœ†å‡½æ•°
     11.void SVGA_Ball(const int x1,const int y1,const int r,const int color);
-	»­ÊµĞÄÔ²º¯Êı
+	ç”»å®å¿ƒåœ†å‡½æ•°
     12.void get_image(const int x1,const int y1,const int x2,const y2,short far *buffer);
-	È¡ÆÁÄ»ÉÏ²¿·ÖÍ¼ÏñµÄº¯Êı£¨²»Ö§³Ö»»Ò³£©
+	å–å±å¹•ä¸Šéƒ¨åˆ†å›¾åƒçš„å‡½æ•°ï¼ˆä¸æ”¯æŒæ¢é¡µï¼‰
     13.void put_image(const int x1,const int y1,const int x2,const y2,short far *buffer);
-	½«²¿·ÖÍ¼Ïñ»¹Ô­µ½ÆÁÄ»ÉÏµÄº¯Êı£¨²»Ö§³Ö»»Ò³£©
+	å°†éƒ¨åˆ†å›¾åƒè¿˜åŸåˆ°å±å¹•ä¸Šçš„å‡½æ•°ï¼ˆä¸æ”¯æŒæ¢é¡µï¼‰
     14.void SVGA_Straight(const x,const y,const length,const color);
-	»­´¹Ö±Ïßº¯Êı
+	ç”»å‚ç›´çº¿å‡½æ•°
 	15.void enlarge(int x, int y,int n,char * path)
-	·Å´óÍ¼ÏñÎªÕûÊı±¶
+	æ”¾å¤§å›¾åƒä¸ºæ•´æ•°å€
 	16.int Getcolor(const int x, const int y)
-	»ñÈ¡Ä³µãµÄÑÕÉ«
+	è·å–æŸç‚¹çš„é¢œè‰²
 	17.void maskbmp(int x, int y,char*path)
-	Ö»»­Í¼ÏñºÚÉ«µÄ²¿·Ö
+	åªç”»å›¾åƒé»‘è‰²çš„éƒ¨åˆ†
 **********************************************************/
-//½èÓÃËûÈË£¬²»¼ÆÈë´úÂëÁ¿
+//å€Ÿç”¨ä»–äººï¼Œä¸è®¡å…¥ä»£ç é‡
 /**********************************************************
-Function£º		Line
+Functionï¼š		Line
 
-Description£º	»­Ò»°ãÖ±Ïßº¯Êı
-				¿ÉÒÔ½ÓÊÕ³¬³öÆÁÄ»·¶Î§µÄÊı¾İ£¬Ö»»­³öÔÚÆÁÄ»ÄÚ²¿·Ö
-				ÒòÎªÃ»ÓĞ·ÀÖ¹ÕûĞÍ±äÁ¿Òç³öµÄÅĞ¶Ï£¬»­³¬³öÆÁÄ»µÄÏßÊ±Ó¦·ÀÖ¹ÊäÈëÌØ´óÊı¾İ
+Descriptionï¼š	ç”»ä¸€èˆ¬ç›´çº¿å‡½æ•°
+				å¯ä»¥æ¥æ”¶è¶…å‡ºå±å¹•èŒƒå›´çš„æ•°æ®ï¼Œåªç”»å‡ºåœ¨å±å¹•å†…éƒ¨åˆ†
+				å› ä¸ºæ²¡æœ‰é˜²æ­¢æ•´å‹å˜é‡æº¢å‡ºçš„åˆ¤æ–­ï¼Œç”»è¶…å‡ºå±å¹•çš„çº¿æ—¶åº”é˜²æ­¢è¾“å…¥ç‰¹å¤§æ•°æ®
 
-Calls£º			Putpixel256
+Callsï¼š			Putpixel256
 				
 				abs
 
-Called By£º		LightSW
+Called Byï¼š		LightSW
 				LightNE
 				LightNW
 				LightSE
 
-Input£º			int x1					ÆğÊ¼µãºá×ø±ê£¬´Ó×óµ½ÓÒÔö¼Ó£¬0Îª×îĞ¡Öµ£¨ÆÁÄ»²Î¿¼Ïµ£©
-				int y1					ÆğÊ¼µã×İ×ø±ê£¬´ÓÉÏµ½ÏÂÔö¼Ó£¬0Îª×îĞ¡Öµ£¨ÆÁÄ»²Î¿¼Ïµ£©
-				int x2					ÖÕÖ¹µãºá×ø±ê£¨ÆÁÄ»²Î¿¼Ïµ£©
-				int y2					ÖÕÖ¹µã×İ×ø±ê£¨ÆÁÄ»²Î¿¼Ïµ£©
-				unsigned char color		ÑÕÉ«Êı£¬¹²ÓĞ256ÖÖ
+Inputï¼š			int x1					èµ·å§‹ç‚¹æ¨ªåæ ‡ï¼Œä»å·¦åˆ°å³å¢åŠ ï¼Œ0ä¸ºæœ€å°å€¼ï¼ˆå±å¹•å‚è€ƒç³»ï¼‰
+				int y1					èµ·å§‹ç‚¹çºµåæ ‡ï¼Œä»ä¸Šåˆ°ä¸‹å¢åŠ ï¼Œ0ä¸ºæœ€å°å€¼ï¼ˆå±å¹•å‚è€ƒç³»ï¼‰
+				int x2					ç»ˆæ­¢ç‚¹æ¨ªåæ ‡ï¼ˆå±å¹•å‚è€ƒç³»ï¼‰
+				int y2					ç»ˆæ­¢ç‚¹çºµåæ ‡ï¼ˆå±å¹•å‚è€ƒç³»ï¼‰
+				unsigned char color		é¢œè‰²æ•°ï¼Œå…±æœ‰256ç§
 
-Output£º		ÆÁÄ»ÉÏ»­³öÖ±Ïß
+Outputï¼š		å±å¹•ä¸Šç”»å‡ºç›´çº¿
 
-Return£º		None
-Others£º		None
+Returnï¼š		None
+Othersï¼š		None
 **********************************************************/
 void SVGA_Line(int x1, int y1, int x2, int y2, unsigned char color) {
-    int dx, dy;      /*Ö±Ïßx¡¢y×ø±ê²îÖµ*/
-    int dx2, dy2;    /*¼Ó¿ìÔËËãËÙ¶ÈµÄÖĞ¼äÖµ*/
-    int xinc, yinc;    /*ÅĞ¶ÏÏë¡¢yÔö¼Ó·½ÏòµÄ·ûºÅÖµ*/
-    int d, dxy;      /*¾ö²ß±äÁ¿*/
+    int dx, dy;      /*ç›´çº¿xã€yåæ ‡å·®å€¼*/
+    int dx2, dy2;    /*åŠ å¿«è¿ç®—é€Ÿåº¦çš„ä¸­é—´å€¼*/
+    int xinc, yinc;    /*åˆ¤æ–­æƒ³ã€yå¢åŠ æ–¹å‘çš„ç¬¦å·å€¼*/
+    int d, dxy;      /*å†³ç­–å˜é‡*/
 
-/*¼ÆËã×ø±ê²îÖµºÍÖĞ¼ä±äÁ¿*/
+/*è®¡ç®—åæ ‡å·®å€¼å’Œä¸­é—´å˜é‡*/
     dx = abs(x2 - x1);
     dx2 = dx << 1;
     dy = abs(y2 - y1);
     dy2 = dy << 1;
 
-/*ÅĞ¶ÏÖ±Ïßx×ø±êÔö¼Ó·½Ïò*/
+/*åˆ¤æ–­ç›´çº¿xåæ ‡å¢åŠ æ–¹å‘*/
     if (x2 > x1) {
         xinc = 1;
     }
 
-/*Èç¹ûÊÇÊúÖ±Ïß*/
+/*å¦‚æœæ˜¯ç«–ç›´çº¿*/
     else if (x2 == x1) {
-        /*y×ø±êÅÅĞò*/
+        /*yåæ ‡æ’åº*/
         if (y1 > y2) {
             dx = y1;
             y1 = y2;
             y2 = dx;
         }
 
-        /*»­ÊúÖ±Ïß*/
+        /*ç”»ç«–ç›´çº¿*/
         for (dx = y1; dx <= y2; dx++) {
             put_pixel(x1, dx, color);
         }
@@ -132,12 +132,12 @@ void SVGA_Line(int x1, int y1, int x2, int y2, unsigned char color) {
         xinc = -1;
     }
 
-/*ÅĞ¶ÏÖ±Ïßy×ø±êÔö¼Ó·½Ïò*/
+/*åˆ¤æ–­ç›´çº¿yåæ ‡å¢åŠ æ–¹å‘*/
     if (y2 > y1) {
         yinc = 1;
     }
 
-/*Èç¹ûÊÇË®Æ½Ïß*/
+/*å¦‚æœæ˜¯æ°´å¹³çº¿*/
     else if (y2 == y1) {
         SVGA_Horizon(x1, y1, x2 - x1, color);
         return;
@@ -146,9 +146,9 @@ void SVGA_Line(int x1, int y1, int x2, int y2, unsigned char color) {
     }
 
 /*******************************
-ÒÔÏÂÔËÓÃBresenhamËã·¨Éú³ÉÖ±Ïß¡£
-¸ÃËã·¨ÊÇµÃµ½¹«ÈÏµÄ³ÉÊìµÄ¿ìËÙËã·¨¡£
-¾ßÌåÏ¸½ÚÂÔÈ¥¡£
+ä»¥ä¸‹è¿ç”¨Bresenhamç®—æ³•ç”Ÿæˆç›´çº¿ã€‚
+è¯¥ç®—æ³•æ˜¯å¾—åˆ°å…¬è®¤çš„æˆç†Ÿçš„å¿«é€Ÿç®—æ³•ã€‚
+å…·ä½“ç»†èŠ‚ç•¥å»ã€‚
 *******************************/
     put_pixel(x1, y1, color);
 
@@ -186,18 +186,18 @@ void SVGA_Line(int x1, int y1, int x2, int y2, unsigned char color) {
 }
 
 /********************************
-**º¯ÊıÃû£ºSet_SVGA
-**²ÎÊı£º  Void
-**¹¦ÄÜ£º  ÉèÖÃÏÔÊ¾Ä£Ê½Îª0x117
+**å‡½æ•°åï¼šSet_SVGA
+**å‚æ•°ï¼š  Void
+**åŠŸèƒ½ï¼š  è®¾ç½®æ˜¾ç¤ºæ¨¡å¼ä¸º0x117
 ********************************/
 void Set_SVGA(void)
-//ÉèÖÃµ±Ç°ÏÔÊ¾Ä£Ê½
+//è®¾ç½®å½“å‰æ˜¾ç¤ºæ¨¡å¼
 {
     union REGS regs;
-    regs.x.ax = 0x4f02;//ÉèÖÃµ±Ç°ÏÔÊ¾Ä£Ê½
-    regs.x.bx = 0x117;//ÉèÖÃÏÔÊ¾Ä£Ê½·Ö±æÂÊÎª1024*768 ÑÕÉ«Êı4K ÑÕÉ«ÅÌ5:6:5
-    int86(0x10, &regs, &regs);//µ÷ÓÃBIOS int86 10h ÖĞ¶Ï
-    if (regs.x.ax != 0x004f)//Èç¹ûÉèÖÃ³ö´í£¬ÔòÖÕÖ¹³ÌĞò
+    regs.x.ax = 0x4f02;//è®¾ç½®å½“å‰æ˜¾ç¤ºæ¨¡å¼
+    regs.x.bx = 0x117;//è®¾ç½®æ˜¾ç¤ºæ¨¡å¼åˆ†è¾¨ç‡ä¸º1024*768 é¢œè‰²æ•°4K é¢œè‰²ç›˜5:6:5
+    int86(0x10, &regs, &regs);//è°ƒç”¨BIOS int86 10h ä¸­æ–­
+    if (regs.x.ax != 0x004f)//å¦‚æœè®¾ç½®å‡ºé”™ï¼Œåˆ™ç»ˆæ­¢ç¨‹åº
     {
         printf("Set SVGA mode wrong");
         exit(1);
@@ -205,30 +205,30 @@ void Set_SVGA(void)
 }
 
 /********************************
-**º¯ÊıÃû£ºselectpage
-**²ÎÊı£º  Void
-**¹¦ÄÜ£º  ¸ü»»½çÃæ
+**å‡½æ•°åï¼šselectpage
+**å‚æ•°ï¼š  Void
+**åŠŸèƒ½ï¼š  æ›´æ¢ç•Œé¢
 ********************************/
 void selectpage(register char page)
-//»»Ò³º¯Êı
+//æ¢é¡µå‡½æ•°
 {
     union REGS r;
     r.x.ax = 0x4f05;
     r.x.bx = 0;
-    r.x.dx = page; /*Ñ¡ÔñÒ³Ãæ*/
+    r.x.dx = page; /*é€‰æ‹©é¡µé¢*/
     int86(0x10, &r, &r);
 }
 
 /********************************
-**º¯ÊıÃû£ºPartBmp
-**²ÎÊı£º     const int top       ËùÈ¡µÄ²¿·ÖÔÚÔ­Í¼ÏñµÄ¶¥²¿×ø±ê
-			 const int bottom    ËùÈ¡µÄ²¿·ÖÔÚÔ­Í¼ÏñµÄµ×²¿×ø±ê
-			 const int left      ËùÈ¡µÄ²¿·ÖÔÚÔ­Í¼ÏñµÄ×ó¶Ë×ø±ê
-			 const int right     ËùÈ¡µÄ²¿·ÖÔÚÔ­Í¼ÏñµÄÓÒ¶Ë×ø±ê
-			 const int x         ËùÈ¡µÄ²¿·ÖÔÚÆÁÄ»ÉÏµÄºá×ø±ê
-			 const int y         ËùÈ¡µÄ²¿·ÖÔÚÆÁÄ»ÉÏµÄ×İ×ø±ê
+**å‡½æ•°åï¼šPartBmp
+**å‚æ•°ï¼š     const int top       æ‰€å–çš„éƒ¨åˆ†åœ¨åŸå›¾åƒçš„é¡¶éƒ¨åæ ‡
+			 const int bottom    æ‰€å–çš„éƒ¨åˆ†åœ¨åŸå›¾åƒçš„åº•éƒ¨åæ ‡
+			 const int left      æ‰€å–çš„éƒ¨åˆ†åœ¨åŸå›¾åƒçš„å·¦ç«¯åæ ‡
+			 const int right     æ‰€å–çš„éƒ¨åˆ†åœ¨åŸå›¾åƒçš„å³ç«¯åæ ‡
+			 const int x         æ‰€å–çš„éƒ¨åˆ†åœ¨å±å¹•ä¸Šçš„æ¨ªåæ ‡
+			 const int y         æ‰€å–çš„éƒ¨åˆ†åœ¨å±å¹•ä¸Šçš„çºµåæ ‡
 			 const char *path
-**¹¦ÄÜ£º  ½«Í¼ÏñµÄÄ³Ò»²¿·Ö¶ÁÈ¡µ½ÆÁÄ»ÉÏ
+**åŠŸèƒ½ï¼š  å°†å›¾åƒçš„æŸä¸€éƒ¨åˆ†è¯»å–åˆ°å±å¹•ä¸Š
 ********************************/
 void PartBmp(const int top,
              const int bottom,
@@ -239,19 +239,19 @@ void PartBmp(const int top,
              const char *path) {
     FILE *fpbmp = NULL;
     int sign = 0;
-    long int Width, Height;//Í¼Ïñ¿í¸ß
-    long int linebytes;//Ò»ĞĞÓ¦¸ÃÓĞµÄ×Ö½ÚÊı
-    unsigned long position;//Ã¿¸öÏñËØµãÔÚÆÁÄ»ÉÏÓ¦¸Ã´æÔÚµÄÎ»ÖÃ
-    register int i, j;//¼ÆÊı
-    register char page_new = 0;//»»Ò³±êÊ¶
+    long int Width, Height;//å›¾åƒå®½é«˜
+    long int linebytes;//ä¸€è¡Œåº”è¯¥æœ‰çš„å­—èŠ‚æ•°
+    unsigned long position;//æ¯ä¸ªåƒç´ ç‚¹åœ¨å±å¹•ä¸Šåº”è¯¥å­˜åœ¨çš„ä½ç½®
+    register int i, j;//è®¡æ•°
+    register char page_new = 0;//æ¢é¡µæ ‡è¯†
     register char page_old;
     long int Resx, Resy;
     long int PartWidth, PartHeight;
-    short *buffer = NULL;//ÉèÖÃÏÔÊ¾ÆÁÒ»ĞĞÏÔÊ¾1024¸öÏñËØ
+    short *buffer = NULL;//è®¾ç½®æ˜¾ç¤ºå±ä¸€è¡Œæ˜¾ç¤º1024ä¸ªåƒç´ 
     short far
     *
     const VideoBuffer = (short far
-    *)0xA0000000L;//Éè¶¨ÏÔ´æÖ¸Õë²»±ä
+    *)0xA0000000L;//è®¾å®šæ˜¾å­˜æŒ‡é’ˆä¸å˜
     if ((fpbmp = fopen(path, "rb")) == NULL) {
         printf("Cannot open the picture");
         fclose(fpbmp);
@@ -259,14 +259,14 @@ void PartBmp(const int top,
     }
     fseek(fpbmp, 0L, 0);
     fread(&sign, 2, 1, fpbmp);
-    if (sign != 0x4d42)//ÈôÖ¸¶¨Í¼Ïñ²¢²»ÊÇbmp£¬ÔòÖÕÖ¹³ÌĞò
+    if (sign != 0x4d42)//è‹¥æŒ‡å®šå›¾åƒå¹¶ä¸æ˜¯bmpï¼Œåˆ™ç»ˆæ­¢ç¨‹åº
     {
         printf("the file is not a bmp");
         fclose(fpbmp);
         exit(1);
     }
     fseek(fpbmp, 18L, 0);
-    fread(&Width, 4, 1, fpbmp);//¶ÁÈ¡Í¼Ïñ¿í¡¢¸ß
+    fread(&Width, 4, 1, fpbmp);//è¯»å–å›¾åƒå®½ã€é«˜
     fseek(fpbmp, 22L, 0);
     fread(&Height, 4, 1, fpbmp);
     if (right > Width) {
@@ -289,7 +289,7 @@ void PartBmp(const int top,
     } else {
         Resy = PartHeight;
     }
-    linebytes = (Width * 2) % 4;//ÒòÎª16Î»µÄbmp£¬Ã¿¸öÏñËØÁ½¸ö×Ö½Ú£¬Èô¿í¶ÈËùÕ¼×Ö½Ú²»ÄÜ±»4Õû³ı£¬Ôò²¹È«
+    linebytes = (Width * 2) % 4;//å› ä¸º16ä½çš„bmpï¼Œæ¯ä¸ªåƒç´ ä¸¤ä¸ªå­—èŠ‚ï¼Œè‹¥å®½åº¦æ‰€å å­—èŠ‚ä¸èƒ½è¢«4æ•´é™¤ï¼Œåˆ™è¡¥å…¨
     if (fseek(fpbmp, bottom * Width, SEEK_SET) == -1) {
         printf("Fail to analyse file !");
         fclose(fpbmp);
@@ -298,7 +298,7 @@ void PartBmp(const int top,
     if (!linebytes) {
         linebytes = Width * 2;
     } else {
-        linebytes = Width * 2 + 4 - linebytes;//²¹È«³ÉÎª¿ÉÒÔ±»4Õû³ıµÄbmpÍ¼Æ¬ÄÚÕæÊµµÄÒ»ĞĞµÄ×Ö½ÚÊı
+        linebytes = Width * 2 + 4 - linebytes;//è¡¥å…¨æˆä¸ºå¯ä»¥è¢«4æ•´é™¤çš„bmpå›¾ç‰‡å†…çœŸå®çš„ä¸€è¡Œçš„å­—èŠ‚æ•°
     }
     if ((buffer = (short *) malloc(linebytes)) == NULL) {
         printf("no memory");
@@ -307,31 +307,31 @@ void PartBmp(const int top,
     for (j = PartHeight - 1; j > -1; j--) {
         fread(buffer, 2, PartWidth, fpbmp);
         if (j < Resy) {
-            if ((j + y) * 5 % 256 > 251)//Õû³ı52.1£¬¹Û²ìÒ»ĞĞÊÇ·ñ¶¼ÔÚÒ»Ò³ÄÚ£¬Èç¹û²»ÔÚÒ»Ò³ÔòÒ»Ò³Ò»Ò³´¦Àí
+            if ((j + y) * 5 % 256 > 251)//æ•´é™¤52.1ï¼Œè§‚å¯Ÿä¸€è¡Œæ˜¯å¦éƒ½åœ¨ä¸€é¡µå†…ï¼Œå¦‚æœä¸åœ¨ä¸€é¡µåˆ™ä¸€é¡µä¸€é¡µå¤„ç†
             {
                 for (i = 0; i < Resx; i++) {
-                    position = 1024L * (y + j) + (x + i);//´Ë´¦±ØĞë¼ÓÉÏL·ñÔò»á³öÏÖÖ»ÏÔÊ¾Ò»²¿·Ö·´¸´¸²¸ÇµÄÇé¿ö£¬²Â²âÊÇÒòÎªÊı¾İ¹ı´ó£¬°Ñposition³å±¬ÁË£¬È»ºóÒ³ÊıÒ»Ö±Ã»±ä»¯
-                    page_new = position >> 15;  /*¼ÆËãÏÔÊ¾Ò³£¬Á½¸ö×Ö½Ú*2/65536*/
-                    position &= 0x0000ffffl;    /*¼ÆËãÔÚÒ»¸öÒ³ÃæÉÏµÄÆ«ÒÆÎ»ÖÃ£¬Õû³ı65536µÄ¿ìËÙ·½°¸£¬±£ÁôµÍ16Î»*/
-                    if (page_new != page_old)   /*¸ü»»Ò³Ãæ*/
+                    position = 1024L * (y + j) + (x + i);//æ­¤å¤„å¿…é¡»åŠ ä¸ŠLå¦åˆ™ä¼šå‡ºç°åªæ˜¾ç¤ºä¸€éƒ¨åˆ†åå¤è¦†ç›–çš„æƒ…å†µï¼ŒçŒœæµ‹æ˜¯å› ä¸ºæ•°æ®è¿‡å¤§ï¼ŒæŠŠpositionå†²çˆ†äº†ï¼Œç„¶åé¡µæ•°ä¸€ç›´æ²¡å˜åŒ–
+                    page_new = position >> 15;  /*è®¡ç®—æ˜¾ç¤ºé¡µï¼Œä¸¤ä¸ªå­—èŠ‚*2/65536*/
+                    position &= 0x0000ffffl;    /*è®¡ç®—åœ¨ä¸€ä¸ªé¡µé¢ä¸Šçš„åç§»ä½ç½®ï¼Œæ•´é™¤65536çš„å¿«é€Ÿæ–¹æ¡ˆï¼Œä¿ç•™ä½16ä½*/
+                    if (page_new != page_old)   /*æ›´æ¢é¡µé¢*/
                     {
                         selectpage(page_new);
                         page_old = page_new;
                     }
-                    VideoBuffer[position] = buffer[i];//ÒòÎª×îºóÊÇÒÔÁ½Î»Ïà¶Ô£¬ËùÒÔÒ²²»ÓÃ³ËÒÔ2
+                    VideoBuffer[position] = buffer[i];//å› ä¸ºæœ€åæ˜¯ä»¥ä¸¤ä½ç›¸å¯¹ï¼Œæ‰€ä»¥ä¹Ÿä¸ç”¨ä¹˜ä»¥2
                 }
             } else {
                 position = (y + j) * 1024L + x;
                 page_new = position >> 15;
                 position &= 0x0000ffffl;
-                if (page_new != page_old)   /*¸ü»»Ò³Ãæ*/
+                if (page_new != page_old)   /*æ›´æ¢é¡µé¢*/
                 {
                     selectpage(page_new);
                     page_old = page_new;
                 }
                 for (i = 0; i < Resx; i++) {
 
-                    VideoBuffer[position + i] = buffer[i];//ÒòÎª×îºóÊÇÒÔÁ½Î»Ïà¶Ô£¬ËùÒÔÒ²²»ÓÃ³ËÒÔ2
+                    VideoBuffer[position + i] = buffer[i];//å› ä¸ºæœ€åæ˜¯ä»¥ä¸¤ä½ç›¸å¯¹ï¼Œæ‰€ä»¥ä¹Ÿä¸ç”¨ä¹˜ä»¥2
                 }
             }
         }
@@ -345,49 +345,49 @@ void PartBmp(const int top,
 }
 
 /********************************
-**º¯ÊıÃû£ºreadbmp
+**å‡½æ•°åï¼šreadbmp
 
-**²ÎÊı£º     const int x         ËùÈ¡µÄ²¿·ÖÔÚÆÁÄ»ÉÏµÄºá×ø±ê
-			 const int y         ËùÈ¡µÄ²¿·ÖÔÚÆÁÄ»ÉÏµÄ×İ×ø±ê
+**å‚æ•°ï¼š     const int x         æ‰€å–çš„éƒ¨åˆ†åœ¨å±å¹•ä¸Šçš„æ¨ªåæ ‡
+			 const int y         æ‰€å–çš„éƒ¨åˆ†åœ¨å±å¹•ä¸Šçš„çºµåæ ‡
 			 const char *path
 			 
-**¹¦ÄÜ£º  ½«Ö¸¶¨bmpÎÄ¼şÖĞµÄÍ¼Ïñ¶ÁÈ¡µ½ÆÁÄ»ÉÏ,³¬¹ıÆÁÄ»µÄ²¿·Ö²»ÓèÒÔÏÔÊ¾
+**åŠŸèƒ½ï¼š  å°†æŒ‡å®šbmpæ–‡ä»¶ä¸­çš„å›¾åƒè¯»å–åˆ°å±å¹•ä¸Š,è¶…è¿‡å±å¹•çš„éƒ¨åˆ†ä¸äºˆä»¥æ˜¾ç¤º
 
 ********************************/
 void readbmp(int x, int y, char *path) {
     FILE *fpbmp = NULL;
-    long int Width;//Í¼Ïñ¿í¶È
-    long int Height;//Í¼Ïñ¸ß¶È
-    long int linebytes;//²¹È«ºóÒ»ĞĞ×Ö½ÚÊı
-    unsigned int sign;//bmpÎÄ¼ş±êÊ¶
-    unsigned long position;//Ã¿¸öÏñËØÓ¦¸ÃÔÚÆÁÄ»ÉÏÏÔÊ¾µÄ×ø±ê
+    long int Width;//å›¾åƒå®½åº¦
+    long int Height;//å›¾åƒé«˜åº¦
+    long int linebytes;//è¡¥å…¨åä¸€è¡Œå­—èŠ‚æ•°
+    unsigned int sign;//bmpæ–‡ä»¶æ ‡è¯†
+    unsigned long position;//æ¯ä¸ªåƒç´ åº”è¯¥åœ¨å±å¹•ä¸Šæ˜¾ç¤ºçš„åæ ‡
     register int i, j;
-    long int Resx, Resy;//×îºóÏÔÊ¾µÄ³¤¶ÈºÍ¿í¶È
-    register char page_new = 0;//»»Ò³±êÊ¶
+    long int Resx, Resy;//æœ€åæ˜¾ç¤ºçš„é•¿åº¦å’Œå®½åº¦
+    register char page_new = 0;//æ¢é¡µæ ‡è¯†
     static char page_old = 0;
-    short *buffer = NULL;//ÉèÖÃÏÔÊ¾ÆÁÒ»ĞĞÏÔ1024¸ö×Ö½Ú
+    short *buffer = NULL;//è®¾ç½®æ˜¾ç¤ºå±ä¸€è¡Œæ˜¾1024ä¸ªå­—èŠ‚
     short far
     *
     const VideoBuffer = (short far
-    *)0xA0000000L;//Éè¶¨ÏÔ´æÖ¸Õë²»±ä
-    if ((fpbmp = fopen(path, "rb")) == NULL)//ÈôÎŞ·¨´ò¿ªÖ¸¶¨Í¼Ïñ£¬ÖÕÖ¹³Ì??
+    *)0xA0000000L;//è®¾å®šæ˜¾å­˜æŒ‡é’ˆä¸å˜
+    if ((fpbmp = fopen(path, "rb")) == NULL)//è‹¥æ— æ³•æ‰“å¼€æŒ‡å®šå›¾åƒï¼Œç»ˆæ­¢ç¨‹??
     {
         printf("Cannot open the picture");
         exit(1);
     }
     fseek(fpbmp, 0, 0);
     fread(&sign, 2, 1, fpbmp);
-    if (sign != 0x4d42)//ÈôÖ¸¶¨Í¼Ïñ²¢²»ÊÇbmp£¬ÔòÖÕÖ¹³ÌĞò
+    if (sign != 0x4d42)//è‹¥æŒ‡å®šå›¾åƒå¹¶ä¸æ˜¯bmpï¼Œåˆ™ç»ˆæ­¢ç¨‹åº
     {
         printf("the file is not a bmp");
         fclose(fpbmp);
         exit(1);
     }
     fseek(fpbmp, 18L, 0);
-    fread(&Width, 4, 1, fpbmp);//¶ÁÈ¡Í¼Ïñ¿í¡¢¸ß
+    fread(&Width, 4, 1, fpbmp);//è¯»å–å›¾åƒå®½ã€é«˜
     fseek(fpbmp, 22L, 0);
     fread(&Height, 4, 1, fpbmp);
-    if (x + Width > 1024)//ÉèÖÃÆÁÄ»ÏŞÖÆ£¬³¬³öÆÁÄ»´óĞ¡²»ÓèÒÔÏÔÊ¾
+    if (x + Width > 1024)//è®¾ç½®å±å¹•é™åˆ¶ï¼Œè¶…å‡ºå±å¹•å¤§å°ä¸äºˆä»¥æ˜¾ç¤º
     {
         Resx = 1024 - x;
     } else {
@@ -398,13 +398,13 @@ void readbmp(int x, int y, char *path) {
     } else {
         Resy = Height;
     }
-    linebytes = (Width * 2) % 4;//ÒòÎª16Î»µÄbmp£¬Ã¿¸öÏñËØÁ½¸ö×Ö½Ú£¬Èô¿í¶ÈËùÕ¼×Ö½Ú²»ÄÜ±»4Õû³ı£¬Ôò²¹È«
+    linebytes = (Width * 2) % 4;//å› ä¸º16ä½çš„bmpï¼Œæ¯ä¸ªåƒç´ ä¸¤ä¸ªå­—èŠ‚ï¼Œè‹¥å®½åº¦æ‰€å å­—èŠ‚ä¸èƒ½è¢«4æ•´é™¤ï¼Œåˆ™è¡¥å…¨
     if (!linebytes) {
         linebytes = Width * 2;
     } else {
-        linebytes = Width * 2 + 4L - linebytes;//²¹È«È«³ÆÎª¿ÉÒÔ±»4Õû³ıµÄbmpÍ¼Æ¬ÄÚÕæÊµµÄÒ»ĞĞµÄ×Ö½ÚÊı
+        linebytes = Width * 2 + 4L - linebytes;//è¡¥å…¨å…¨ç§°ä¸ºå¯ä»¥è¢«4æ•´é™¤çš„bmpå›¾ç‰‡å†…çœŸå®çš„ä¸€è¡Œçš„å­—èŠ‚æ•°
     }
-    if ((buffer = (short *) malloc(linebytes)) == NULL)//·ÖÅä¿Õ¼ä£¬ÓÃÓÚ´æ´¢Ã¿ĞĞÍ¼ÏñµÄĞÅÏ¢£¬Ö®ËùÒÔÓÃint¸ñÊ½£¬ÊÇÒòÎª16Î»bmpÃ¿Á½¸öÏñËØÒ»Î»£¬ÕâÑù·½±ã¶¨Î»
+    if ((buffer = (short *) malloc(linebytes)) == NULL)//åˆ†é…ç©ºé—´ï¼Œç”¨äºå­˜å‚¨æ¯è¡Œå›¾åƒçš„ä¿¡æ¯ï¼Œä¹‹æ‰€ä»¥ç”¨intæ ¼å¼ï¼Œæ˜¯å› ä¸º16ä½bmpæ¯ä¸¤ä¸ªåƒç´ ä¸€ä½ï¼Œè¿™æ ·æ–¹ä¾¿å®šä½
     {
         printf("no memory");
         exit(1);
@@ -413,35 +413,35 @@ void readbmp(int x, int y, char *path) {
     page_old = (Resy - 1 + y) * 1024L + Resx + x;
     selectpage(page_old);
     page_new = page_old;
-    for (j = Height - 1; j > -1; j--)//dim¶ÁÍ¼ÉÏÏÂµßµ¹£¬ËùÒÔÍ¬Ïà·´µÄ·½Ê½½«Í¼ÏñÂ¼ÈëÏÔ´æ
+    for (j = Height - 1; j > -1; j--)//dimè¯»å›¾ä¸Šä¸‹é¢ å€’ï¼Œæ‰€ä»¥åŒç›¸åçš„æ–¹å¼å°†å›¾åƒå½•å…¥æ˜¾å­˜
     {
         fread(buffer, linebytes, 1, fpbmp);
         if (j < Resy) {
-            if ((j + y) * 5 % 256 > 251)//¹Û²ìÒ»ĞĞÊÇ·ñ¶¼ÔÚÒ»Ò³ÄÚ£¬Èç¹û²»ÔÚÒ»Ò³ÔòÒ»Ò³Ò»Ò³´¦Àí
+            if ((j + y) * 5 % 256 > 251)//è§‚å¯Ÿä¸€è¡Œæ˜¯å¦éƒ½åœ¨ä¸€é¡µå†…ï¼Œå¦‚æœä¸åœ¨ä¸€é¡µåˆ™ä¸€é¡µä¸€é¡µå¤„ç†
             {
                 for (i = 0; i < Resx; i++) {
-                    position = 1024L * (y + j) + (x + i);//´Ë´¦±ØĞë¼ÓÉÏL·ñÔò»á³öÏÖÖ»ÏÔÊ¾Ò»²¿·Ö·´¸´¸²¸ÇµÄÇé¿ö£¬²Â²âÊÇÒòÎªÊı¾İ¹ı´ó£¬°Ñposition³å±¬ÁË£¬È»ºóÒ³ÊıÒ»Ö±Ã»±ä
-                    page_new = position >> 15;  /*¼ÆËãÏÔÊ¾Ò³£¬Á½¸ö×Ö½Ú*2/65536*/
-                    position &= 0x0000ffffl;    //¼ÆËãÔÚÒ»¸öÒ³ÃæÉÏµÄÆ«ÒÆÎ»ÖÃ£¬Õû³ı65536µÄ¿ìËÙ·½°¸£¬±£ÁôµÍÊ®ÁùÎ»
-                    if (page_new != page_old)   /*¸ü»»Ò³Ãæ*/
+                    position = 1024L * (y + j) + (x + i);//æ­¤å¤„å¿…é¡»åŠ ä¸ŠLå¦åˆ™ä¼šå‡ºç°åªæ˜¾ç¤ºä¸€éƒ¨åˆ†åå¤è¦†ç›–çš„æƒ…å†µï¼ŒçŒœæµ‹æ˜¯å› ä¸ºæ•°æ®è¿‡å¤§ï¼ŒæŠŠpositionå†²çˆ†äº†ï¼Œç„¶åé¡µæ•°ä¸€ç›´æ²¡å˜
+                    page_new = position >> 15;  /*è®¡ç®—æ˜¾ç¤ºé¡µï¼Œä¸¤ä¸ªå­—èŠ‚*2/65536*/
+                    position &= 0x0000ffffl;    //è®¡ç®—åœ¨ä¸€ä¸ªé¡µé¢ä¸Šçš„åç§»ä½ç½®ï¼Œæ•´é™¤65536çš„å¿«é€Ÿæ–¹æ¡ˆï¼Œä¿ç•™ä½åå…­ä½
+                    if (page_new != page_old)   /*æ›´æ¢é¡µé¢*/
                     {
                         selectpage(page_new);
                         page_old = page_new;
                     }
-                    VideoBuffer[position] = buffer[i];//ÒòÎª×îºóÊÇÒÔÁ½Î»Ïà¶Ô£¬ËùÒÔÒ²²»ÓÃ³ËÒÔ2
+                    VideoBuffer[position] = buffer[i];//å› ä¸ºæœ€åæ˜¯ä»¥ä¸¤ä½ç›¸å¯¹ï¼Œæ‰€ä»¥ä¹Ÿä¸ç”¨ä¹˜ä»¥2
                 }
             } else {
                 position = (y + j) * 1024L + x;
                 page_new = position >> 15;
                 position &= 0x0000ffffl;
-                if (page_new != page_old)   /*¸ü»»Ò³Ãæ*/
+                if (page_new != page_old)   /*æ›´æ¢é¡µé¢*/
                 {
                     selectpage(page_new);
                     page_old = page_new;
                 }
                 for (i = 0; i < Resx; i++) {
 
-                    VideoBuffer[position + i] = buffer[i];//ÒòÎª×îºóÊÇÒÔÁ½Î»Ïà¶Ô£¬ËùÒÔÒ²²»ÓÃ³ËÒÔ2
+                    VideoBuffer[position + i] = buffer[i];//å› ä¸ºæœ€åæ˜¯ä»¥ä¸¤ä½ç›¸å¯¹ï¼Œæ‰€ä»¥ä¹Ÿä¸ç”¨ä¹˜ä»¥2
                 }
             }
         }
@@ -454,37 +454,37 @@ void readbmp(int x, int y, char *path) {
 }
 
 /********************************
-**º¯ÊıÃû£ºput_pixel
-**²ÎÊı£º
-**    const int x     Ä¿±êµãµÄºá×ø±ê
-**    const int y     Ä¿±êµãµÄ×İ×ø±ê
-**    const int color Ä¿±êµãµÄÑÕÉ«
-**¹¦ÄÜ£ºÔÚÆÁÄ»(x,y)ÉÏ»­µã
+**å‡½æ•°åï¼šput_pixel
+**å‚æ•°ï¼š
+**    const int x     ç›®æ ‡ç‚¹çš„æ¨ªåæ ‡
+**    const int y     ç›®æ ‡ç‚¹çš„çºµåæ ‡
+**    const int color ç›®æ ‡ç‚¹çš„é¢œè‰²
+**åŠŸèƒ½ï¼šåœ¨å±å¹•(x,y)ä¸Šç”»ç‚¹
 ********************************/
 void put_pixel(int x, int y, int color) {
-/*ÏÔ´æÖ¸Õë³£Á¿£¬Ö¸ÏòÏÔ´æÊ×µØÖ·£¬Ö¸Õë±¾Éí²»ÔÊĞíĞŞ¸Ä*/
+/*æ˜¾å­˜æŒ‡é’ˆå¸¸é‡ï¼ŒæŒ‡å‘æ˜¾å­˜é¦–åœ°å€ï¼ŒæŒ‡é’ˆæœ¬èº«ä¸å…è®¸ä¿®æ”¹*/
     unsigned int far
     *
     const video_buffer = (unsigned int far
     *)0xa0000000L;
-/*ÒªÇĞ»»µÄÒ³ÃæºÅ*/
+/*è¦åˆ‡æ¢çš„é¡µé¢å·*/
     unsigned char new_page;
-/*¶ÔÓ¦ÏÔ´æµØÖ·Æ«ÒÆÁ¿*/
+/*å¯¹åº”æ˜¾å­˜åœ°å€åç§»é‡*/
     unsigned long int page;
     page = ((unsigned long int) y << 10) + x;
-    new_page = page >> 15;  /*32k¸öµãÒ»»»Ò³£¬³ıÒÔ32kµÄÌæ´úËã·¨*/
+    new_page = page >> 15;  /*32kä¸ªç‚¹ä¸€æ¢é¡µï¼Œé™¤ä»¥32kçš„æ›¿ä»£ç®—æ³•*/
     selectpage(new_page);
     video_buffer[page] = color;
 }
 
 /********************************
-**º¯ÊıÃû£ºSVGA_Horizon
-**²ÎÊı£º
-**    const int x1     Ä¿±êÖ±ÏßµÄÆğÊ¼µãºá×ø±ê
-**    const int y1     Ä¿±êÖ±ÏßµÄÆğÊ¼µã×İ×ø±ê
-**    const int length  Ä¿±êÖ±ÏßµÄ¿í¶È
-**    const int color     »­ÏßµÄÑÕÉ«
-**¹¦ÄÜ£ºµ÷ÓÃput_pixel»­ÆğÊ¼µã£¨x1,y1£©,³¤¶ÈÎªlenghtµÄºáÏß
+**å‡½æ•°åï¼šSVGA_Horizon
+**å‚æ•°ï¼š
+**    const int x1     ç›®æ ‡ç›´çº¿çš„èµ·å§‹ç‚¹æ¨ªåæ ‡
+**    const int y1     ç›®æ ‡ç›´çº¿çš„èµ·å§‹ç‚¹çºµåæ ‡
+**    const int length  ç›®æ ‡ç›´çº¿çš„å®½åº¦
+**    const int color     ç”»çº¿çš„é¢œè‰²
+**åŠŸèƒ½ï¼šè°ƒç”¨put_pixelç”»èµ·å§‹ç‚¹ï¼ˆx1,y1ï¼‰,é•¿åº¦ä¸ºlenghtçš„æ¨ªçº¿
 ********************************/
 void SVGA_Horizon(const int x1, const int y1, const int length, const int color) {
     register char page_old = (x1 + y1 * 1024) >> 15;
@@ -501,7 +501,7 @@ void SVGA_Horizon(const int x1, const int y1, const int length, const int color)
             }
         } else {
             page_new = (x1 + 1024L * y1) >> 15;
-            if (page_new != page_old)   /*¸ü»»Ò³Ãæ*/
+            if (page_new != page_old)   /*æ›´æ¢é¡µé¢*/
             {
                 selectpage(page_new);
                 page_old = page_new;
@@ -520,7 +520,7 @@ void SVGA_Horizon(const int x1, const int y1, const int length, const int color)
             }
         } else {
             page_new = (x1 + 1024L * y1) >> 15;
-            if (page_new != page_old)   /*¸ü»»Ò³Ãæ*/
+            if (page_new != page_old)   /*æ›´æ¢é¡µé¢*/
             {
                 selectpage(page_new);
                 page_old = page_new;
@@ -536,17 +536,17 @@ void SVGA_Horizon(const int x1, const int y1, const int length, const int color)
 }
 
 /********************************
-**º¯ÊıÃû£ºSVGA_Rectangular
-**²ÎÊı£º
-**    const int x1     Ä¿±ê¾ØĞÎµÄ×ó¶Ëµãºá×ø±ê
-**    const int y1     Ä¿±ê¾ØĞÎµÄ×ó¶Ëµã×İ×ø±ê
-**    const int x2     Ä¿±ê¾ØĞÎµÄÓÒ¶Ëµãºá×ø±ê
-**    const int y2     Ä¿±ê¾ØĞÎµÄÓÒ¶Ëµã×İ×ø±ê
-**	  const int x3     Ä¿±ê¾ØĞÎµÄÓÒ¶Ëµãºá×ø±ê
-**    const int y3     Ä¿±ê¾ØĞÎµÄÓÒ¶Ëµã×İ×ø±ê
-**    const int color     »­ÏßµÄÑÕÉ«
-**¹¦ÄÜ£ºµ÷ÓÃput_pixel(x1,y1),(x2,y2)»­¾ØĞÎ
-**Ö»Ö§³Ö×ó²àÆğÊ¼µã£¬ÓÒ²àÖÕÖ¹µãµÄ²Ù×÷
+**å‡½æ•°åï¼šSVGA_Rectangular
+**å‚æ•°ï¼š
+**    const int x1     ç›®æ ‡çŸ©å½¢çš„å·¦ç«¯ç‚¹æ¨ªåæ ‡
+**    const int y1     ç›®æ ‡çŸ©å½¢çš„å·¦ç«¯ç‚¹çºµåæ ‡
+**    const int x2     ç›®æ ‡çŸ©å½¢çš„å³ç«¯ç‚¹æ¨ªåæ ‡
+**    const int y2     ç›®æ ‡çŸ©å½¢çš„å³ç«¯ç‚¹çºµåæ ‡
+**	  const int x3     ç›®æ ‡çŸ©å½¢çš„å³ç«¯ç‚¹æ¨ªåæ ‡
+**    const int y3     ç›®æ ‡çŸ©å½¢çš„å³ç«¯ç‚¹çºµåæ ‡
+**    const int color     ç”»çº¿çš„é¢œè‰²
+**åŠŸèƒ½ï¼šè°ƒç”¨put_pixel(x1,y1),(x2,y2)ç”»çŸ©å½¢
+**åªæ”¯æŒå·¦ä¾§èµ·å§‹ç‚¹ï¼Œå³ä¾§ç»ˆæ­¢ç‚¹çš„æ“ä½œ
 ********************************/
 void SVGA_Triangle(int x1, int y1, int x2, int y2, int x3, int y3, unsigned char color) {
     SVGA_Line(x1, y1, x2, y2, color);
@@ -555,15 +555,15 @@ void SVGA_Triangle(int x1, int y1, int x2, int y2, int x3, int y3, unsigned char
 }
 
 /********************************
-**º¯ÊıÃû£ºSVGA_Rectangular
-**²ÎÊı£º
-**    const int x1     Ä¿±ê¾ØĞÎµÄ×ó¶Ëµãºá×ø±ê
-**    const int y1     Ä¿±ê¾ØĞÎµÄ×ó¶Ëµã×İ×ø±ê
-**    const int x2     Ä¿±ê¾ØĞÎµÄÓÒ¶Ëµãºá×ø±ê
-**    const int y2     Ä¿±ê¾ØĞÎµÄÓÒ¶Ëµã×İ×ø±ê
-**    const int color     »­ÏßµÄÑÕÉ«
-**¹¦ÄÜ£ºµ÷ÓÃput_pixel(x1,y1),(x2,y2)»­¾ØĞÎ
-**Ö»Ö§³Ö×ó²àÆğÊ¼µã£¬ÓÒ²àÖÕÖ¹µãµÄ²Ù×÷
+**å‡½æ•°åï¼šSVGA_Rectangular
+**å‚æ•°ï¼š
+**    const int x1     ç›®æ ‡çŸ©å½¢çš„å·¦ç«¯ç‚¹æ¨ªåæ ‡
+**    const int y1     ç›®æ ‡çŸ©å½¢çš„å·¦ç«¯ç‚¹çºµåæ ‡
+**    const int x2     ç›®æ ‡çŸ©å½¢çš„å³ç«¯ç‚¹æ¨ªåæ ‡
+**    const int y2     ç›®æ ‡çŸ©å½¢çš„å³ç«¯ç‚¹çºµåæ ‡
+**    const int color     ç”»çº¿çš„é¢œè‰²
+**åŠŸèƒ½ï¼šè°ƒç”¨put_pixel(x1,y1),(x2,y2)ç”»çŸ©å½¢
+**åªæ”¯æŒå·¦ä¾§èµ·å§‹ç‚¹ï¼Œå³ä¾§ç»ˆæ­¢ç‚¹çš„æ“ä½œ
 ********************************/
 void SVGA_Rectangular(const int x1, const int y1, const int x2, const int y2, const int color) {
     int x, y;
@@ -576,15 +576,15 @@ void SVGA_Rectangular(const int x1, const int y1, const int x2, const int y2, co
 }
 
 /********************************
-**º¯ÊıÃû£ºSVGA_Button
-**²ÎÊı£º
-**    const int x1     Ä¿±ê¾ØĞÎµÄ×ó¶Ëµãºá×ø±ê
-**    const int y1     Ä¿±ê¾ØĞÎµÄ×ó¶Ëµã×İ×ø±ê
-**    const int x2     Ä¿±ê¾ØĞÎµÄÓÒ¶Ëµãºá×ø±ê
-**    const int y2     Ä¿±ê¾ØĞÎµÄÓÒ¶Ëµã×İ×ø±ê
-**    const int color     »­ÏßµÄÑÕÉ«
-**¹¦ÄÜ£ºµ÷ÓÃput_pixel(x1,y1),(x2,y2)»­¾ØĞÎ
-**Ö»Ö§³Ö×ó²àÆğÊ¼µã£¬ÓÒ²àÖÕÖ¹µãµÄ²Ù×÷
+**å‡½æ•°åï¼šSVGA_Button
+**å‚æ•°ï¼š
+**    const int x1     ç›®æ ‡çŸ©å½¢çš„å·¦ç«¯ç‚¹æ¨ªåæ ‡
+**    const int y1     ç›®æ ‡çŸ©å½¢çš„å·¦ç«¯ç‚¹çºµåæ ‡
+**    const int x2     ç›®æ ‡çŸ©å½¢çš„å³ç«¯ç‚¹æ¨ªåæ ‡
+**    const int y2     ç›®æ ‡çŸ©å½¢çš„å³ç«¯ç‚¹çºµåæ ‡
+**    const int color     ç”»çº¿çš„é¢œè‰²
+**åŠŸèƒ½ï¼šè°ƒç”¨put_pixel(x1,y1),(x2,y2)ç”»çŸ©å½¢
+**åªæ”¯æŒå·¦ä¾§èµ·å§‹ç‚¹ï¼Œå³ä¾§ç»ˆæ­¢ç‚¹çš„æ“ä½œ
 ********************************/
 void SVGA_Button(const int x1, const int y1, const int x2, const int y2, const int color) {
     int i;
@@ -597,13 +597,13 @@ void SVGA_Button(const int x1, const int y1, const int x2, const int y2, const i
 }
 
 /********************************
-**º¯ÊıÃû£ºSVGA_Straight
-**²ÎÊı£º
-**    const int x1     Ä¿±êÖ±ÏßµÄÆğÊ¼µãºá×ø±ê
-**    const int y1     Ä¿±êÖ±ÏßµÄÆğÊ¼µã×İ×ø±ê
-**    const int length  Ä¿±êÖ±ÏßµÄ¿í¶È
-**    const int color     »­ÏßµÄÑÕÉ«
-**¹¦ÄÜ£ºµ÷ÓÃput_pixel»­ÆğÊ¼µã£¨x1,y1£©,³¤¶ÈÎªlenghtµÄÊúÏßÏß
+**å‡½æ•°åï¼šSVGA_Straight
+**å‚æ•°ï¼š
+**    const int x1     ç›®æ ‡ç›´çº¿çš„èµ·å§‹ç‚¹æ¨ªåæ ‡
+**    const int y1     ç›®æ ‡ç›´çº¿çš„èµ·å§‹ç‚¹çºµåæ ‡
+**    const int length  ç›®æ ‡ç›´çº¿çš„å®½åº¦
+**    const int color     ç”»çº¿çš„é¢œè‰²
+**åŠŸèƒ½ï¼šè°ƒç”¨put_pixelç”»èµ·å§‹ç‚¹ï¼ˆx1,y1ï¼‰,é•¿åº¦ä¸ºlenghtçš„ç«–çº¿çº¿
 ********************************/
 void SVGA_Straight(const x, const y, const length, const color) {
     int y1;
@@ -619,15 +619,15 @@ void SVGA_Straight(const x, const y, const length, const color) {
 }
 
 /********************************
-**º¯ÊıÃû£ºSVGA_Bar
-**²ÎÊı£º
-**    const int x1     Ä¿±ê¾ØĞÎµÄ×ó¶Ëµãºá×ø±ê
-**    const int y1     Ä¿±ê¾ØĞÎµÄ×ó¶Ëµã×İ×ø±ê
-**    const int x2     Ä¿±ê¾ØĞÎµÄÓÒ¶Ëµãºá×ø±ê
-**    const int y2     Ä¿±ê¾ØĞÎµÄÓÒ¶Ëµã×İ×ø±ê
-**    const int color     »­ÏßµÄÑÕÉ«
-**¹¦ÄÜ£ºµ÷ÓÃput_pixel(x1,y1)µ½(x2,y2)»­ÊµĞÄ¾ØĞÎ
-**Ö»Ö§³Ö×ó²àÆğÊ¼µã£¬ÓÒ²àÖÕÖ¹µãµÄ²Ù×÷
+**å‡½æ•°åï¼šSVGA_Bar
+**å‚æ•°ï¼š
+**    const int x1     ç›®æ ‡çŸ©å½¢çš„å·¦ç«¯ç‚¹æ¨ªåæ ‡
+**    const int y1     ç›®æ ‡çŸ©å½¢çš„å·¦ç«¯ç‚¹çºµåæ ‡
+**    const int x2     ç›®æ ‡çŸ©å½¢çš„å³ç«¯ç‚¹æ¨ªåæ ‡
+**    const int y2     ç›®æ ‡çŸ©å½¢çš„å³ç«¯ç‚¹çºµåæ ‡
+**    const int color     ç”»çº¿çš„é¢œè‰²
+**åŠŸèƒ½ï¼šè°ƒç”¨put_pixel(x1,y1)åˆ°(x2,y2)ç”»å®å¿ƒçŸ©å½¢
+**åªæ”¯æŒå·¦ä¾§èµ·å§‹ç‚¹ï¼Œå³ä¾§ç»ˆæ­¢ç‚¹çš„æ“ä½œ
 ********************************/
 void SVGA_Bar(const int x1, const int y1, const int x2, const int y2, const int color) {
     register char page_old = (x1 + y1 * 1024) >> 15;
@@ -644,7 +644,7 @@ void SVGA_Bar(const int x1, const int y1, const int x2, const int y2, const int 
             }
         } else {
             page_new = (x1 + 1024L * y) >> 15;
-            if (page_new != page_old)   /*¸ü»»Ò³Ãæ*/
+            if (page_new != page_old)   /*æ›´æ¢é¡µé¢*/
             {
                 selectpage(page_new);
                 page_old = page_new;
@@ -660,13 +660,13 @@ void SVGA_Bar(const int x1, const int y1, const int x2, const int y2, const int 
 }
 
 /********************************
-**º¯ÊıÃû£ºSVGA_Cricle
-**²ÎÊı£º
-**    const int x1     Ä¿±êÔ²µÄºá×ø±ê
-**    const int y1     Ä¿±êÔ²µÄ×İ×ø±ê
-**    const int r      Ä¿±êÔ²µÄ°ë¾¶
-**    const int color     »­ÏßµÄÑÕÉ«
-**¹¦ÄÜ£ºµ÷ÓÃput_pixel»­Ô²ĞÄÎª(x1,y1),°ë¾¶ÎªrµÄ¿ÕĞÄÔ²
+**å‡½æ•°åï¼šSVGA_Cricle
+**å‚æ•°ï¼š
+**    const int x1     ç›®æ ‡åœ†çš„æ¨ªåæ ‡
+**    const int y1     ç›®æ ‡åœ†çš„çºµåæ ‡
+**    const int r      ç›®æ ‡åœ†çš„åŠå¾„
+**    const int color     ç”»çº¿çš„é¢œè‰²
+**åŠŸèƒ½ï¼šè°ƒç”¨put_pixelç”»åœ†å¿ƒä¸º(x1,y1),åŠå¾„ä¸ºrçš„ç©ºå¿ƒåœ†
 ********************************/
 void SVGA_Cricle(const int x1, const int y1, const int r, const int color) {
     float i;
@@ -676,13 +676,13 @@ void SVGA_Cricle(const int x1, const int y1, const int r, const int color) {
 }
 
 /********************************
-**º¯ÊıÃû£ºSVGA_Ball
-**²ÎÊı£º
-**    const int x1     Ä¿±êÔ²µÄºá×ø±ê
-**    const int y1     Ä¿±êÔ²µÄ×İ×ø±ê
-**    const int r      Ä¿±êÔ²µÄ°ë¾¶
-**    const int color     »­ÏßµÄÑÕÉ«
-**¹¦ÄÜ£ºµ÷ÓÃput_pixel»­Ô²ĞÄÎª(x1,y1),°ë¾¶ÎªrµÄÊµĞÄÔ²
+**å‡½æ•°åï¼šSVGA_Ball
+**å‚æ•°ï¼š
+**    const int x1     ç›®æ ‡åœ†çš„æ¨ªåæ ‡
+**    const int y1     ç›®æ ‡åœ†çš„çºµåæ ‡
+**    const int r      ç›®æ ‡åœ†çš„åŠå¾„
+**    const int color     ç”»çº¿çš„é¢œè‰²
+**åŠŸèƒ½ï¼šè°ƒç”¨put_pixelç”»åœ†å¿ƒä¸º(x1,y1),åŠå¾„ä¸ºrçš„å®å¿ƒåœ†
 ********************************/
 void SVGA_Ball(const int x1, const int y1, const int r, const int color) {
     int R;
@@ -692,14 +692,14 @@ void SVGA_Ball(const int x1, const int y1, const int r, const int color) {
 }
 
 /********************************
-**º¯ÊıÃû£ºget_image
-**²ÎÊı£º
-**    const int x1     Ä¿±êµãµÄºá×ø±ê
-**    const int y1     Ä¿±êµãµÄ×İ×ø±ê
-**    const int x2     Ä¿±êµãµÄºá×ø±ê
-**    const int y2     Ä¿±êµãµÄ×İ×ø±ê
-**¹¦ÄÜ£º´æ´¢ÆÁÄ»(x1,y1)µ½(x2,y2)µÄÇøÓò£¬½«ĞÅÏ¢´«µİ¸øbuffer
-**×¢Òâ£ºÖ»ÄÜ´æ´¢²»³¬¹ıÆÁÄ»´óĞ¡µÄ¶«Î÷
+**å‡½æ•°åï¼šget_image
+**å‚æ•°ï¼š
+**    const int x1     ç›®æ ‡ç‚¹çš„æ¨ªåæ ‡
+**    const int y1     ç›®æ ‡ç‚¹çš„çºµåæ ‡
+**    const int x2     ç›®æ ‡ç‚¹çš„æ¨ªåæ ‡
+**    const int y2     ç›®æ ‡ç‚¹çš„çºµåæ ‡
+**åŠŸèƒ½ï¼šå­˜å‚¨å±å¹•(x1,y1)åˆ°(x2,y2)çš„åŒºåŸŸï¼Œå°†ä¿¡æ¯ä¼ é€’ç»™buffer
+**æ³¨æ„ï¼šåªèƒ½å­˜å‚¨ä¸è¶…è¿‡å±å¹•å¤§å°çš„ä¸œè¥¿
 ********************************/
 void get_image(int x1, int y1, int x2, int y2, short far
 
@@ -714,8 +714,8 @@ short far
 video_buffer =
 (
 short far
-*)0xA0000000L;  //³õÊ¼»¯Ö¸ÏòÆÁÄ»µãÏÔ´æµÄÖ¸Õë£¬³õÊ¼»¯Î»ÖÃ£¨×óÉÏ½Ç£©
-oldpage = (y1 * (long) 1024 + x1) >> 15;    //³õÊ¼»¯Ò³Âë
+*)0xA0000000L;  //åˆå§‹åŒ–æŒ‡å‘å±å¹•ç‚¹æ˜¾å­˜çš„æŒ‡é’ˆï¼Œåˆå§‹åŒ–ä½ç½®ï¼ˆå·¦ä¸Šè§’ï¼‰
+oldpage = (y1 * (long) 1024 + x1) >> 15;    //åˆå§‹åŒ–é¡µç 
 newpage = oldpage;
 selectpage(oldpage);
 for(
@@ -730,27 +730,27 @@ j++,k++)
 {
 position = (i + y1) * (long) 1024 + j + x1;
 newpage = position >> 15;
-if(newpage!=oldpage)            //µ÷ÓÃ»»Ò³º¯Êı
+if(newpage!=oldpage)            //è°ƒç”¨æ¢é¡µå‡½æ•°
 {
 selectpage(newpage);
 oldpage = newpage;
 }
 position&=0x0000ffffl;
-save[k]=*(video_buffer+position);//iÊÇ»áË¢ĞÂ¸²¸ÇµÄ£¬²»¿ÉÒÔÓÃi×÷Îª´æ´¢ÊıÖµ
+save[k]=*(video_buffer+position);//iæ˜¯ä¼šåˆ·æ–°è¦†ç›–çš„ï¼Œä¸å¯ä»¥ç”¨iä½œä¸ºå­˜å‚¨æ•°å€¼
 }
 }
 }
 
 /********************************
-**º¯ÊıÃû£ºput_image
-**²ÎÊı£º
-**    const int x1     Ä¿±êµãµÄºá×ø±ê
-**    const int y1     Ä¿±êµãµÄ×İ×ø±ê
-**    const int x2     Ä¿±êµãµÄºá×ø±ê
-**    const int y2     Ä¿±êµãµÄ×İ×ø±ê
-**    short * buffer    Ö¸ÏòËù´æ´¢µÄĞÅÏ¢
-**¹¦ÄÜ£º½«´æ´¢µÄĞÅÏ¢ÖØĞÂÊäÈëµ½ÆÁÄ»ÉÏ
-**×¢Òâ£ºÖ»ÄÜ´æ´¢²»³¬¹ıÆÁÄ»´óĞ¡µÄ¶«Î÷
+**å‡½æ•°åï¼šput_image
+**å‚æ•°ï¼š
+**    const int x1     ç›®æ ‡ç‚¹çš„æ¨ªåæ ‡
+**    const int y1     ç›®æ ‡ç‚¹çš„çºµåæ ‡
+**    const int x2     ç›®æ ‡ç‚¹çš„æ¨ªåæ ‡
+**    const int y2     ç›®æ ‡ç‚¹çš„çºµåæ ‡
+**    short * buffer    æŒ‡å‘æ‰€å­˜å‚¨çš„ä¿¡æ¯
+**åŠŸèƒ½ï¼šå°†å­˜å‚¨çš„ä¿¡æ¯é‡æ–°è¾“å…¥åˆ°å±å¹•ä¸Š
+**æ³¨æ„ï¼šåªèƒ½å­˜å‚¨ä¸è¶…è¿‡å±å¹•å¤§å°çš„ä¸œè¥¿
 ********************************/
 void put_image(const int x1, const int y1, const int x2, const int y2, short far
 
@@ -770,7 +770,7 @@ short far
 *)0xA0000000L;
 if(x2>1024)
 {
-printf("the Blancket area is in the select part");//³¬³öÆÁÄ»Ôò²»ÓèÒÔÏÔÊ¾
+printf("the Blancket area is in the select part");//è¶…å‡ºå±å¹•åˆ™ä¸äºˆä»¥æ˜¾ç¤º
 return;
 }
 if(y2>768)
@@ -795,29 +795,29 @@ x1;
 i++,k++)
 {
 position = 1024L * (y1 + j) + x1 + i;
-page_new = position >> 15;//65536¸ö×Ö½Ú»»Ò»Ò³
-if (page_new != page_old)   /*¸ü»»Ò³Ãæ*/
+page_new = position >> 15;//65536ä¸ªå­—èŠ‚æ¢ä¸€é¡µ
+if (page_new != page_old)   /*æ›´æ¢é¡µé¢*/
 {
 selectpage(page_new);
 page_old = page_new;
 }
-position&=0x0000ffffl;//È·¶¨º¯ÊıÔÚĞÂÒ³ÃæÉÏµÄÎ»ÖÃ
-*(Videobuffer+position)=buffer[k];//iÊÇ»áË¢ĞÂ¸²¸ÇµÄ£¬²»¿ÉÒÔÓÃi×÷Îª´æ´¢ÊıÖµ
+position&=0x0000ffffl;//ç¡®å®šå‡½æ•°åœ¨æ–°é¡µé¢ä¸Šçš„ä½ç½®
+*(Videobuffer+position)=buffer[k];//iæ˜¯ä¼šåˆ·æ–°è¦†ç›–çš„ï¼Œä¸å¯ä»¥ç”¨iä½œä¸ºå­˜å‚¨æ•°å€¼
 }
 }
 }
 
 /**********************************************************
-Function£º		Getcolor
+Functionï¼š		Getcolor
 
-Description£º	ÓÃÓÚ»ñÈ¡µ±Ç°µãÑÕÉ«
+Descriptionï¼š	ç”¨äºè·å–å½“å‰ç‚¹é¢œè‰²
 
-Input£º			int x       ÓÃ»§µÄÓÃ»§Ãû
-				int y 	    ÓÃ»§ÃûËù¶ÔÓ¦µÄÓÃ»§Â·¾¶
+Inputï¼š			int x       ç”¨æˆ·çš„ç”¨æˆ·å
+				int y 	    ç”¨æˆ·åæ‰€å¯¹åº”çš„ç”¨æˆ·è·¯å¾„
 
-Output£º	    NONE
+Outputï¼š	    NONE
 
-Return£º		µ±Ç°ÑÕÉ«
+Returnï¼š		å½“å‰é¢œè‰²
 
 **********************************************************/
 int Getcolor(const int x, const int y) {
@@ -836,55 +836,55 @@ int Getcolor(const int x, const int y) {
 }
 
 /**********************************************************
-Function£º		maskbmp
+Functionï¼š		maskbmp
 
-Description£º   ÓÃÓÚÏÔÊ¾Í¼ÏñÖĞºÚÉ«µÄ²¿·Ö
+Descriptionï¼š   ç”¨äºæ˜¾ç¤ºå›¾åƒä¸­é»‘è‰²çš„éƒ¨åˆ†
 
-Input£º
-				int x       ×óÉÏ½Ç×ø±ê
-				int y       ×óÉÏ½Ç×ø±ê
-				int n       ·Å´ó±¶Êı
-				char *path  Í¼Ïñ¶ÔÓ¦Â·¾¶
+Inputï¼š
+				int x       å·¦ä¸Šè§’åæ ‡
+				int y       å·¦ä¸Šè§’åæ ‡
+				int n       æ”¾å¤§å€æ•°
+				char *path  å›¾åƒå¯¹åº”è·¯å¾„
 
-Output£º	    Í¼ÏñÎªºÚÉ«µÄ²¿·Ö
+Outputï¼š	    å›¾åƒä¸ºé»‘è‰²çš„éƒ¨åˆ†
 
-Return£º		NONE
+Returnï¼š		NONE
 
 **********************************************************/
 void maskbmp(int x, int y, char *path) {
     FILE *fpbmp = NULL;
-    long int Width;//Í¼Ïñ¿í¶È
-    long int Height;//Í¼Ïñ¸ß¶È
-    long int linebytes;//²¹È«ºóÒ»ĞĞ×Ö½ÚÊı
-    unsigned int sign;//bmpÎÄ¼ş±êÊ¶
-    unsigned long position;//Ã¿¸öÏñËØÓ¦¸ÃÔÚÆÁÄ»ÉÏÏÔÊ¾µÄ×ø±ê
+    long int Width;//å›¾åƒå®½åº¦
+    long int Height;//å›¾åƒé«˜åº¦
+    long int linebytes;//è¡¥å…¨åä¸€è¡Œå­—èŠ‚æ•°
+    unsigned int sign;//bmpæ–‡ä»¶æ ‡è¯†
+    unsigned long position;//æ¯ä¸ªåƒç´ åº”è¯¥åœ¨å±å¹•ä¸Šæ˜¾ç¤ºçš„åæ ‡
     register int i, j;
-    long int Resx, Resy;//×îºóÏÔÊ¾µÄ³¤¶ÈºÍ¿í¶È
-    register char page_new = 0;//»»Ò³±êÊ¶
+    long int Resx, Resy;//æœ€åæ˜¾ç¤ºçš„é•¿åº¦å’Œå®½åº¦
+    register char page_new = 0;//æ¢é¡µæ ‡è¯†
     static char page_old = 0;
-    short *buffer = NULL;//ÉèÖÃÏÔÊ¾ÆÁÒ»ĞĞÏÔ1024¸ö×Ö½Ú
+    short *buffer = NULL;//è®¾ç½®æ˜¾ç¤ºå±ä¸€è¡Œæ˜¾1024ä¸ªå­—èŠ‚
     short far
     *
     const VideoBuffer = (short far
-    *)0xA0000000L;//Éè¶¨ÏÔ´æÖ¸Õë²»±ä
-    if ((fpbmp = fopen(path, "rb")) == NULL)//ÈôÎŞ·¨´ò¿ªÖ¸¶¨Í¼Ïñ£¬ÖÕÖ¹³Ì??
+    *)0xA0000000L;//è®¾å®šæ˜¾å­˜æŒ‡é’ˆä¸å˜
+    if ((fpbmp = fopen(path, "rb")) == NULL)//è‹¥æ— æ³•æ‰“å¼€æŒ‡å®šå›¾åƒï¼Œç»ˆæ­¢ç¨‹??
     {
         printf("Cannot open the picture");
         exit(1);
     }
     fseek(fpbmp, 0, 0);
     fread(&sign, 2, 1, fpbmp);
-    if (sign != 0x4d42)//ÈôÖ¸¶¨Í¼Ïñ²¢²»ÊÇbmp£¬ÔòÖÕÖ¹³ÌĞò
+    if (sign != 0x4d42)//è‹¥æŒ‡å®šå›¾åƒå¹¶ä¸æ˜¯bmpï¼Œåˆ™ç»ˆæ­¢ç¨‹åº
     {
         printf("the file is not a bmp");
         fclose(fpbmp);
         exit(1);
     }
     fseek(fpbmp, 18L, 0);
-    fread(&Width, 4, 1, fpbmp);//¶ÁÈ¡Í¼Ïñ¿í¡¢¸ß
+    fread(&Width, 4, 1, fpbmp);//è¯»å–å›¾åƒå®½ã€é«˜
     fseek(fpbmp, 22L, 0);
     fread(&Height, 4, 1, fpbmp);
-    if (x + Width > 1024)//ÉèÖÃÆÁÄ»ÏŞÖÆ£¬³¬³öÆÁÄ»´óĞ¡²»ÓèÒÔÏÔÊ¾
+    if (x + Width > 1024)//è®¾ç½®å±å¹•é™åˆ¶ï¼Œè¶…å‡ºå±å¹•å¤§å°ä¸äºˆä»¥æ˜¾ç¤º
     {
         Resx = 1024 - x;
     } else {
@@ -895,13 +895,13 @@ void maskbmp(int x, int y, char *path) {
     } else {
         Resy = Height;
     }
-    linebytes = (Width * 2) % 4;//ÒòÎª16Î»µÄbmp£¬Ã¿¸öÏñËØÁ½¸ö×Ö½Ú£¬Èô¿í¶ÈËùÕ¼×Ö½Ú²»ÄÜ±»4Õû³ı£¬Ôò²¹È«
+    linebytes = (Width * 2) % 4;//å› ä¸º16ä½çš„bmpï¼Œæ¯ä¸ªåƒç´ ä¸¤ä¸ªå­—èŠ‚ï¼Œè‹¥å®½åº¦æ‰€å å­—èŠ‚ä¸èƒ½è¢«4æ•´é™¤ï¼Œåˆ™è¡¥å…¨
     if (!linebytes) {
         linebytes = Width * 2;
     } else {
-        linebytes = Width * 2 + 4L - linebytes;//²¹È«È«³ÆÎª¿ÉÒÔ±»4Õû³ıµÄbmpÍ¼Æ¬ÄÚÕæÊµµÄÒ»ĞĞµÄ×Ö½ÚÊı
+        linebytes = Width * 2 + 4L - linebytes;//è¡¥å…¨å…¨ç§°ä¸ºå¯ä»¥è¢«4æ•´é™¤çš„bmpå›¾ç‰‡å†…çœŸå®çš„ä¸€è¡Œçš„å­—èŠ‚æ•°
     }
-    if ((buffer = (short *) malloc(linebytes)) == NULL)//·ÖÅä¿Õ¼ä£¬ÓÃÓÚ´æ´¢Ã¿ĞĞÍ¼ÏñµÄĞÅÏ¢£¬Ö®ËùÒÔÓÃint¸ñÊ½£¬ÊÇÒòÎª16Î»bmpÃ¿Á½¸öÏñËØÒ»Î»£¬ÕâÑù·½±ã¶¨Î»
+    if ((buffer = (short *) malloc(linebytes)) == NULL)//åˆ†é…ç©ºé—´ï¼Œç”¨äºå­˜å‚¨æ¯è¡Œå›¾åƒçš„ä¿¡æ¯ï¼Œä¹‹æ‰€ä»¥ç”¨intæ ¼å¼ï¼Œæ˜¯å› ä¸º16ä½bmpæ¯ä¸¤ä¸ªåƒç´ ä¸€ä½ï¼Œè¿™æ ·æ–¹ä¾¿å®šä½
     {
         printf("no memory");
         exit(1);
@@ -910,37 +910,37 @@ void maskbmp(int x, int y, char *path) {
     page_old = (Resy - 1 + y) * 1024L + Resx + x;
     selectpage(page_old);
     page_new = page_old;
-    for (j = Height - 1; j > -1; j--)//dim¶ÁÍ¼ÉÏÏÂµßµ¹£¬ËùÒÔÍ¬Ïà·´µÄ·½Ê½½«Í¼ÏñÂ¼ÈëÏÔ´æ
+    for (j = Height - 1; j > -1; j--)//dimè¯»å›¾ä¸Šä¸‹é¢ å€’ï¼Œæ‰€ä»¥åŒç›¸åçš„æ–¹å¼å°†å›¾åƒå½•å…¥æ˜¾å­˜
     {
         fread(buffer, linebytes, 1, fpbmp);
         if (j < Resy) {
-            if ((j + y) * 5 % 256 > 251)//¹Û²ìÒ»ĞĞÊÇ·ñ¶¼ÔÚÒ»Ò³ÄÚ£¬Èç¹û²»ÔÚÒ»Ò³ÔòÒ»Ò³Ò»Ò³´¦Àí
+            if ((j + y) * 5 % 256 > 251)//è§‚å¯Ÿä¸€è¡Œæ˜¯å¦éƒ½åœ¨ä¸€é¡µå†…ï¼Œå¦‚æœä¸åœ¨ä¸€é¡µåˆ™ä¸€é¡µä¸€é¡µå¤„ç†
             {
                 for (i = 0; i < Resx; i++) {
                     if (buffer[i] != -1) {
-                        position = 1024L * (y + j) + (x + i);//´Ë´¦±ØĞë¼ÓÉÏL·ñÔò»á³öÏÖÖ»ÏÔÊ¾Ò»²¿·Ö·´¸´¸²¸ÇµÄÇé¿ö£¬²Â²âÊÇÒòÎªÊı¾İ¹ı´ó£¬°Ñposition³å±¬ÁË£¬È»ºóÒ³ÊıÒ»Ö±Ã»±ä
-                        page_new = position >> 15;  /*¼ÆËãÏÔÊ¾Ò³£¬Á½¸ö×Ö½Ú*2/65536*/
-                        position &= 0x0000ffffl;    //¼ÆËãÔÚÒ»¸öÒ³ÃæÉÏµÄÆ«ÒÆÎ»ÖÃ£¬Õû³ı65536µÄ¿ìËÙ·½°¸£¬±£ÁôµÍÊ®ÁùÎ»
-                        if (page_new != page_old)   /*¸ü»»Ò³Ãæ*/
+                        position = 1024L * (y + j) + (x + i);//æ­¤å¤„å¿…é¡»åŠ ä¸ŠLå¦åˆ™ä¼šå‡ºç°åªæ˜¾ç¤ºä¸€éƒ¨åˆ†åå¤è¦†ç›–çš„æƒ…å†µï¼ŒçŒœæµ‹æ˜¯å› ä¸ºæ•°æ®è¿‡å¤§ï¼ŒæŠŠpositionå†²çˆ†äº†ï¼Œç„¶åé¡µæ•°ä¸€ç›´æ²¡å˜
+                        page_new = position >> 15;  /*è®¡ç®—æ˜¾ç¤ºé¡µï¼Œä¸¤ä¸ªå­—èŠ‚*2/65536*/
+                        position &= 0x0000ffffl;    //è®¡ç®—åœ¨ä¸€ä¸ªé¡µé¢ä¸Šçš„åç§»ä½ç½®ï¼Œæ•´é™¤65536çš„å¿«é€Ÿæ–¹æ¡ˆï¼Œä¿ç•™ä½åå…­ä½
+                        if (page_new != page_old)   /*æ›´æ¢é¡µé¢*/
                         {
                             selectpage(page_new);
                             page_old = page_new;
                         }
-                        VideoBuffer[position] = buffer[i];//ÒòÎª×îºóÊÇÒÔÁ½Î»Ïà¶Ô£¬ËùÒÔÒ²²»ÓÃ³ËÒÔ2
+                        VideoBuffer[position] = buffer[i];//å› ä¸ºæœ€åæ˜¯ä»¥ä¸¤ä½ç›¸å¯¹ï¼Œæ‰€ä»¥ä¹Ÿä¸ç”¨ä¹˜ä»¥2
                     }
                 }
             } else {
                 position = (y + j) * 1024L + x;
                 page_new = position >> 15;
                 position &= 0x0000ffffl;
-                if (page_new != page_old)   /*¸ü»»Ò³Ãæ*/
+                if (page_new != page_old)   /*æ›´æ¢é¡µé¢*/
                 {
                     selectpage(page_new);
                     page_old = page_new;
                 }
                 for (i = 0; i < Resx; i++) {
                     if (buffer[i] != -1) {
-                        VideoBuffer[position + i] = buffer[i];//ÒòÎª×îºóÊÇÒÔÁ½Î»Ïà¶Ô£¬ËùÒÔÒ²²»ÓÃ³ËÒÔ2
+                        VideoBuffer[position + i] = buffer[i];//å› ä¸ºæœ€åæ˜¯ä»¥ä¸¤ä½ç›¸å¯¹ï¼Œæ‰€ä»¥ä¹Ÿä¸ç”¨ä¹˜ä»¥2
                     }
                 }
             }
@@ -954,56 +954,56 @@ void maskbmp(int x, int y, char *path) {
 }
 
 /**********************************************************
-Function£º		enlarge
+Functionï¼š		enlarge
 
-Description£º	ÓÃÓÚ·Å´óÍ¼ÏñÎªÕûÊı±¶
+Descriptionï¼š	ç”¨äºæ”¾å¤§å›¾åƒä¸ºæ•´æ•°å€
 
-Input£º
-				int x       ×óÉÏ½Ç×ø±ê
-				int y       ×óÉÏ½Ç×ø±ê
-				int n       ·Å´ó±¶Êı
-				char *path  Í¼Ïñ¶ÔÓ¦Â·¾¶
+Inputï¼š
+				int x       å·¦ä¸Šè§’åæ ‡
+				int y       å·¦ä¸Šè§’åæ ‡
+				int n       æ”¾å¤§å€æ•°
+				char *path  å›¾åƒå¯¹åº”è·¯å¾„
 
-Output£º	    ·Å´óºóµÄÍ¼Ïñ
+Outputï¼š	    æ”¾å¤§åçš„å›¾åƒ
 
-Return£º		NONE
+Returnï¼š		NONE
 
 **********************************************************/
 void enlarge(int x, int y, int n, char *path) {
     FILE *fpbmp = NULL;
-    long int Width;//Í¼Ïñ¿í¶È
-    long int Height;//Í¼Ïñ¸ß¶È
-    long int linebytes;//²¹È«ºóÒ»ĞĞ×Ö½ÚÊı
-    unsigned int sign;//bmpÎÄ¼ş±êÊ¶
-    unsigned long position;//Ã¿¸öÏñËØÓ¦¸ÃÔÚÆÁÄ»ÉÏÏÔÊ¾µÄ×ø±ê
+    long int Width;//å›¾åƒå®½åº¦
+    long int Height;//å›¾åƒé«˜åº¦
+    long int linebytes;//è¡¥å…¨åä¸€è¡Œå­—èŠ‚æ•°
+    unsigned int sign;//bmpæ–‡ä»¶æ ‡è¯†
+    unsigned long position;//æ¯ä¸ªåƒç´ åº”è¯¥åœ¨å±å¹•ä¸Šæ˜¾ç¤ºçš„åæ ‡
     register int i, j;
-    register int k = 0, m = 0;//¼ÆËãÊÇ·ñ´ïµ½Ó¦ÓĞ±¶Êı
-    long int Resx, Resy;//×îºóÏÔÊ¾µÄ³¤¶ÈºÍ¿í¶È
-    register char page_new = 0;//»»Ò³±êÊ¶
+    register int k = 0, m = 0;//è®¡ç®—æ˜¯å¦è¾¾åˆ°åº”æœ‰å€æ•°
+    long int Resx, Resy;//æœ€åæ˜¾ç¤ºçš„é•¿åº¦å’Œå®½åº¦
+    register char page_new = 0;//æ¢é¡µæ ‡è¯†
     static char page_old = 0;
-    short *buffer = NULL;//ÉèÖÃÏÔÊ¾ÆÁÒ»ĞĞÏÔ1024¸ö×Ö½Ú
+    short *buffer = NULL;//è®¾ç½®æ˜¾ç¤ºå±ä¸€è¡Œæ˜¾1024ä¸ªå­—èŠ‚
     short far
     *
     const VideoBuffer = (short far
-    *)0xA0000000L;//Éè¶¨ÏÔ´æÖ¸Õë²»±ä
-    if ((fpbmp = fopen(path, "rb")) == NULL)//ÈôÎŞ·¨´ò¿ªÖ¸¶¨Í¼Ïñ£¬ÖÕÖ¹³ÌĞò
+    *)0xA0000000L;//è®¾å®šæ˜¾å­˜æŒ‡é’ˆä¸å˜
+    if ((fpbmp = fopen(path, "rb")) == NULL)//è‹¥æ— æ³•æ‰“å¼€æŒ‡å®šå›¾åƒï¼Œç»ˆæ­¢ç¨‹åº
     {
         printf("Cannot open the picture");
         exit(1);
     }
     fseek(fpbmp, 0, 0);
     fread(&sign, 2, 1, fpbmp);
-    if (sign != 0x4d42)//ÈôÖ¸¶¨Í¼Ïñ²¢²»ÊÇbmp£¬ÔòÖÕÖ¹³ÌĞò
+    if (sign != 0x4d42)//è‹¥æŒ‡å®šå›¾åƒå¹¶ä¸æ˜¯bmpï¼Œåˆ™ç»ˆæ­¢ç¨‹åº
     {
         printf("the file is not a bmp");
         fclose(fpbmp);
         exit(1);
     }
     fseek(fpbmp, 18L, 0);
-    fread(&Width, 4, 1, fpbmp);//¶ÁÈ¡Í¼Ïñ¿í¡¢¸ß
+    fread(&Width, 4, 1, fpbmp);//è¯»å–å›¾åƒå®½ã€é«˜
     fseek(fpbmp, 22L, 0);
     fread(&Height, 4, 1, fpbmp);
-    if (x + n * Width > 1024)//ÉèÖÃÆÁÄ»ÏŞÖÆ£¬³¬³öÆÁÄ»´óĞ¡²»ÓèÒÔÏÔÊ¾
+    if (x + n * Width > 1024)//è®¾ç½®å±å¹•é™åˆ¶ï¼Œè¶…å‡ºå±å¹•å¤§å°ä¸äºˆä»¥æ˜¾ç¤º
     {
         Resx = 1024 - x;
     } else {
@@ -1014,13 +1014,13 @@ void enlarge(int x, int y, int n, char *path) {
     } else {
         Resy = n * Height;
     }
-    linebytes = (Width * 2) % 4;//ÒòÎª16Î»µÄbmp£¬Ã¿¸öÏñËØÁ½¸ö×Ö½Ú£¬Èô¿í¶ÈËùÕ¼×Ö½Ú²»ÄÜ±»4Õû³ı£¬Ôò²¹È«
+    linebytes = (Width * 2) % 4;//å› ä¸º16ä½çš„bmpï¼Œæ¯ä¸ªåƒç´ ä¸¤ä¸ªå­—èŠ‚ï¼Œè‹¥å®½åº¦æ‰€å å­—èŠ‚ä¸èƒ½è¢«4æ•´é™¤ï¼Œåˆ™è¡¥å…¨
     if (!linebytes) {
         linebytes = Width * 2;
     } else {
-        linebytes = Width * 2 + 4L - linebytes;//²¹È«È«³ÆÎª¿ÉÒÔ±»4Õû³ıµÄbmpÍ¼Æ¬ÄÚÕæÊµµÄÒ»ĞĞµÄ×Ö½ÚÊı
+        linebytes = Width * 2 + 4L - linebytes;//è¡¥å…¨å…¨ç§°ä¸ºå¯ä»¥è¢«4æ•´é™¤çš„bmpå›¾ç‰‡å†…çœŸå®çš„ä¸€è¡Œçš„å­—èŠ‚æ•°
     }
-    if ((buffer = (short *) malloc(linebytes)) == NULL)//·ÖÅä¿Õ¼ä£¬ÓÃÓÚ´æ´¢Ã¿ĞĞÍ¼ÏñµÄĞÅÏ¢£¬Ö®ËùÒÔÓÃint¸ñÊ½£¬ÊÇÒòÎª16Î»bmpÃ¿Á½¸öÏñËØÒ»Î»£¬ÕâÑù·½±ã¶¨Î»
+    if ((buffer = (short *) malloc(linebytes)) == NULL)//åˆ†é…ç©ºé—´ï¼Œç”¨äºå­˜å‚¨æ¯è¡Œå›¾åƒçš„ä¿¡æ¯ï¼Œä¹‹æ‰€ä»¥ç”¨intæ ¼å¼ï¼Œæ˜¯å› ä¸º16ä½bmpæ¯ä¸¤ä¸ªåƒç´ ä¸€ä½ï¼Œè¿™æ ·æ–¹ä¾¿å®šä½
     {
         printf("no memory");
         exit(1);
@@ -1029,32 +1029,32 @@ void enlarge(int x, int y, int n, char *path) {
     page_old = (Resy - 1 + y) * 1024L + Resx + x;
     selectpage(page_old);
     page_new = page_old;
-    for (j = Height - 1; j > -1; j--)//dim¶ÁÍ¼ÉÏÏÂµßµ¹£¬ËùÒÔÍ¬Ïà·´µÄ·½Ê½½«Í¼ÏñÂ¼ÈëÏÔ´æ
+    for (j = Height - 1; j > -1; j--)//dimè¯»å›¾ä¸Šä¸‹é¢ å€’ï¼Œæ‰€ä»¥åŒç›¸åçš„æ–¹å¼å°†å›¾åƒå½•å…¥æ˜¾å­˜
     {
         fread(buffer, linebytes, 1, fpbmp);
         for (k = 0; k < n; k++) {
             if (j * n + y < Resy) {
-                if ((j * n + y + k) * 5 % 256 > 251)//¹Û²ìÒ»ĞĞÊÇ·ñ¶¼ÔÚÒ»Ò³ÄÚ£¬Èç¹û²»ÔÚÒ»Ò³ÔòÒ»Ò³Ò»Ò³´¦Àí
+                if ((j * n + y + k) * 5 % 256 > 251)//è§‚å¯Ÿä¸€è¡Œæ˜¯å¦éƒ½åœ¨ä¸€é¡µå†…ï¼Œå¦‚æœä¸åœ¨ä¸€é¡µåˆ™ä¸€é¡µä¸€é¡µå¤„ç†
                 {
                     for (i = 0; (m + i * n < Resx); i++) {
                         for (m = 0; ((m < n) && (m + i * n < Resx)); m++) {
                             position = 1024L * (y + j * n + k) +
-                                       (x + m + i * n);//´Ë´¦±ØĞë¼ÓÉÏL·ñÔò»á³öÏÖÖ»ÏÔÊ¾Ò»²¿·Ö·´¸´¸²¸ÇµÄÇé¿ö£¬²Â²âÊÇÒòÎªÊı¾İ¹ı´ó£¬°Ñposition³å±¬ÁË£¬È»ºóÒ³ÊıÒ»Ö±Ã»±ä
-                            page_new = position >> 15;  /*¼ÆËãÏÔÊ¾Ò³£¬Á½¸ö×Ö½Ú*2/65536*/
-                            position &= 0x0000ffffl;    //¼ÆËãÔÚÒ»¸öÒ³ÃæÉÏµÄÆ«ÒÆÎ»ÖÃ£¬Õû³ı65536µÄ¿ìËÙ·½°¸£¬±£ÁôµÍÊ®ÁùÎ»
-                            if (page_new != page_old)   /*¸ü»»Ò³Ãæ*/
+                                       (x + m + i * n);//æ­¤å¤„å¿…é¡»åŠ ä¸ŠLå¦åˆ™ä¼šå‡ºç°åªæ˜¾ç¤ºä¸€éƒ¨åˆ†åå¤è¦†ç›–çš„æƒ…å†µï¼ŒçŒœæµ‹æ˜¯å› ä¸ºæ•°æ®è¿‡å¤§ï¼ŒæŠŠpositionå†²çˆ†äº†ï¼Œç„¶åé¡µæ•°ä¸€ç›´æ²¡å˜
+                            page_new = position >> 15;  /*è®¡ç®—æ˜¾ç¤ºé¡µï¼Œä¸¤ä¸ªå­—èŠ‚*2/65536*/
+                            position &= 0x0000ffffl;    //è®¡ç®—åœ¨ä¸€ä¸ªé¡µé¢ä¸Šçš„åç§»ä½ç½®ï¼Œæ•´é™¤65536çš„å¿«é€Ÿæ–¹æ¡ˆï¼Œä¿ç•™ä½åå…­ä½
+                            if (page_new != page_old)   /*æ›´æ¢é¡µé¢*/
                             {
                                 selectpage(page_new);
                                 page_old = page_new;
                             }
-                            VideoBuffer[position] = buffer[i];//ÒòÎª×îºóÊÇÒÔÁ½Î»Ïà¶Ô£¬ËùÒÔÒ²²»ÓÃ³ËÒÔ2
+                            VideoBuffer[position] = buffer[i];//å› ä¸ºæœ€åæ˜¯ä»¥ä¸¤ä½ç›¸å¯¹ï¼Œæ‰€ä»¥ä¹Ÿä¸ç”¨ä¹˜ä»¥2
                         }
                     }
                 } else {
                     position = (y + j * n + k) * 1024L + x;
                     page_new = position >> 15;
                     position &= 0x0000ffffl;
-                    if (page_new != page_old)   /*¸ü»»Ò³Ãæ*/
+                    if (page_new != page_old)   /*æ›´æ¢é¡µé¢*/
                     {
                         selectpage(page_new);
                         page_old = page_new;
@@ -1063,7 +1063,7 @@ void enlarge(int x, int y, int n, char *path) {
                         for (m = 0; ((m < n) && (m + i * n < Resx)); m++) {
 
                             for (m = 0; ((m < n) && (m + i * n < Resx)); m++) {
-                                VideoBuffer[position + i * n + m] = buffer[i];//ÒòÎª×îºóÊÇÒÔÁ½Î»Ïà¶Ô£¬ËùÒÔÒ²²»ÓÃ³ËÒÔ2
+                                VideoBuffer[position + i * n + m] = buffer[i];//å› ä¸ºæœ€åæ˜¯ä»¥ä¸¤ä½ç›¸å¯¹ï¼Œæ‰€ä»¥ä¹Ÿä¸ç”¨ä¹˜ä»¥2
                             }
                         }
                 }
@@ -1077,21 +1077,21 @@ void enlarge(int x, int y, int n, char *path) {
     }
 }
 /**********************************************************
-Function£º		CircleBar
+Functionï¼š		CircleBar
 
-Description£º	ÓÃÓÚ»­³öÔ²½ÇÊµĞÄ¾ØĞÎ
+Descriptionï¼š	ç”¨äºç”»å‡ºåœ†è§’å®å¿ƒçŸ©å½¢
 
-Input£º
-				int x1       ×óÔ²ĞÄx×ø±ê
-				int y1       ×óÔ²ĞÄy×ø±ê
-				int x2       ÓÒÔ²ĞÄx×ø±ê
-				int y2       ÓÒÔ²ĞÄy×ø±ê
-				int radius   Á½Ô²µÄ°ë¾¶
-				int color    Ìî³äµÄÑÕÉ«
+Inputï¼š
+				int x1       å·¦åœ†å¿ƒxåæ ‡
+				int y1       å·¦åœ†å¿ƒyåæ ‡
+				int x2       å³åœ†å¿ƒxåæ ‡
+				int y2       å³åœ†å¿ƒyåæ ‡
+				int radius   ä¸¤åœ†çš„åŠå¾„
+				int color    å¡«å……çš„é¢œè‰²
 
-Output£º	    Ô²½ÇÊµĞÄ¾ØĞÎ
+Outputï¼š	    åœ†è§’å®å¿ƒçŸ©å½¢
 
-Return£º		NONE
+Returnï¼š		NONE
 
 **********************************************************/
 void CircleBar(const int x1,const int y1,const int x2,const int y2,const int radius,const int color) {
