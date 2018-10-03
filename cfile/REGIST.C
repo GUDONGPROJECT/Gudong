@@ -678,8 +678,8 @@ void Login_draw(void) {
 //    dis_16hz(246, 336, "密码：", 0);
 
     float size = 5.5;
-    SVGA_Bar(0, 0, 68 * size, 140 * size,
-    SVGA_Line(6 * size, 8 * size, 4 * size, 10 * size, BLACK);WHITE);
+    SVGA_Bar(0, 0, 68 * size, 140 * size, WHITE);
+    SVGA_Line(6 * size, 8 * size, 4 * size, 10 * size, BLACK);
     //画左上角返回按钮
     SVGA_Line(6 * size, 12 * size, 4 * size, 10 * size, BLACK);
     //手机登录
