@@ -1076,3 +1076,26 @@ void enlarge(int x, int y, int n, char *path) {
         buffer = NULL;
     }
 }
+/**********************************************************
+Function：		CircleBar
+
+Description：	用于画出圆角实心矩形
+
+Input：
+				int x1       左圆心x坐标
+				int y1       左圆心y坐标
+				int x2       右圆心x坐标
+				int y2       右圆心y坐标
+				int radius   两圆的半径
+				int color    填充的颜色
+
+Output：	    圆角实心矩形
+
+Return：		NONE
+
+**********************************************************/
+void CircleBar(const int x1,const int y1,const int x2,const int y2,const int radius,const int color) {
+    SVGA_Ball(x1,y1,radius,color);
+    SVGA_Ball(x2,y2,radius,color);
+    SVGA_Bar(x1, y1-radius, x2, y2+radius, color);
+}
