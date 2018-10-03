@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="Encoding">
+    <file url="mock:///REGIST.C" charset="GB2312" />
+    <file url="mock:///Show_HZ.c" charset="GB2312" />
+    <file url="file://$PROJECT_DIR$/cfile/REGIST.C" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/cfile/SVGA.c" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/cfile/Show_HZ.c" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/cfile/main.C" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/cfile/mouse.c" charset="UTF-8" />
+  </component>
+</project>
