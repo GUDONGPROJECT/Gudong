@@ -273,13 +273,13 @@ void MouseShape(void *buff)/*设置鼠标的形状*/
     int mousex = 0, mousey = 0, mousekey = 0, i;
     long size;
     mouse_read(&mousex, &mousey, &mousekey);
-    get_image(mousex, mousey, mousex + 30, mousey + 30, buff);
+    get_image(mousex, mousey, mousex + 30, mousey + 30, (short far *)buff);
     if (mousex + 32 > 1020) {
-        get_image(mousex, mousey, 1023, mousey + 30, buff);
+        get_image(mousex, mousey, 1023, mousey + 30, (short far *)buff);
     }
     for (i = 0; i < 160; i++) {
         put_pixel(Imouse[i][0] + mousex, Imouse[i][1] + mousey, 0);//画点
     }
     delay(110);
-    put_image(mousex, mousey, mousex + 30, mousey + 30, buff);
+    put_image(mousex, mousey, mousex + 30, mousey + 30, (short far *)buff);
 }

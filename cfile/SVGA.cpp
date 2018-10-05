@@ -701,7 +701,7 @@ void SVGA_Ball(const int x1, const int y1, const int r, const int color) {
 **功能：存储屏幕(x1,y1)到(x2,y2)的区域，将信息传递给buffer
 **注意：只能存储不超过屏幕大小的东西
 ********************************/
-void get_image(int x1, int y1, int x2, int y2, short far
+void get_image(const int x1, const int y1, const int x2, const int y2, short far
 
 *save)
 {

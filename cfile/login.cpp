@@ -123,36 +123,36 @@ void Begin_draw(void) {
  * @param fun 传入函数
  * @param
  */
-
-void mouseDetector(int lx, int ly, int rx, int ry, int color, int (*fun) (MOUSE *, PEOPLE *), MOUSE *mouse, PEOPLE *people, int *state) {
-    if (mouse->pos_x > lx && mouse->pos_y > ly && mouse->pos_x < rx && mouse->pos_y < ry) {
-        mouse_recover(mouse);  //将箭头鼠标屏蔽
-        SVGA_Rectangular(302, 263, 632, 308, 255);     //在相应位置画蓝框
-        mouse_reset(mouse);     //重新显示箭头鼠标
-        while (1) {
-            mouse_position(mouse);
-            drawmouse(mouse);
-            //点击鼠标则进入相关函数
-            if (mouse->button == 1) {
-                delay(400);
-                mouse_recover(mouse);
-                state = Login(mouse, people);
-                mouse_reset(mouse);
-                if (state == 1) {
-                    fun(mouse, people);
-                    return 1;
-                };
-                break;
-            }
-            if (mouse->pos_x < lx || mouse->pos_y < ly || mouse->pos_x > rx || mouse->pos_y > ry) {
-                mouse_recover(mouse);  //将箭头鼠标屏蔽
-                SVGA_Rectangular(302, 263, 632, 308, -1);      //在相应位置画白框覆盖蓝框
-                mouse_reset(mouse);     //重新显示箭头鼠标
-                break;
-            }
-        }
-    }
-}
+//
+//void mouseDetector(int lx, int ly, int rx, int ry, int color, int (*fun) (MOUSE *, PEOPLE *), MOUSE *mouse, PEOPLE *people, int *state) {
+//    if (mouse->pos_x > lx && mouse->pos_y > ly && mouse->pos_x < rx && mouse->pos_y < ry) {
+//        mouse_recover(mouse);  //将箭头鼠标屏蔽
+//        SVGA_Rectangular(302, 263, 632, 308, 255);     //在相应位置画蓝框
+//        mouse_reset(mouse);     //重新显示箭头鼠标
+//        while (1) {
+//            mouse_position(mouse);
+//            drawmouse(mouse);
+//            //点击鼠标则进入相关函数
+//            if (mouse->button == 1) {
+//                delay(400);
+//                mouse_recover(mouse);
+//                state = Login(mouse, people);
+//                mouse_reset(mouse);
+//                if (state == 1) {
+//                    fun(mouse, people);
+//                    return 1;
+//                };
+//                break;
+//            }
+//            if (mouse->pos_x < lx || mouse->pos_y < ly || mouse->pos_x > rx || mouse->pos_y > ry) {
+//                mouse_recover(mouse);  //将箭头鼠标屏蔽
+//                SVGA_Rectangular(302, 263, 632, 308, -1);      //在相应位置画白框覆盖蓝框
+//                mouse_reset(mouse);     //重新显示箭头鼠标
+//                break;
+//            }
+//        }
+//    }
+//}
 
 /**********************************************************
 Function：		Begin——menu
@@ -174,7 +174,7 @@ int Begin_menu(MOUSE *mouse, PEOPLE *people) {
         drawmouse(mouse);//绘制鼠标
 
         // 用户注册
-        mouseDetector(302, 263, 632, 308, 255, NULL, mouse, people, &state);
+//        mouseDetector(302, 263, 632, 308, 255, NULL, mouse, people, &state);
         //管理员登录
         if (mouse->pos_x > 302 && mouse->pos_y > 413 && mouse->pos_x < 632 && mouse->pos_y < 458) {
             mouse_recover(mouse);  //将箭头鼠标屏蔽
