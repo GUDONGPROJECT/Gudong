@@ -2,54 +2,54 @@
 Copyright (C) 2017 .
 File name:		regist.c
 Author:
-Descriptionï¼š	ç”¨äºç”¨æˆ·çš„ç™»å½•æ³¨å†Œ
+Description£º	ÓÃÓÚÓÃ»§µÄµÇÂ¼×¢²á
 
-Function Listï¼š
+Function List£º
 	1.void Begin(MOUSE * mouse)
-	ç™»å½•æ³¨å†Œç•Œé¢æ‰€æœ‰çš„è¿”å›å€¼ï¼Œå‡½æ•°è°ƒç”¨ï¼Œä¿¡æ¯æ•´ç†
+	µÇÂ¼×¢²á½çÃæËùÓĞµÄ·µ»ØÖµ£¬º¯Êıµ÷ÓÃ£¬ĞÅÏ¢ÕûÀí
 	2.int Begin_menu(MOUSE*mouse,PEOPLE*people);
-	å¼€å§‹ç•Œé¢çš„æ“ä½œ
+	¿ªÊ¼½çÃæµÄ²Ù×÷
 	3.void Begin_draw(void)
-	å¼€å§‹ç•Œé¢çš„å›¾åƒ
+	¿ªÊ¼½çÃæµÄÍ¼Ïñ
 	4.void Regist(MOUSE *mouse,PEOPLE *people);
-	æ³¨å†Œç•Œé¢çš„é¼ æ ‡æ“ä½œ
+	×¢²á½çÃæµÄÊó±ê²Ù×÷
 	5.void Regist_draw(void)
-	ç”»æ³¨å†Œç•Œé¢å›¾åƒ
+	»­×¢²á½çÃæÍ¼Ïñ
 	6.int R_check(MOUSE *mouse,PEOPLE *people,char *txtname,char * key, char *key1);
-	æ£€æŸ¥æ³¨å†Œæ—¶ç”¨æˆ·åç­‰æ˜¯å¦ç¬¦åˆè¦æ±‚ï¼Œæç¤ºç”¨æˆ·è¿›è¡Œä¸‹ä¸€æ­¥æ“ä½œ
+	¼ì²é×¢²áÊ±ÓÃ»§ÃûµÈÊÇ·ñ·ûºÏÒªÇó£¬ÌáÊ¾ÓÃ»§½øĞĞÏÂÒ»²½²Ù×÷
 	7.int Login(MOUSE *mouse,PEOPLE *people);
-	ç™»å½•ç•Œé¢çš„é¼ æ ‡æ“ä½œ
+	µÇÂ¼½çÃæµÄÊó±ê²Ù×÷
 	8.void Login_draw(void)
-	ç”»ç™»å½•ç•Œé¢
+	»­µÇÂ¼½çÃæ
 	9.int L_check(MOUSE *mouse,PEOPLE *people,char *txtname, char *key1);
-	æ£€æŸ¥å¯†ç æ˜¯å¦æ­£ç¡®ï¼Œç”¨æˆ·æ˜¯å¦è¿›å…¥é»‘åå•
+	¼ì²éÃÜÂëÊÇ·ñÕıÈ·£¬ÓÃ»§ÊÇ·ñ½øÈëºÚÃûµ¥
 	10.int registLogin(MOUSE *mouse,PEOPLE *people);
-	ç®¡ç†å‘˜ç™»å½•ç•Œé¢çš„é¼ æ ‡æ“ä½œ
+	¹ÜÀíÔ±µÇÂ¼½çÃæµÄÊó±ê²Ù×÷
 	11.void registLogin_draw(void)
-	ç”»ç®¡ç†å‘˜ç™»å½•ç•Œé¢
+	»­¹ÜÀíÔ±µÇÂ¼½çÃæ
 	12.int RL_check(MOUSE *mouse,PEOPLE *people,char *txtname, char *key1);
-	ç®¡ç†å‘˜å¯†ç æ£€æŸ¥
+	¹ÜÀíÔ±ÃÜÂë¼ì²é
 	13.int Rname(MOUSE *mouse,PEOPLE *people,char *data,int *number,int x,int y);
-	è®°å½•ç”¨æˆ·åå¹¶åœ¨å±å¹•ä¸Šæ˜¾ç¤ºï¼Œä¸å¾—è¶…è¿‡å…«ä½
+	¼ÇÂ¼ÓÃ»§Ãû²¢ÔÚÆÁÄ»ÉÏÏÔÊ¾£¬²»µÃ³¬¹ı°ËÎ»
 	14.int Rkey(MOUSE *mouse,char *data,int *number,int x,int y);
-	è®°å½•ç”¨æˆ·å¯†ç å¹¶åœ¨å±å¹•ä¸Šæ˜¾ç¤ºï¼Œä¸å¾—è¶…è¿‡å…«ä½
+	¼ÇÂ¼ÓÃ»§ÃÜÂë²¢ÔÚÆÁÄ»ÉÏÏÔÊ¾£¬²»µÃ³¬¹ı°ËÎ»
 	15.void Create_path (char *name,char *textname);
-	ç”Ÿæˆæ–‡ä»¶è·¯å¾„
+	Éú³ÉÎÄ¼şÂ·¾¶
 	16.void flash(void)
-	å¼€æœºåŠ¨ç”»
+	¿ª»ú¶¯»­
 **********************************************************/
 #include"./header/regist.h"
 
 /**********************************************************
-Functionï¼š		Begin
+Function£º		Begin
 
-Descriptionï¼š	ç™»å½•æ³¨å†Œç•Œé¢æ‰€æœ‰çš„è¿”å›å€¼ï¼Œå‡½æ•°è°ƒç”¨ï¼Œä¿¡æ¯æ•´ç†
+Description£º	µÇÂ¼×¢²á½çÃæËùÓĞµÄ·µ»ØÖµ£¬º¯Êıµ÷ÓÃ£¬ĞÅÏ¢ÕûÀí
 
-Inputï¼š			MOUSE *mouse 	  é¼ æ ‡å˜é‡
+Input£º			MOUSE *mouse 	  Êó±ê±äÁ¿
 				
-Outputï¼š		è°ƒç”¨ä¸‹ä¸€çº§å‡½æ•°
+Output£º		µ÷ÓÃÏÂÒ»¼¶º¯Êı
 
-Returnï¼š		NONE
+Return£º		NONE
 **********************************************************/
 void Begin(MOUSE *mouse) {
     int state = 3;
@@ -69,130 +69,121 @@ void Begin(MOUSE *mouse) {
 }
 
 /**********************************************************
-Functionï¼š		Begin_draw
+Function£º		Begin_draw
 
-Descriptionï¼š	ç”»å¼€å§‹ç•Œé¢
+Description£º	»­¿ªÊ¼½çÃæ
 
-Inputï¼š			NONE
+Input£º			NONE
 				
-Outputï¼š		å¼€å§‹ç•Œé¢
+Output£º		¿ªÊ¼½çÃæ
 
-Returnï¼š		NONE
+Return£º		NONE
 **********************************************************/
 void Begin_draw(void) {
 //    SVGA_Bar(182, 128, 749, 551, 0x000EFF);
-//    SVGA_Bar(302, 263, 632, 308, 0x7FFF0E);     //åœ¨ç›¸åº”ä½ç½®ç”»è“æ¡†
-//    SVGA_Bar(302, 339, 632, 382, 0x7FFF0E);       //åœ¨ç›¸åº”ä½ç½®ç”»è“æ¡†
+//    SVGA_Bar(302, 263, 632, 308, 0x7FFF0E);     //ÔÚÏàÓ¦Î»ÖÃ»­À¶¿ò
+//    SVGA_Bar(302, 339, 632, 382, 0x7FFF0E);       //ÔÚÏàÓ¦Î»ÖÃ»­À¶¿ò
 //    SVGA_Bar(302, 413, 632, 458, 0x7FFF0E);
 //    SVGA_Bar(600, 481, 710, 526, 0x7FFF0E);
-////dis_hz_gai(369,178,2,"æ¬¢è¿ç™»å½•",0);
-//    dis_24hz(417, 178, "æ¬¢è¿ç™»å½•", 0);
-//    dis_24hz(419, 273, "ç”¨æˆ·ç™»å½•", 0);
-//    dis_24hz(419, 348, "ç”¨æˆ·æ³¨å†Œ", 0);
-//    dis_24hz(407, 423, "ç®¡ç†å‘˜ç™»å½•", 0);
-//    dis_24hz(631, 491, "é€€å‡º", 0);
+////dis_hz_gai(369,178,2,"»¶Ó­µÇÂ¼",0);
+//    dis_24hz(417, 178, "»¶Ó­µÇÂ¼", 0);
+//    dis_24hz(419, 273, "ÓÃ»§µÇÂ¼", 0);
+//    dis_24hz(419, 348, "ÓÃ»§×¢²á", 0);
+//    dis_24hz(407, 423, "¹ÜÀíÔ±µÇÂ¼", 0);
+//    dis_24hz(631, 491, "ÍË³ö", 0);
     float size=5.5;
     SVGA_Bar(0,0,68*size,140*size,DARK_GRAY);
     //setcolor(GREEN);
-    //ç”»å¾®ä¿¡ç»¿è‰²æŒ‰é’®
+    //»­Î¢ĞÅÂÌÉ«°´Å¥
     CircleBar(7*size,102*size,61*size,102*size,5*size,GREEN);
-    dis_16hz(34*size-16,102*size-8,"å¾®ä¿¡",WHITE);
-    //ç”»å¾®åšã€QQç°è‰²æŒ‰é’®
+    dis_16hz(34*size-16,102*size-8,"Î¢ĞÅ",WHITE);
+    //»­Î¢²©¡¢QQ»ÒÉ«°´Å¥
     CircleBar(7*size,115*size,61*size,115*size,5*size,LIGHT_GRAY);
-    dis_16hz(34*size-16*7,115*size-8,"å¾®åš",WHITE);
+    dis_16hz(34*size-16*7,115*size-8,"Î¢²©",WHITE);
     SVGA_Line(34*size,112*size,34*size,118*size,WHITE);
     dis_16zf(34*size+16*5,115*size-8,"QQ",WHITE);
-    //ç”»æ‰‹æœºå·|é‚®ç®±ç™»å½•
-    dis_16hz(16*size-16*4,126*size-8,"æ‰‹æœºå·",WHITE);
+    //»­ÊÖ»úºÅ|ÓÊÏäµÇÂ¼
+    dis_16hz(16*size-16*4,126*size-8,"ÊÖ»úºÅ",WHITE);
     SVGA_Line(16*size,126*size-8,16*size,126*size+8,WHITE);
-    dis_16hz(16*size+8,126*size-8,"é‚®ç®±ç™»å½•",WHITE);
-    //ç”»æ‰‹æœºå·æ³¨å†Œ
-    dis_16hz(53*size-40,126*size-8,"æ‰‹æœºå·æ³¨å†Œ",WHITE);
-    //åè®®
-    dis_16hz(3*size,134*size-8,"æ³¨å†Œæˆ–ç™»å½•å³åŒæ„",WHITE);
+    dis_16hz(16*size+8,126*size-8,"ÓÊÏäµÇÂ¼",WHITE);
+    //»­ÊÖ»úºÅ×¢²á
+    dis_16hz(53*size-40,126*size-8,"ÊÖ»úºÅ×¢²á",WHITE);
+    //Ğ­Òé
+    dis_16hz(3*size,134*size-8,"×¢²á»òµÇÂ¼¼´Í¬Òâ",WHITE);
+}
+
+/**
+ * mouseDetector Õì²âÊó±ê·¶Î§
+ *
+ * @param lx ×óÉÏ½Çºá×ø±ê
+ * @param ly ×óÉÏ½Ç×İ×ø±ê
+ * @param rx ÓÒÏÂ½Çºá×ø±ê
+ * @param ry ÓÒÏÂ½Ç×İ×ø±ê
+ * @param color ÑÕÉ«
+ * @param fun ´«Èëº¯Êı
+ * @param
+ */
+
+void mouseDetector(int lx, int ly, int rx, int ry, int color, int (*fun) (MOUSE *, PEOPLE *), MOUSE *mouse, PEOPLE *people, int *state) {
+    if (mouse->pos_x > lx && mouse->pos_y > ly && mouse->pos_x < rx && mouse->pos_y < ry) {
+        mouse_recover(mouse);  //½«¼ıÍ·Êó±êÆÁ±Î
+        SVGA_Rectangular(302, 263, 632, 308, 255);     //ÔÚÏàÓ¦Î»ÖÃ»­À¶¿ò
+        mouse_reset(mouse);     //ÖØĞÂÏÔÊ¾¼ıÍ·Êó±ê
+        while (1) {
+            mouse_position(mouse);
+            drawmouse(mouse);
+            //µã»÷Êó±êÔò½øÈëÏà¹Øº¯Êı
+            if (mouse->button == 1) {
+                delay(400);
+                mouse_recover(mouse);
+                state = Login(mouse, people);
+                mouse_reset(mouse);
+                if (state == 1) {
+                    fun(mouse, people);
+                    return 1;
+                };
+                break;
+            }
+            if (mouse->pos_x < lx || mouse->pos_y < ly || mouse->pos_x > rx || mouse->pos_y > ry) {
+                mouse_recover(mouse);  //½«¼ıÍ·Êó±êÆÁ±Î
+                SVGA_Rectangular(302, 263, 632, 308, -1);      //ÔÚÏàÓ¦Î»ÖÃ»­°×¿ò¸²¸ÇÀ¶¿ò
+                mouse_reset(mouse);     //ÖØĞÂÏÔÊ¾¼ıÍ·Êó±ê
+                break;
+            }
+        }
+    }
 }
 
 /**********************************************************
-Functionï¼š		Beginâ€•â€•menu
+Function£º		Begin¡ª¡ªmenu
 
-Descriptionï¼š	ç”¨äºä»å¼€å§‹ç•Œé¢é€‰æ‹©åŠŸèƒ½
+Description£º	ÓÃÓÚ´Ó¿ªÊ¼½çÃæÑ¡Ôñ¹¦ÄÜ
 
-Inputï¼š			MOUSE *mouse 	  é¼ æ ‡å˜é‡
+Input£º			MOUSE *mouse 	  Êó±ê±äÁ¿
 				
-Outputï¼š		NONE
+Output£º		NONE
 
-Returnï¼š		åŠŸèƒ½åºå·
+Return£º		¹¦ÄÜĞòºÅ
 **********************************************************/
 int Begin_menu(MOUSE *mouse, PEOPLE *people) {
     int state = 0;
     Begin_draw();
-    mouse_reset(mouse);//é‡ç½®é¼ æ ‡
+    mouse_reset(mouse);//ÖØÖÃÊó±ê
     while (1) {
-        mouse_position(mouse);//è·å–é¼ æ ‡ä½ç½®
-        drawmouse(mouse);//ç»˜åˆ¶é¼ æ ‡
-        /*é¼ æ ‡ä½ç½®ç§»åˆ°ç”¨æˆ·ç™»å½•*/
-        if (mouse->pos_x > 302 && mouse->pos_y > 263 && mouse->pos_x < 632 && mouse->pos_y < 308) {
-            mouse_recover(mouse);  //å°†ç®­å¤´é¼ æ ‡å±è”½
-            SVGA_Rectangular(302, 263, 632, 308, 255);     //åœ¨ç›¸åº”ä½ç½®ç”»è“æ¡†
-            mouse_reset(mouse);     //é‡æ–°æ˜¾ç¤ºç®­å¤´é¼ æ ‡
-            while (1) {
-                mouse_position(mouse);
-                drawmouse(mouse);
-                if (mouse->button == 1) //ç‚¹å‡»é¼ æ ‡åˆ™è¿›å…¥ç›¸å…³å‡½æ•°
-                {
-                    delay(400);
-                    mouse_recover(mouse);
-                    state = Login(mouse, people);
-                    mouse_reset(mouse);
-                    if (state == 1) {
-                        //menu1(mouse,people);
-                        return 1;
+        mouse_position(mouse);//»ñÈ¡Êó±êÎ»ÖÃ
+        drawmouse(mouse);//»æÖÆÊó±ê
 
-                    }
-                    break;
-                }
-                if (mouse->pos_x < 302 || mouse->pos_y < 263 || mouse->pos_x > 632 || mouse->pos_y > 308) {
-                    mouse_recover(mouse);  //å°†ç®­å¤´é¼ æ ‡å±è”½
-                    SVGA_Rectangular(302, 263, 632, 308, -1);      //åœ¨ç›¸åº”ä½ç½®ç”»ç™½æ¡†è¦†ç›–è“æ¡†
-                    mouse_reset(mouse);     //é‡æ–°æ˜¾ç¤ºç®­å¤´é¼ æ ‡
-                    break;
-                }
-            }
-
-        }
-        /*é¼ æ ‡ä½ç½®ç§»åˆ°ç”¨æˆ·æ³¨å†Œ*/
-        if (mouse->pos_x > 302 && mouse->pos_y > 339 && mouse->pos_x < 632 && mouse->pos_y < 382) {
-            mouse_recover(mouse);  //å°†ç®­å¤´é¼ æ ‡å±è”½
-            SVGA_Rectangular(302, 339, 632, 382, 255);       //åœ¨ç›¸åº”ä½ç½®ç”»è“æ¡†
-            mouse_reset(mouse);     //é‡æ–°æ˜¾ç¤ºç®­å¤´é¼ æ ‡
-            while (1) {
-                mouse_position(mouse);
-                drawmouse(mouse);
-                if (mouse->button == 1) {
-                    delay(100);//å¯ä»¥é˜²æ­¢åŒå‡»						//ç‚¹å‡»é¼ æ ‡åˆ™è¿›å…¥ç›¸å…³å‡½æ•°
-                    mouse_recover(mouse);
-                    Regist(mouse);
-                    mouse_reset(mouse);
-                    break;
-                }
-                if (mouse->pos_x < 302 || mouse->pos_x > 632 || mouse->pos_y < 339 || mouse->pos_y > 382) {
-                    mouse_recover(mouse);  //å°†ç®­å¤´é¼ æ ‡å±è”½
-                    SVGA_Rectangular(302, 339, 632, 382, -1);    //åœ¨ç›¸åº”ä½ç½®ç”»ç™½æ¡†è¦†ç›–è“æ¡†
-                    mouse_reset(mouse);      //é‡æ–°æ˜¾ç¤ºç®­å¤´é¼ æ ‡
-                    break;
-                }
-            }
-
-        }
-        /*é¼ æ ‡ä½ç½®ç§»åˆ°ç®¡ç†å‘˜ç™»å½•*/
+        // ÓÃ»§×¢²á
+        mouseDetector(302, 263, 632, 308, 255, NULL, mouse, people, &state);
+        //¹ÜÀíÔ±µÇÂ¼
         if (mouse->pos_x > 302 && mouse->pos_y > 413 && mouse->pos_x < 632 && mouse->pos_y < 458) {
-            mouse_recover(mouse);  //å°†ç®­å¤´é¼ æ ‡å±è”½
+            mouse_recover(mouse);  //½«¼ıÍ·Êó±êÆÁ±Î
             SVGA_Rectangular(302, 413, 632, 458, 255);
-            mouse_reset(mouse);      //é‡æ–°æ˜¾ç¤ºç®­å¤´é¼ æ ‡
+            mouse_reset(mouse);      //ÖØĞÂÏÔÊ¾¼ıÍ·Êó±ê
             while (1) {
                 mouse_position(mouse);
                 drawmouse(mouse);
-                if (mouse->button == 1) {              //ç‚¹å‡»é¼ æ ‡åˆ™è¿›å…¥ç›¸å…³å‡½æ•°
+                if (mouse->button == 1) {              //µã»÷Êó±êÔò½øÈëÏà¹Øº¯Êı
                     delay(100);
                     mouse_recover(mouse);
                     state = registLogin(mouse);
@@ -203,32 +194,32 @@ int Begin_menu(MOUSE *mouse, PEOPLE *people) {
                     }
                     break;
                 }
-                delay(100);//å¯ä»¥é˜²æ­¢åŒå‡»
+                delay(100);//¿ÉÒÔ·ÀÖ¹Ë«»÷
                 if (mouse->pos_x < 302 || mouse->pos_x > 632 || mouse->pos_y < 413 || mouse->pos_y > 458) {
-                    mouse_recover(mouse);  //å°†ç®­å¤´é¼ æ ‡å±è”½
+                    mouse_recover(mouse);  //½«¼ıÍ·Êó±êÆÁ±Î
                     SVGA_Rectangular(302, 413, 632, 458, -1);
-                    mouse_reset(mouse);      //é‡æ–°æ˜¾ç¤ºç®­å¤´é¼ æ ‡
+                    mouse_reset(mouse);      //ÖØĞÂÏÔÊ¾¼ıÍ·Êó±ê
                     break;
                 }
             }
 
         }
-        /*é¼ æ ‡ä½ç½®ç§»åˆ°æ³¨é”€*/
+        /*Êó±êÎ»ÖÃÒÆµ½×¢Ïú*/
         if (mouse->pos_x > 600 && mouse->pos_y > 481 && mouse->pos_x < 710 && mouse->pos_y < 526) {
-            mouse_recover(mouse);  //å°†ç®­å¤´é¼ æ ‡å±è”½
+            mouse_recover(mouse);  //½«¼ıÍ·Êó±êÆÁ±Î
             SVGA_Rectangular(600, 481, 710, 526, 255);
-            mouse_reset(mouse);      //é‡æ–°æ˜¾ç¤ºç®­å¤´é¼ æ ‡
+            mouse_reset(mouse);      //ÖØĞÂÏÔÊ¾¼ıÍ·Êó±ê
             while (1) {
                 mouse_position(mouse);
                 drawmouse(mouse);
                 if (mouse->button == 1) {
-                    delay(100);    //ç‚¹å‡»é¼ æ ‡åˆ™é€€å‡ºæ•´ä¸ªç¨‹åº
+                    delay(100);    //µã»÷Êó±êÔòÍË³öÕû¸ö³ÌĞò
                     return 0;
-                }          //é€€å‡ºç¨‹åº
+                }          //ÍË³ö³ÌĞò
                 if (mouse->pos_x < 600 || mouse->pos_x > 710 || mouse->pos_y < 481 || mouse->pos_y > 526) {
-                    mouse_recover(mouse);  //å°†ç®­å¤´é¼ æ ‡å±è”½
+                    mouse_recover(mouse);  //½«¼ıÍ·Êó±êÆÁ±Î
                     SVGA_Rectangular(600, 481, 710, 526, -1);
-                    mouse_reset(mouse);      //é‡æ–°æ˜¾ç¤ºç®­å¤´é¼ æ ‡
+                    mouse_reset(mouse);      //ÖØĞÂÏÔÊ¾¼ıÍ·Êó±ê
                     break;
                 }
             }
@@ -237,7 +228,7 @@ int Begin_menu(MOUSE *mouse, PEOPLE *people) {
 }
 
 void flash(void) {
-    int i = 0;//å·¦å³å‘ä¸­é—´
+    int i = 0;//×óÓÒÏòÖĞ¼ä
     for (i = 0; i < 10; i++) {
         PartBmp(0, 768, 0, 824 + 20 * i, 0, 0, "pic\\pic4.bmp");
     }
@@ -247,13 +238,13 @@ void flash(void) {
         PartBmp(0, 768, 612 - 12 * i, 1024, 612 - 12 * i, 0, "pic\\pic1.bmp");
     }
     delay(500);
-//å‰åå‘ä¸­é—´
+//Ç°ºóÏòÖĞ¼ä
     for (i = 0; i < 10; i++) {
         PartBmp(0, 284 + 12 * i, 0, 1024, 0, 0, "pic\\pic2.bmp");
         PartBmp(484 - 12 * i, 768, 0, 1024, 0, 484 - 12 * i, "pic\\pic2.bmp");
     }
     delay(500);
-//è¯¥å¾ªç¯ç”¨äºä»ä¸­é—´å¾€å¤–è¯»å›¾
+//¸ÃÑ­»·ÓÃÓÚ´ÓÖĞ¼äÍùÍâ¶ÁÍ¼
     for (i = 0; i <= 20; i++) {
         PartBmp(340 - 17 * i, 428 + 17 * i, 280 - 14 * i, 744 + 14 * i, 280 - 14 * i, 340 - 17 * i, "pic\\pic3.bmp");
     }
@@ -261,23 +252,23 @@ void flash(void) {
 }
 
 /**********************************************************
-Functionï¼š		Regist
+Function£º		Regist
 
-Descriptionï¼š	ç”¨æˆ·æ³¨å†Œå‡½æ•°
+Description£º	ÓÃ»§×¢²áº¯Êı
 
-Inputï¼š			MOUSE *mouse 	  é¼ æ ‡å˜é‡
+Input£º			MOUSE *mouse 	  Êó±ê±äÁ¿
 				
-Outputï¼š		æ³¨å†Œå‡½æ•°çš„ä½¿ç”¨
+Output£º		×¢²áº¯ÊıµÄÊ¹ÓÃ
 
-Returnï¼š		NONE
+Return£º		NONE
 				
 **********************************************************/
-void Regist(MOUSE *mouse)//åˆ¤æ–­æŒ‰é”®å¹¶ä¸”æ‰§è¡Œå‡½æ•°åŠŸèƒ½
+void Regist(MOUSE *mouse)//ÅĞ¶Ï°´¼ü²¢ÇÒÖ´ĞĞº¯Êı¹¦ÄÜ
 {
-    char *name = (char *) malloc(15);//å®šä¹‰ç”¨äºå­˜å‚¨å§“å
-    char *key = (char *) malloc(15);//ç”¨äºå­˜å‚¨å¯†ç 
-    char *key1 = (char *) malloc(15);//ç”¨äºæ£€éªŒç”¨æˆ·å¯†ç æ˜¯å¦æ­£ç¡®
-    char *txtname = (char *) malloc(35);//ç”¨äºå­˜å‚¨æ–‡ä»¶å
+    char *name = (char *) malloc(15);//¶¨ÒåÓÃÓÚ´æ´¢ĞÕÃû
+    char *key = (char *) malloc(15);//ÓÃÓÚ´æ´¢ÃÜÂë
+    char *key1 = (char *) malloc(15);//ÓÃÓÚ¼ìÑéÓÃ»§ÃÜÂëÊÇ·ñÕıÈ·
+    char *txtname = (char *) malloc(35);//ÓÃÓÚ´æ´¢ÎÄ¼şÃû
     FILE *fp;
     int state = 0;
     int num1 = 0;
@@ -285,15 +276,15 @@ void Regist(MOUSE *mouse)//åˆ¤æ–­æŒ‰é”®å¹¶ä¸”æ‰§è¡Œå‡½æ•°åŠŸèƒ½
     int num3 = 0;
     Regist_draw();
     mouse_reset(mouse);
-    for (;;)//æ¥å›æŒ‰é”®
+    for (;;)//À´»Ø°´¼ü
     {
-        mouse_position(mouse);//è·å–é¼ æ ‡ä½ç½®
-        drawmouse(mouse);//ç»˜åˆ¶é¼ æ ‡
+        mouse_position(mouse);//»ñÈ¡Êó±êÎ»ÖÃ
+        drawmouse(mouse);//»æÖÆÊó±ê
         if (mouse->pos_x > 352 && mouse->pos_y > 236 && mouse->pos_x < 686 && mouse->pos_y < 272 &&
-            mouse->button == 1)//å¦‚æœç”¨æˆ·å°†é¼ æ ‡æ”¾ç½®åœ¨ç”¨æˆ·åç™½æ¡†å†…
+            mouse->button == 1)//Èç¹ûÓÃ»§½«Êó±ê·ÅÖÃÔÚÓÃ»§Ãû°×¿òÄÚ
         {
-            delay(100);//å¯ä»¥é˜²æ­¢åŒå‡»
-            if (Rname(mouse, name, &num1, 352, 236) == -1)//xyä¸ºç”¨æˆ·åå·¦ä¸Šè§’ç™½æ¡†
+            delay(100);//¿ÉÒÔ·ÀÖ¹Ë«»÷
+            if (Rname(mouse, name, &num1, 352, 236) == -1)//xyÎªÓÃ»§Ãû×óÉÏ½Ç°×¿ò
             {
                 mouse_recover(mouse);
                 Regist_draw();
@@ -302,17 +293,17 @@ void Regist(MOUSE *mouse)//åˆ¤æ–­æŒ‰é”®å¹¶ä¸”æ‰§è¡Œå‡½æ•°åŠŸèƒ½
                 num2 = 0;
                 num3 = 0;
             }
-            if (num1 != 0)//é˜²æ­¢é¼ æ ‡åªæ˜¯å»æ™ƒä¸€åœˆçš„
+            if (num1 != 0)//·ÀÖ¹Êó±êÖ»ÊÇÈ¥»ÎÒ»È¦µÄ
             {
-                Create_path(name, txtname);//ç”Ÿæˆæ–‡ä»¶è·¯å¾„
-                //æ˜¯å¦åœ¨æ­¤è®¾ç½®æŠ¥é”™é¡¹ç›®
+                Create_path(name, txtname);//Éú³ÉÎÄ¼şÂ·¾¶
+                //ÊÇ·ñÔÚ´ËÉèÖÃ±¨´íÏîÄ¿
                 fp = fopen(txtname, "r+");
                 if (fp != NULL) {
                     fclose(fp);
-                    //readbmp(182,128,"pic\\chongfu.bmp");//æç¤ºç”¨æˆ·åæœ‰é‡å¤,é‡æ–°è½½å…¥ç”¨æˆ·æ³¨å†Œç•Œé¢
+                    //readbmp(182,128,"pic\\chongfu.bmp");//ÌáÊ¾ÓÃ»§ÃûÓĞÖØ¸´,ÖØĞÂÔØÈëÓÃ»§×¢²á½çÃæ
                     mouse_recover(mouse);
                     SVGA_Bar(182, 128, 749, 551, 0x000EFF);
-                    dis_24hz(393, 327, "ç”¨æˆ·åå·²å­˜åœ¨", 0);
+                    dis_24hz(393, 327, "ÓÃ»§ÃûÒÑ´æÔÚ", 0);
                     delay(500);
                     Regist_draw();
                     mouse_reset(mouse);
@@ -325,8 +316,8 @@ void Regist(MOUSE *mouse)//åˆ¤æ–­æŒ‰é”®å¹¶ä¸”æ‰§è¡Œå‡½æ•°åŠŸèƒ½
             }
         } else if (mouse->pos_x > 352 && mouse->pos_y > 307 && mouse->pos_x < 686 && mouse->pos_y < 344 &&
                    mouse->button == 1) {
-            delay(100);//å¯ä»¥é˜²æ­¢åŒå‡»
-            if (Rkey(mouse, key, &num2, 352, 307) == -1)//å½•å…¥ç¬¬ä¸€æ¬¡çš„å¯†ç 
+            delay(100);//¿ÉÒÔ·ÀÖ¹Ë«»÷
+            if (Rkey(mouse, key, &num2, 352, 307) == -1)//Â¼ÈëµÚÒ»´ÎµÄÃÜÂë
             {
                 mouse_recover(mouse);
                 Regist_draw();
@@ -337,7 +328,7 @@ void Regist(MOUSE *mouse)//åˆ¤æ–­æŒ‰é”®å¹¶ä¸”æ‰§è¡Œå‡½æ•°åŠŸèƒ½
             }
         } else if (mouse->pos_x > 352 && mouse->pos_y > 379 && mouse->pos_x < 686 && mouse->pos_y < 417 &&
                    mouse->button == 1) {
-            delay(100);//å¯ä»¥é˜²æ­¢åŒå‡»
+            delay(100);//¿ÉÒÔ·ÀÖ¹Ë«»÷
             if (Rkey(mouse, key1, &num3, 352, 379) == -1) {
                 mouse_recover(mouse);
                 Regist_draw();
@@ -345,14 +336,14 @@ void Regist(MOUSE *mouse)//åˆ¤æ–­æŒ‰é”®å¹¶ä¸”æ‰§è¡Œå‡½æ•°åŠŸèƒ½
                 num1 = 0;
                 num2 = 0;
                 num3 = 0;
-            }//å½•å…¥ç¬¬äºŒæ¬¡çš„å¯†ç 
-            //æ˜¯å¦è®¾ç½®æŠ¥é”™ï¼Œkey1
+            }//Â¼ÈëµÚ¶ş´ÎµÄÃÜÂë
+            //ÊÇ·ñÉèÖÃ±¨´í£¬key1
         } else if (mouse->pos_x > 247 && mouse->pos_y > 452 && mouse->pos_x < 352 && mouse->pos_y < 497 &&
-                   mouse->button == 1)//ç‚¹å‡»æ³¨å†ŒæŒ‰é’®
+                   mouse->button == 1)//µã»÷×¢²á°´Å¥
         {
-            delay(100);//å¯ä»¥é˜²æ­¢åŒå‡»
+            delay(100);//¿ÉÒÔ·ÀÖ¹Ë«»÷
             mouse_recover(mouse);
-            state = R_check(txtname, key, key1);//æ³¨å†ŒæˆåŠŸï¼Œåˆ™å‡½æ•°è¿”å›ä¸»ç•Œé¢
+            state = R_check(txtname, key, key1);//×¢²á³É¹¦£¬Ôòº¯Êı·µ»ØÖ÷½çÃæ
             mouse_reset(mouse);
             if (state == 1) {
                 fp = fopen("txt\\username.txt", "a+");
@@ -386,9 +377,9 @@ void Regist(MOUSE *mouse)//åˆ¤æ–­æŒ‰é”®å¹¶ä¸”æ‰§è¡Œå‡½æ•°åŠŸèƒ½
                 num3 = 0;
             }
         } else if (mouse->pos_x > 577 && mouse->pos_y > 453 && mouse->pos_x < 686 && mouse->pos_y < 497 &&
-                   mouse->button == 1)//æŒ‰åˆ°è¿”å›æŒ‰é’®ï¼Œåˆ™é€€å›åˆ°ä¸Šä¸€å±‚ç•Œé¢
+                   mouse->button == 1)//°´µ½·µ»Ø°´Å¥£¬ÔòÍË»Øµ½ÉÏÒ»²ã½çÃæ
         {
-            delay(100);//å¯ä»¥é˜²æ­¢åŒå‡»
+            delay(100);//¿ÉÒÔ·ÀÖ¹Ë«»÷
             if (name != NULL) {
                 free(name);
                 name = NULL;
@@ -414,71 +405,71 @@ void Regist(MOUSE *mouse)//åˆ¤æ–­æŒ‰é”®å¹¶ä¸”æ‰§è¡Œå‡½æ•°åŠŸèƒ½
 }
 
 /**********************************************************
-Functionï¼š		Regist_draw
+Function£º		Regist_draw
 
-Descriptionï¼š	ç”»æ³¨å†Œç•Œé¢
+Description£º	»­×¢²á½çÃæ
 
-Inputï¼š			NONE
+Input£º			NONE
 				
-Outputï¼š		æ³¨å†Œç•Œé¢
+Output£º		×¢²á½çÃæ
 
-Returnï¼š		NONE
+Return£º		NONE
 				
 **********************************************************/
 void Regist_draw(void) {
-////readbmp(182,128,"pic\\regist.bmp");//è½½å…¥æ³¨å†Œç•Œé¢
+////readbmp(182,128,"pic\\regist.bmp");//ÔØÈë×¢²á½çÃæ
 //    SVGA_Bar(182, 128, 749, 551, 0x000EFF);
 //    SVGA_Bar(352, 236, 686, 272, -1);
 //    SVGA_Bar(352, 307, 686, 344, -1);
 //    SVGA_Bar(352, 379, 686, 417, -1);
 //    SVGA_Bar(247, 452, 352, 497, 0x7FFF0E);
 //    SVGA_Bar(577, 453, 686, 497, 0x7FFF0E);
-//    dis_24hz(441, 164, "æ³¨å†Œ", 0);
-//    dis_16hz(246, 240, "ç”¨æˆ·åï¼š", 0);
-//    dis_16hz(246, 314, "å¯†ç ï¼š", 0);
-//    dis_16hz(246, 386, "ç¡®è®¤ï¼š", 0);
-//    dis_16hz(276, 465, "æ³¨å†Œ", 0);
-//    dis_16hz(608, 463, "é€€å‡º", 0);
+//    dis_24hz(441, 164, "×¢²á", 0);
+//    dis_16hz(246, 240, "ÓÃ»§Ãû£º", 0);
+//    dis_16hz(246, 314, "ÃÜÂë£º", 0);
+//    dis_16hz(246, 386, "È·ÈÏ£º", 0);
+//    dis_16hz(276, 465, "×¢²á", 0);
+//    dis_16hz(608, 463, "ÍË³ö", 0);
     float size=5.5;
     SVGA_Bar(0,0,68*size,140*size,WHITE);
-    //ç”»å·¦ä¸Šè§’è¿”å›æŒ‰é’®
+    //»­×óÉÏ½Ç·µ»Ø°´Å¥
     SVGA_Line(6*size,8*size,4*size,10*size,BLACK);
     SVGA_Line(6*size,12*size,4*size,10*size,BLACK);
-    //ç”»æ³¨å†ŒæŒ‰é’®
+    //»­×¢²á°´Å¥
     CircleBar(7*size,111*size,61*size,111*size,5*size,DARK_GRAY);
-    dis_16hz(34*size-16*1,111*size-8,"æ³¨å†Œ",WHITE);
-    //è¾“å…¥æ‰‹æœºå·æ¡†
-    dis_24hz(34*size-24*3.5,25*size-12,"è¾“å…¥ä½ çš„æ‰‹æœºå·",BLACK);
+    dis_16hz(34*size-16*1,111*size-8,"×¢²á",WHITE);
+    //ÊäÈëÊÖ»úºÅ¿ò
+    dis_24hz(34*size-24*3.5,25*size-12,"ÊäÈëÄãµÄÊÖ»úºÅ",BLACK);
     SVGA_Line(6*size,47*size,62*size,47*size,LIGHT_GRAY);
-    //è¾“å…¥å¯†ç æ¡†
-    dis_24hz(34*size-24*4.5,75*size-12,"è¾“å…¥ä½ è¦è®¾ç½®çš„å¯†ç ",BLACK);
+    //ÊäÈëÃÜÂë¿ò
+    dis_24hz(34*size-24*4.5,75*size-12,"ÊäÈëÄãÒªÉèÖÃµÄÃÜÂë",BLACK);
     SVGA_Line(6*size,97*size,62*size,97*size,LIGHT_GRAY);
-    //å·²ç»æ³¨å†Œï¼Ÿ
-    dis_16hz(34*size-16*7.5,124*size-8,"å·²ç»æ³¨å†Œè¿‡å’•å’šï¼Ÿ",LIGHT_GRAY);
-    dis_16hz(34*size+16*2,124*size-8,"ç‚¹æ­¤ç™»å½•",GREEN);
+    //ÒÑ¾­×¢²á£¿
+    dis_16hz(34*size-16*7.5,124*size-8,"ÒÑ¾­×¢²á¹ı¹¾ßË£¿",LIGHT_GRAY);
+    dis_16hz(34*size+16*2,124*size-8,"µã´ËµÇÂ¼",GREEN);
 }
 
 /**********************************************************
-Functionï¼š		R_check
+Function£º		R_check
 
-Descriptionï¼š	ç”¨äºæ£€æµ‹ç”¨æˆ·ç”¨æˆ·åå¯†ç æ˜¯å¦ç¬¦åˆæ ‡å‡†
+Description£º	ÓÃÓÚ¼ì²âÓÃ»§ÓÃ»§ÃûÃÜÂëÊÇ·ñ·ûºÏ±ê×¼
 
-Inputï¼š			char *txtname     ç”¨æ¥å­˜å‚¨ç”¨æˆ·çš„æ–‡ä»¶ååœ°å€
-			    char *key         ç”¨æˆ·ç¬¬ä¸€æ¬¡è¾“å…¥çš„å¯†ç 
-				char *key1        ç”¨æˆ·ç¬¬äºŒæ¬¡è¾“å…¥çš„å¯†ç 
+Input£º			char *txtname     ÓÃÀ´´æ´¢ÓÃ»§µÄÎÄ¼şÃûµØÖ·
+			    char *key         ÓÃ»§µÚÒ»´ÎÊäÈëµÄÃÜÂë
+				char *key1        ÓÃ»§µÚ¶ş´ÎÊäÈëµÄÃÜÂë
 				
-Outputï¼š		æç¤ºç”¨æˆ·æ³¨å†ŒçŠ¶æ€ï¼Œä¿å­˜ç”¨æˆ·åæ–‡ä»¶ï¼Œç”Ÿæˆç”¨æˆ·æ–‡ä»¶
+Output£º		ÌáÊ¾ÓÃ»§×¢²á×´Ì¬£¬±£´æÓÃ»§ÃûÎÄ¼ş£¬Éú³ÉÓÃ»§ÎÄ¼ş
 
-Returnï¼š		æ³¨å†ŒçŠ¶æ€åºå·
+Return£º		×¢²á×´Ì¬ĞòºÅ
 				
 **********************************************************/
-int R_check(char *txtname, char *key, char *key1)//åˆ¤æ–­å‡½æ•°æ˜¯å¦å¯ä»¥å¯å½•å…¥ï¼Œä»¥åŠå½•å…¥å‡½æ•°
+int R_check(char *txtname, char *key, char *key1)//ÅĞ¶Ïº¯ÊıÊÇ·ñ¿ÉÒÔ¿ÉÂ¼Èë£¬ÒÔ¼°Â¼Èëº¯Êı
 {
     FILE *fp;
     if (strcmp(key, key1) != 0) {
-        //readbmp(182,128,"pic\\notmatch.bmp");//æç¤ºå‰åä¸¤æ¬¡çš„å¯†ç ä¸ç›¸åŒï¼Œé‡æ–°è½½å…¥ç•Œé¢
+        //readbmp(182,128,"pic\\notmatch.bmp");//ÌáÊ¾Ç°ºóÁ½´ÎµÄÃÜÂë²»ÏàÍ¬£¬ÖØĞÂÔØÈë½çÃæ
         SVGA_Bar(182, 128, 749, 551, 0x000EFF);
-        dis_24hz(393, 327, "å‰åå¯†ç ä¸ä¸€è‡´", 0);
+        dis_24hz(393, 327, "Ç°ºóÃÜÂë²»Ò»ÖÂ", 0);
         delay(700);
         //Regist(mouse,people);
         return 0;
@@ -486,11 +477,11 @@ int R_check(char *txtname, char *key, char *key1)//åˆ¤æ–­å‡½æ•°æ˜¯å¦å¯ä»¥å¯å½
         fp = fopen(txtname, "r+");
         if (fp != NULL) {
             fclose(fp);
-            //readbmp(182,128,"pic\\chongfu.bmp");//æç¤ºç”¨æˆ·åæœ‰é‡å¤,é‡æ–°è½½å…¥ç”¨æˆ·ç™»å½•ç•Œé¢
+            //readbmp(182,128,"pic\\chongfu.bmp");//ÌáÊ¾ÓÃ»§ÃûÓĞÖØ¸´,ÖØĞÂÔØÈëÓÃ»§µÇÂ¼½çÃæ
             SVGA_Bar(182, 128, 749, 551, 0x000EFF);
-            dis_24hz(393, 327, "ç”¨æˆ·åæœ‰é‡å¤", 0);
+            dis_24hz(393, 327, "ÓÃ»§ÃûÓĞÖØ¸´", 0);
             delay(700);
-            //Regist(mouse,people);//è½½å…¥ç™»å½•ç•Œé¢
+            //Regist(mouse,people);//ÔØÈëµÇÂ¼½çÃæ
             return 0;
         } else {
             fclose(fp);
@@ -500,7 +491,7 @@ int R_check(char *txtname, char *key, char *key1)//åˆ¤æ–­å‡½æ•°æ˜¯å¦å¯ä»¥å¯å½
             fclose(fp);
             //readbmp(182,128,"pic\\okay.bmp");
             SVGA_Bar(182, 128, 749, 551, 0x000EFF);
-            dis_24hz(393, 327, "æ‚¨å·²æ³¨å†ŒæˆåŠŸ", 0);
+            dis_24hz(393, 327, "ÄúÒÑ×¢²á³É¹¦", 0);
             delay(700);
             //Begin_menu(mouse);
             return 1;
@@ -509,43 +500,43 @@ int R_check(char *txtname, char *key, char *key1)//åˆ¤æ–­å‡½æ•°æ˜¯å¦å¯ä»¥å¯å½
 }
 
 /**********************************************************
-Functionï¼š		Login
+Function£º		Login
 
-Descriptionï¼š	ç”¨æˆ·ç™»å½•å‡½æ•°ï¼Œä¿å­˜ç”¨æˆ·åï¼Œç”¨æˆ·æ–‡ä»¶å
+Description£º	ÓÃ»§µÇÂ¼º¯Êı£¬±£´æÓÃ»§Ãû£¬ÓÃ»§ÎÄ¼şÃû
 
-Inputï¼š			MOUSE *mouse 	  é¼ æ ‡å˜é‡
-				PEOPLE *people    ç”¨æˆ·ç»“æ„ä½“
+Input£º			MOUSE *mouse 	  Êó±ê±äÁ¿
+				PEOPLE *people    ÓÃ»§½á¹¹Ìå
 				
-Outputï¼š		NONE
+Output£º		NONE
 
-Returnï¼š		åŠŸèƒ½åºå·
+Return£º		¹¦ÄÜĞòºÅ
 				
 **********************************************************/
 int Login(MOUSE *mouse, PEOPLE *people) {
     char *name = (char *) malloc(15);
-//å®šä¹‰ç”¨äºå­˜å‚¨å§“å
+//¶¨ÒåÓÃÓÚ´æ´¢ĞÕÃû
     char *key = (char *) malloc(15);
-//ç”¨äºå­˜å‚¨å¯†ç 
+//ÓÃÓÚ´æ´¢ÃÜÂë
     char *txtname = (char *) malloc(35);
-//ç”¨äºå­˜å‚¨æ–‡ä»¶å
+//ÓÃÓÚ´æ´¢ÎÄ¼şÃû
     FILE *fp;
     int num1 = 0;
     int num2 = 0;
     int state = 0;
 //readbmp(182,128,"pic\\Login.bmp");
     Login_draw();
-//è½½å…¥ç™»é™†ç•Œé¢
+//ÔØÈëµÇÂ½½çÃæ
     mouse_reset(mouse);
     for (;;) {
         mouse_position(mouse);
-        //è·å–é¼ æ ‡ä½ç½®
+        //»ñÈ¡Êó±êÎ»ÖÃ
         drawmouse(mouse);
-        //ç»˜åˆ¶é¼ æ ‡
+        //»æÖÆÊó±ê
         if (mouse->pos_x > 352 && mouse->pos_y > 263 && mouse->pos_x < 686 && mouse->pos_y < 299 &&
-            mouse->button == 1)//ç‚¹å‡»ç”¨æˆ·å
+            mouse->button == 1)//µã»÷ÓÃ»§Ãû
         {
             delay(100);
-            //å¯ä»¥é˜²æ­¢åŒå‡»
+            //¿ÉÒÔ·ÀÖ¹Ë«»÷
             if (Rname(mouse, name, &num1, 352, 263) == -1) {
                 mouse_recover(mouse);
                 Login_draw();
@@ -557,10 +548,10 @@ int Login(MOUSE *mouse, PEOPLE *people) {
                 Create_path(name, txtname);
                 fp = fopen(txtname, "r+");
                 if (fp == NULL) {
-                    //readbmp(182,128,"pic\\notexist.bmp");//æç¤ºç”¨æˆ·åä¸å­˜åœ¨
+                    //readbmp(182,128,"pic\\notexist.bmp");//ÌáÊ¾ÓÃ»§Ãû²»´æÔÚ
                     mouse_recover(mouse);
                     SVGA_Bar(182, 128, 749, 551, 0x000EFF);
-                    dis_24hz(393, 327, "ç”¨æˆ·åä¸å­˜åœ¨", 0);
+                    dis_24hz(393, 327, "ÓÃ»§Ãû²»´æÔÚ", 0);
                     delay(700);
                     fclose(fp);
                     //Login(mouse,people);
@@ -573,9 +564,9 @@ int Login(MOUSE *mouse, PEOPLE *people) {
                 }
             }
         } else if (mouse->pos_x > 352 && mouse->pos_y > 334 && mouse->pos_x < 686 && mouse->pos_y < 372 &&
-                   mouse->button == 1)//ç‚¹å‡»ç™»å½•æŒ‰é’®ç™»å½•
+                   mouse->button == 1)//µã»÷µÇÂ¼°´Å¥µÇÂ¼
         {
-            delay(100);//å¯ä»¥é˜²æ­¢åŒå‡»
+            delay(100);//¿ÉÒÔ·ÀÖ¹Ë«»÷
             if (Rkey(mouse, key, &num2, 352, 334) == -1) {
                 mouse_recover(mouse);
                 Login_draw();
@@ -584,9 +575,9 @@ int Login(MOUSE *mouse, PEOPLE *people) {
                 num2 = 0;
             }
         } else if (mouse->pos_x > 245 && mouse->pos_y > 443 && mouse->pos_x < 352 && mouse->pos_y < 487 &&
-                   mouse->button == 1)//ç‚¹å‡»ç™»å½•æŒ‰é’®
+                   mouse->button == 1)//µã»÷µÇÂ¼°´Å¥
         {
-            delay(100);//å¯ä»¥é˜²æ­¢åŒå‡»
+            delay(100);//¿ÉÒÔ·ÀÖ¹Ë«»÷
             mouse_recover(mouse);
             state = L_check(people, txtname, key);
             mouse_reset(mouse);
@@ -632,7 +623,7 @@ int Login(MOUSE *mouse, PEOPLE *people) {
             }
         } else if (mouse->pos_x > 578 && mouse->pos_y > 443 && mouse->pos_x < 687 && mouse->pos_y < 487 &&
                    mouse->button == 1) {
-            delay(100);//å¯ä»¥é˜²æ­¢åŒå‡»
+            delay(100);//¿ÉÒÔ·ÀÖ¹Ë«»÷
             if (name != NULL) {
                 free(name);
                 name = NULL;
@@ -654,15 +645,15 @@ int Login(MOUSE *mouse, PEOPLE *people) {
 }
 
 /**********************************************************
-Functionï¼š		Login_draw
+Function£º		Login_draw
 
-Descriptionï¼š	ç”»ç™»å½•ç•Œé¢
+Description£º	»­µÇÂ¼½çÃæ
 
-Inputï¼š			NONE
+Input£º			NONE
 				
-Outputï¼š		ç™»å½•ç•Œé¢
+Output£º		µÇÂ¼½çÃæ
 
-Returnï¼š		NONE
+Return£º		NONE
 				
 **********************************************************/
 void Login_draw(void) {
@@ -671,53 +662,53 @@ void Login_draw(void) {
 //    SVGA_Bar(352, 334, 686, 372, -1);
 //    SVGA_Bar(245, 443, 352, 487, 0x7FFF0E);
 //    SVGA_Bar(578, 443, 687, 487, 0x7FFF0E);
-//    dis_24hz(441, 191, "ç™»å½•", 0);
-//    dis_16hz(246, 267, "ç”¨æˆ·åï¼š", 0);
-//    dis_16hz(278, 454, "ç™»å½•", 0);
-//    dis_16hz(607, 452, "é€€å‡º", 0);
-//    dis_16hz(246, 336, "å¯†ç ï¼š", 0);
+//    dis_24hz(441, 191, "µÇÂ¼", 0);
+//    dis_16hz(246, 267, "ÓÃ»§Ãû£º", 0);
+//    dis_16hz(278, 454, "µÇÂ¼", 0);
+//    dis_16hz(607, 452, "ÍË³ö", 0);
+//    dis_16hz(246, 336, "ÃÜÂë£º", 0);
 
     float size = 5.5;
     SVGA_Bar(0, 0, 68 * size, 140 * size, WHITE);
     SVGA_Line(6 * size, 8 * size, 4 * size, 10 * size, BLACK);
-    //ç”»å·¦ä¸Šè§’è¿”å›æŒ‰é’®
+    //»­×óÉÏ½Ç·µ»Ø°´Å¥
     SVGA_Line(6 * size, 12 * size, 4 * size, 10 * size, BLACK);
-    //æ‰‹æœºç™»å½•
-    dis_24hz(6 * size, 18 * size, "æ‰‹æœºç™»å½•", BLACK);
-    //è´¦å·è¾“å…¥æ¡†
+    //ÊÖ»úµÇÂ¼
+    dis_24hz(6 * size, 18 * size, "ÊÖ»úµÇÂ¼", BLACK);
+    //ÕËºÅÊäÈë¿ò
     SVGA_Line(6 * size, 47 * size, 62 * size, 47 * size, LIGHT_GRAY);
-    dis_16hz(6 * size, 41 * size, "æ‰‹æœºå·", LIGHT_GRAY);
-    //å¯†ç è¾“å…¥æ¡†
+    dis_16hz(6 * size, 41 * size, "ÊÖ»úºÅ", LIGHT_GRAY);
+    //ÃÜÂëÊäÈë¿ò
     SVGA_Line(6 * size, 57 * size, 62 * size, 57 * size, LIGHT_GRAY);
-    dis_16hz(6 * size, 51 * size, "å¯†ç ", LIGHT_GRAY);
-    //ç™»å½•æŒ‰é’®
+    dis_16hz(6 * size, 51 * size, "ÃÜÂë", LIGHT_GRAY);
+    //µÇÂ¼°´Å¥
     CircleBar(7 * size, 70 * size, 61 * size, 70 * size, 5 * size, DARK_GRAY);
-    dis_16hz(34 * size - 16 * 1, 70 * size - 8, "ç™»å½•", WHITE);
+    dis_16hz(34 * size - 16 * 1, 70 * size - 8, "µÇÂ¼", WHITE);
 }
 
 /**********************************************************
-Functionï¼š		L_check
+Function£º		L_check
 
-Descriptionï¼š	ç”¨äºæ£€æµ‹ç”¨æˆ·ç”¨æˆ·åæ˜¯å¦å­˜åœ¨ï¼Œå¯†ç æ˜¯å¦æ­£ç¡®çš„å‡½æ•°ï¼Œæç¤ºä¸‹ä¸€æ­¥æ“ä½œ
+Description£º	ÓÃÓÚ¼ì²âÓÃ»§ÓÃ»§ÃûÊÇ·ñ´æÔÚ£¬ÃÜÂëÊÇ·ñÕıÈ·µÄº¯Êı£¬ÌáÊ¾ÏÂÒ»²½²Ù×÷
 
-Inputï¼š			PEOPLE *people    ç”¨æˆ·ç»“æ„ä½“
-				char *txtname     ç”¨æ¥å­˜å‚¨ç”¨æˆ·çš„æ–‡ä»¶ååœ°å€
-				char *key1        ç”¨æˆ·ç¬¬äºŒæ¬¡è¾“å…¥çš„å¯†ç 
+Input£º			PEOPLE *people    ÓÃ»§½á¹¹Ìå
+				char *txtname     ÓÃÀ´´æ´¢ÓÃ»§µÄÎÄ¼şÃûµØÖ·
+				char *key1        ÓÃ»§µÚ¶ş´ÎÊäÈëµÄÃÜÂë
 				
-Outputï¼š		æç¤ºç”¨æˆ·ç™»å½•çŠ¶æ€ï¼Œè¿›å…¥ä¸»ç•Œé¢
+Output£º		ÌáÊ¾ÓÃ»§µÇÂ¼×´Ì¬£¬½øÈëÖ÷½çÃæ
 
-Returnï¼š		ç”¨æˆ·ç™»å½•çŠ¶æ€åºåˆ—å·
+Return£º		ÓÃ»§µÇÂ¼×´Ì¬ĞòÁĞºÅ
 				
 **********************************************************/
 int L_check(PEOPLE *people, char *txtname, char *key1) {
     FILE *fp;
-    char *key = (char *) malloc(15);//ç”¨äºå­˜å‚¨æ­£ç¡®çš„å¯†ç 
+    char *key = (char *) malloc(15);//ÓÃÓÚ´æ´¢ÕıÈ·µÄÃÜÂë
     char ac;
     fp = fopen(txtname, "r+");
     if (fp == NULL) {
-        //readbmp(182,128,"pic\\notexist.bmp");//æç¤ºç”¨æˆ·åä¸å­˜åœ¨
+        //readbmp(182,128,"pic\\notexist.bmp");//ÌáÊ¾ÓÃ»§Ãû²»´æÔÚ
         SVGA_Bar(182, 128, 749, 551, 0x000EFF);
-        dis_24hz(393, 327, "ç”¨æˆ·åä¸å­˜åœ¨", 0);
+        dis_24hz(393, 327, "ÓÃ»§Ãû²»´æÔÚ", 0);
         delay(700);
         if (key != NULL) {
             free(key);
@@ -727,7 +718,7 @@ int L_check(PEOPLE *people, char *txtname, char *key1) {
     }
     fscanf(fp, "%s\n", key);
     if (strcmp(key, key1) == 0) {
-        fclose(fp);//è‹¥å¯†ç æ­£ç¡®ï¼Œåˆ™è¿›å…¥ä¸»èœå•ç•Œé¢
+        fclose(fp);//ÈôÃÜÂëÕıÈ·£¬Ôò½øÈëÖ÷²Ëµ¥½çÃæ
         strcpy(people->key, key);
         strcpy(people->txtname, txtname);
         if (key != NULL) {
@@ -738,12 +729,12 @@ int L_check(PEOPLE *people, char *txtname, char *key1) {
         //menu1(mouse,people);
     } else {
         fseek(fp, 0, 0);
-        if (fgetc(fp) == EOF)//é»‘åå•å¯ä»¥å†™åœ¨è¿™
+        if (fgetc(fp) == EOF)//ºÚÃûµ¥¿ÉÒÔĞ´ÔÚÕâ
         {
             fclose(fp);
-            //readbmp(182,128,"pic\\black.bmp");//æç¤ºç”¨æˆ·å·²ç»è¢«åŠ å…¥é»‘åå•ï¼Œé€€å‡ºåˆ°ä¸»ç•Œé¢
+            //readbmp(182,128,"pic\\black.bmp");//ÌáÊ¾ÓÃ»§ÒÑ¾­±»¼ÓÈëºÚÃûµ¥£¬ÍË³öµ½Ö÷½çÃæ
             SVGA_Bar(182, 128, 749, 551, 0x000EFF);
-            dis_24hz(393, 327, "æ‚¨åœ¨é»‘åå•ä¸Š", 0);
+            dis_24hz(393, 327, "ÄúÔÚºÚÃûµ¥ÉÏ", 0);
             delay(500);
             //Begin_menu(mouse);
             if (key != NULL) {
@@ -753,11 +744,11 @@ int L_check(PEOPLE *people, char *txtname, char *key1) {
             return 2;
         }
         fclose(fp);
-        //readbmp(182,128,"pic\\erro.bmp");//è‹¥å¯†ç ä¸å­˜åœ¨ï¼Œåˆ™æç¤ºå¯†ç é”™è¯¯
+        //readbmp(182,128,"pic\\erro.bmp");//ÈôÃÜÂë²»´æÔÚ£¬ÔòÌáÊ¾ÃÜÂë´íÎó
         SVGA_Bar(182, 128, 749, 551, 0x000EFF);
-        dis_24hz(393, 327, "æ‚¨çš„å¯†ç é”™è¯¯", 0);
+        dis_24hz(393, 327, "ÄúµÄÃÜÂë´íÎó", 0);
         delay(700);
-        //Login(mouse,people);//å›åˆ°ç™»å½•å‡½æ•°
+        //Login(mouse,people);//»Øµ½µÇÂ¼º¯Êı
         if (key != NULL) {
             free(key);
             key = NULL;
@@ -767,16 +758,16 @@ int L_check(PEOPLE *people, char *txtname, char *key1) {
 }
 
 /**********************************************************
-Functionï¼š		registLogin
+Function£º		registLogin
 
-Descriptionï¼š	ç®¡ç†å‘˜ç™»å½•å‡½æ•°
+Description£º	¹ÜÀíÔ±µÇÂ¼º¯Êı
 
-Inputï¼š			MOUSE *mouse 	  é¼ æ ‡å˜é‡
-				PEOPLE *people    ç”¨æˆ·ç»“æ„ä½“
+Input£º			MOUSE *mouse 	  Êó±ê±äÁ¿
+				PEOPLE *people    ÓÃ»§½á¹¹Ìå
 				
-Outputï¼š		ç™»å½•ç•Œé¢
+Output£º		µÇÂ¼½çÃæ
 
-Returnï¼š		NONE
+Return£º		NONE
 				
 **********************************************************/
 void registLogin_draw(void) {
@@ -784,28 +775,28 @@ void registLogin_draw(void) {
     SVGA_Bar(245, 443, 352, 487, 0x7FFF0E);
     SVGA_Bar(578, 443, 687, 487, 0x7FFF0E);
     SVGA_Bar(352, 317, 686, 355, -1);
-    dis_24hz(405, 191, "ç®¡ç†å‘˜ç™»å½•", 0);
-    dis_16hz(246, 318, "å¯†ç ï¼š", 0);
-    dis_16hz(278, 454, "ç™»å½•", 0);
-    dis_16hz(607, 452, "é€€å‡º", 0);
+    dis_24hz(405, 191, "¹ÜÀíÔ±µÇÂ¼", 0);
+    dis_16hz(246, 318, "ÃÜÂë£º", 0);
+    dis_16hz(278, 454, "µÇÂ¼", 0);
+    dis_16hz(607, 452, "ÍË³ö", 0);
 }
 
 int registLogin(MOUSE *mouse) {
-    char *key1 = (char *) malloc(15);//ç”¨äºå­˜å‚¨å¯†ç 
+    char *key1 = (char *) malloc(15);//ÓÃÓÚ´æ´¢ÃÜÂë
     int num = 0;
     int state = 0;
     FILE *fp;
-// readbmp(182,128,"pic\\register.bmp");//è½½å…¥ç™»é™†ç•Œé¢
+// readbmp(182,128,"pic\\register.bmp");//ÔØÈëµÇÂ½½çÃæ
     registLogin_draw();
-    mouse_reset(mouse);//é‡ç½®é¼ æ ‡
+    mouse_reset(mouse);//ÖØÖÃÊó±ê
     for (;;) {
-        mouse_position(mouse);//è·å–é¼ æ ‡ä½ç½®
-        drawmouse(mouse);//ç»˜åˆ¶é¼ æ ‡
+        mouse_position(mouse);//»ñÈ¡Êó±êÎ»ÖÃ
+        drawmouse(mouse);//»æÖÆÊó±ê
 
         if (mouse->pos_x > 352 && mouse->pos_y > 317 && mouse->pos_x < 686 && mouse->pos_y < 383 &&
-            mouse->button == 1)//ç‚¹å‡»ç™»å½•æŒ‰é’®ç™»å½•
+            mouse->button == 1)//µã»÷µÇÂ¼°´Å¥µÇÂ¼
         {
-            delay(100);//å¯ä»¥é˜²æ­¢åŒå‡»
+            delay(100);//¿ÉÒÔ·ÀÖ¹Ë«»÷
             if (Rkey(mouse, key1, &num, 352, 317) == -1) {
                 mouse_recover(mouse);
                 registLogin_draw();
@@ -813,9 +804,9 @@ int registLogin(MOUSE *mouse) {
                 num = 0;
             }
         } else if (mouse->pos_x > 245 && mouse->pos_y > 443 && mouse->pos_x < 352 && mouse->pos_y < 487 &&
-                   mouse->button == 1)//ç‚¹å‡»ç™»å½•æŒ‰é’®
+                   mouse->button == 1)//µã»÷µÇÂ¼°´Å¥
         {
-            delay(100);//å¯ä»¥é˜²æ­¢åŒå‡»
+            delay(100);//¿ÉÒÔ·ÀÖ¹Ë«»÷
             mouse_recover(mouse);
             state = RL_check("txt\\regist.txt", key1);
             mouse_reset(mouse);
@@ -834,9 +825,9 @@ int registLogin(MOUSE *mouse) {
                 mouse_reset(mouse);
             }
         } else if (mouse->pos_x > 577 && mouse->pos_y > 443 && mouse->pos_x < 686 && mouse->pos_y < 489 &&
-                   mouse->button == 1)//ç‚¹å‡»é€€å‡º
+                   mouse->button == 1)//µã»÷ÍË³ö
         {
-            delay(100);//å¯ä»¥é˜²æ­¢åŒå‡»
+            delay(100);//¿ÉÒÔ·ÀÖ¹Ë«»÷
             if (key1 != NULL) {
                 free(key1);
                 key1 = NULL;
@@ -850,19 +841,19 @@ int registLogin(MOUSE *mouse) {
 }
 
 /**********************************************************
-Functionï¼š		RL_check
+Function£º		RL_check
 
-Descriptionï¼š	ç”¨äºæ£€æµ‹ç®¡ç†å‘˜å¯†ç æ˜¯å¦æ­£ç¡®çš„å‡½æ•°
+Description£º	ÓÃÓÚ¼ì²â¹ÜÀíÔ±ÃÜÂëÊÇ·ñÕıÈ·µÄº¯Êı
 
-Inputï¼š			MOUSE *mouse 	  é¼ æ ‡å˜é‡
-				PEOPLE *people    ç”¨æˆ·ç»“æ„ä½“
-				char *txtname     ç”¨æ¥å­˜å‚¨ç”¨æˆ·çš„æ–‡ä»¶ååœ°å€
-				char *key         ç”¨æˆ·ç¬¬ä¸€æ¬¡è¾“å…¥çš„å¯†ç 
-				char *key1        ç”¨æˆ·ç¬¬äºŒæ¬¡è¾“å…¥çš„å¯†ç 
+Input£º			MOUSE *mouse 	  Êó±ê±äÁ¿
+				PEOPLE *people    ÓÃ»§½á¹¹Ìå
+				char *txtname     ÓÃÀ´´æ´¢ÓÃ»§µÄÎÄ¼şÃûµØÖ·
+				char *key         ÓÃ»§µÚÒ»´ÎÊäÈëµÄÃÜÂë
+				char *key1        ÓÃ»§µÚ¶ş´ÎÊäÈëµÄÃÜÂë
 
-Outputï¼š		æç¤ºç®¡ç†å‘˜ç™»å½•çŠ¶æ€ï¼Œè¿›å…¥ç®¡ç†ç•Œé¢
+Output£º		ÌáÊ¾¹ÜÀíÔ±µÇÂ¼×´Ì¬£¬½øÈë¹ÜÀí½çÃæ
 
-Returnï¼š		NONE
+Return£º		NONE
 
 **********************************************************/
 int RL_check(char *txtname, char *key1) {
@@ -878,7 +869,7 @@ int RL_check(char *txtname, char *key1) {
     }
     fscanf(fp, "%s\n", key);
     if (strcmp(key, key1) == 0) {
-        fclose(fp);//è‹¥å¯†ç æ­£ç¡®ï¼Œåˆ™è¿›å…¥ä¸»èœå•ç•Œé¢
+        fclose(fp);//ÈôÃÜÂëÕıÈ·£¬Ôò½øÈëÖ÷²Ëµ¥½çÃæ
         // for(be=0;be<6;be++)
         //{
         //	people->tuijian[be]=0;
@@ -891,9 +882,9 @@ int RL_check(char *txtname, char *key1) {
         return 1;
     } else {
         fclose(fp);
-        //readbmp(182,128,"pic\\erro.bmp");//è‹¥å¯†ç ä¸å­˜åœ¨ï¼Œåˆ™æç¤ºå¯†ç é”™è¯¯
+        //readbmp(182,128,"pic\\erro.bmp");//ÈôÃÜÂë²»´æÔÚ£¬ÔòÌáÊ¾ÃÜÂë´íÎó
         SVGA_Bar(182, 128, 749, 551, 0x000EFF);
-        dis_24hz(393, 327, "æ‚¨çš„å¯†ç é”™è¯¯", 0);
+        dis_24hz(393, 327, "ÄúµÄÃÜÂë´íÎó", 0);
         delay(700);
         if (key != NULL) {
             free(key);
@@ -904,17 +895,17 @@ int RL_check(char *txtname, char *key1) {
 }
 
 /**********************************************************
-Functionï¼š		Create_path
+Function£º		Create_path
 
-Descriptionï¼š	ç”¨äºç”Ÿæˆç”¨æˆ·çš„ç”¨æˆ·åæ–‡ä»¶è·¯å¾„
+Description£º	ÓÃÓÚÉú³ÉÓÃ»§µÄÓÃ»§ÃûÎÄ¼şÂ·¾¶
 
-Inputï¼š
-				char *name       ç”¨æˆ·çš„ç”¨æˆ·å
-				char *textname   ç”¨æˆ·åæ‰€å¯¹åº”çš„ç”¨æˆ·è·¯å¾„
+Input£º
+				char *name       ÓÃ»§µÄÓÃ»§Ãû
+				char *textname   ÓÃ»§ÃûËù¶ÔÓ¦µÄÓÃ»§Â·¾¶
 
-Outputï¼š	    NONE
+Output£º	    NONE
 
-Returnï¼š		NONE
+Return£º		NONE
 
 **********************************************************/
 void Create_path(char *name, char *textname) {
@@ -924,134 +915,134 @@ void Create_path(char *name, char *textname) {
 }
 
 /**********************************************************
-Functionï¼š		Rkey
+Function£º		Rkey
 
-Descriptionï¼š	ç”¨äºè¯»å–ç”¨æˆ·åœ¨ç™»å½•æ³¨å†Œæ—¶è¾“å…¥çš„å¯†ç 
+Description£º	ÓÃÓÚ¶ÁÈ¡ÓÃ»§ÔÚµÇÂ¼×¢²áÊ±ÊäÈëµÄÃÜÂë
 
-Inputï¼š			char *data        ç”¨æ¥å­˜å‚¨è¾“å…¥çš„å­—ç¬¦ä¸²
-				int x             æ–‡æœ¬æ¡†çš„æ¨ªåæ ‡
-				int y			  æ–‡æœ¬æ¡†çš„çºµåæ ‡
+Input£º			char *data        ÓÃÀ´´æ´¢ÊäÈëµÄ×Ö·û´®
+				int x             ÎÄ±¾¿òµÄºá×ø±ê
+				int y			  ÎÄ±¾¿òµÄ×İ×ø±ê
 
-Outputï¼š		ç”¨æˆ·è¾“å…¥çš„å­—ç¬¦
+Output£º		ÓÃ»§ÊäÈëµÄ×Ö·û
 
-Returnï¼š		è¾“å…¥çŠ¶æ€åºåˆ—å·
+Return£º		ÊäÈë×´Ì¬ĞòÁĞºÅ
 
 **********************************************************/
 int Rkey(MOUSE *mouse, char *data, int *number, int x, int y) {
-    char ac;//ç”¨äºå­˜å‚¨è¾“å…¥çš„é”®å€¼å¹¶æ˜¾ç¤º
+    char ac;//ÓÃÓÚ´æ´¢ÊäÈëµÄ¼üÖµ²¢ÏÔÊ¾
     int num = *number;
     int pos = x + 2 + num * 20;
-    mouse_recover(mouse);//å±è”½é¼ æ ‡
-    dis_16hz(pos, y + 9, "å››è‡³å…«ä½", 0);
+    mouse_recover(mouse);//ÆÁ±ÎÊó±ê
+    dis_16hz(pos, y + 9, "ËÄÖÁ°ËÎ»", 0);
     delay(500);
-    while (bioskey(1))//bioskey(1)æŸ¥è¯¢æ˜¯å¦æŒ‰ä¸‹ä¸€ä¸ªé”®ï¼Œè‹¥æŒ‰ä¸‹ï¼Œåˆ™è¿”å›éé›¶å€¼
+    while (bioskey(1))//bioskey(1)²éÑ¯ÊÇ·ñ°´ÏÂÒ»¸ö¼ü£¬Èô°´ÏÂ£¬Ôò·µ»Ø·ÇÁãÖµ
     {
         getch();
     }
     SVGA_Bar(pos, y + 2, pos + 100, y + 30, -1);
-    SVGA_Straight(pos + 2, y + 9, 16, 0);//æ˜¾ç¤ºå…‰æ ‡
+    SVGA_Straight(pos + 2, y + 9, 16, 0);//ÏÔÊ¾¹â±ê
     while ((ac = getch()) != 13) {
         if (((ac >= '0') && (ac <= '9')) || (ac >= 'a') && (ac <= 'z')) {
-            SVGA_Straight(pos + 2, y + 9, 16, -1);//é®ä½ä¹‹å‰çš„å…‰æ ‡
+            SVGA_Straight(pos + 2, y + 9, 16, -1);//ÕÚ×¡Ö®Ç°µÄ¹â±ê
             data[num++] = ac;
-            SVGA_Ball(pos + 10, y + 15, 5, 0);//ä½¿ç”¨outtextè¾“å‡ºå­—ç¬¦åˆ°åŸç‚¹
-            pos = pos + 20;//æ¨ªåæ ‡åŠ ä¸Š20ä½œä¸ºä¸‹ä¸€ä¸ªç‚¹çš„åæ ‡
-            SVGA_Straight(pos + 2, y + 9, 16, 0);//ç”»ä¸‹ä¸€ä¸ªå…‰æ ‡
-        } else if (((ac == 127) || (ac == 8)) && (num > 0))//æŒ‰ä¸‹delé”®ï¼Œbackspaceï¼Œåˆ™åˆ é™¤å­—ç¬¦
+            SVGA_Ball(pos + 10, y + 15, 5, 0);//Ê¹ÓÃouttextÊä³ö×Ö·ûµ½Ô­µã
+            pos = pos + 20;//ºá×ø±ê¼ÓÉÏ20×÷ÎªÏÂÒ»¸öµãµÄ×ø±ê
+            SVGA_Straight(pos + 2, y + 9, 16, 0);//»­ÏÂÒ»¸ö¹â±ê
+        } else if (((ac == 127) || (ac == 8)) && (num > 0))//°´ÏÂdel¼ü£¬backspace£¬ÔòÉ¾³ı×Ö·û
         {
             SVGA_Straight(pos + 2, y + 9, 16, -1);
             data[num] = 0;
             num--;
-            pos = pos - 20;//æ¨ªåæ ‡å‡å»20ä½œä¸ºä¸‹ä¸€ä¸ªå­—ç¬¦çš„åæ ‡
-            SVGA_Bar(pos, y + 5, pos + 19, y + 30, -1);//ç”»ç™½è‰²çŸ©å½¢æ©ç›–ä½ä¹‹å‰çš„å­—ç¬¦
+            pos = pos - 20;//ºá×ø±ê¼õÈ¥20×÷ÎªÏÂÒ»¸ö×Ö·ûµÄ×ø±ê
+            SVGA_Bar(pos, y + 5, pos + 19, y + 30, -1);//»­°×É«¾ØĞÎÑÚ¸Ç×¡Ö®Ç°µÄ×Ö·û
             SVGA_Straight(pos + 2, y + 9, 16, 0);
         }
         if (num > 8) {
             SVGA_Bar(182, 128, 749, 551, 0x000EFF);
-            dis_24hz(393, 327, "å¯†ç ä½æ•°è¿‡å¤š", 0);
+            dis_24hz(393, 327, "ÃÜÂëÎ»Êı¹ı¶à", 0);
             //readbmp(182,128,"pic\\too.bmp");
-            delay(500);//æç¤ºå¯†ç ä½æ•°è¿‡å¤š
+            delay(500);//ÌáÊ¾ÃÜÂëÎ»Êı¹ı¶à
             return -1;
         }
     }
-    SVGA_Straight(pos + 2, y + 9, 16, -1);//é®ä½æ‰€æœ‰çš„å…‰æ ‡
-    mouse_reset(mouse);//é‡ç½®é¼ æ ‡
-    data[num] = '\0';//æœ€åä¸€ä½æ”¾ä¸Šç»ˆæ­¢ç¬¦ï¼Œæ–¹ä¾¿fscanè¯»å–
-    number[0] = num;//å°†æœ€åçš„å¯†ç ä½æ•°ä¼ å›åˆ°ä¸»å‡½æ•°ä¸­
+    SVGA_Straight(pos + 2, y + 9, 16, -1);//ÕÚ×¡ËùÓĞµÄ¹â±ê
+    mouse_reset(mouse);//ÖØÖÃÊó±ê
+    data[num] = '\0';//×îºóÒ»Î»·ÅÉÏÖÕÖ¹·û£¬·½±ãfscan¶ÁÈ¡
+    number[0] = num;//½«×îºóµÄÃÜÂëÎ»Êı´«»Øµ½Ö÷º¯ÊıÖĞ
     if (num < 4) {
         SVGA_Bar(182, 128, 749, 551, 0x000EFF);
-        dis_24hz(393, 327, "å¯†ç ä½æ•°è¿‡å°‘", 0);
+        dis_24hz(393, 327, "ÃÜÂëÎ»Êı¹ıÉÙ", 0);
         //readbmp(182,128,"pic\\too.bmp");
-        delay(500);//æç¤ºå¯†ç ä½æ•°è¿‡å¤š
+        delay(500);//ÌáÊ¾ÃÜÂëÎ»Êı¹ı¶à
         return -1;
     }
     return 1;
 }
 
 /**********************************************************
-Functionï¼š		Rname
+Function£º		Rname
 
-Descriptionï¼š	ç”¨äºè¯»å–å¹¶æ˜¾ç¤ºç”¨æˆ·åœ¨ç™»å½•æ³¨å†Œæ—¶è¾“å…¥çš„ç”¨æˆ·å
+Description£º	ÓÃÓÚ¶ÁÈ¡²¢ÏÔÊ¾ÓÃ»§ÔÚµÇÂ¼×¢²áÊ±ÊäÈëµÄÓÃ»§Ãû
 
-Inputï¼š			MOUSE *mouse 	  é¼ æ ‡å˜é‡
-				PEOPLE *people    ç”¨æˆ·ç»“æ„ä½“
-				char *data        ç”¨æ¥å­˜å‚¨è¾“å…¥çš„å­—ç¬¦ä¸²
-				int x             æ–‡æœ¬æ¡†çš„æ¨ªåæ ‡
-				int y			  æ–‡æœ¬æ¡†çš„çºµåæ ‡
+Input£º			MOUSE *mouse 	  Êó±ê±äÁ¿
+				PEOPLE *people    ÓÃ»§½á¹¹Ìå
+				char *data        ÓÃÀ´´æ´¢ÊäÈëµÄ×Ö·û´®
+				int x             ÎÄ±¾¿òµÄºá×ø±ê
+				int y			  ÎÄ±¾¿òµÄ×İ×ø±ê
 
-Outputï¼š		ç”¨æˆ·è¾“å…¥çš„ç”¨æˆ·å
+Output£º		ÓÃ»§ÊäÈëµÄÓÃ»§Ãû
 
-Returnï¼š		è¾“å…¥çŠ¶æ€åºåˆ—å·
+Return£º		ÊäÈë×´Ì¬ĞòÁĞºÅ
 
 **********************************************************/
 int Rname(MOUSE *mouse, char *data, int *number, int x, int y) {
-    char ac;//ç”¨äºå­˜å‚¨è¾“å…¥çš„é”®å€¼å¹¶æ˜¾ç¤º
-    char str[2];//ç”¨äºå­˜å‚¨è¾“å…¥å­—ç¬¦å¹¶ä¸”ä¼ ç»™å›¾å½¢æ¨¡å¼ä¸‹æ–‡æœ¬è¾“å‡ºå‡½æ•°ï¼ˆå­—ç¬¦ä¸²ï¼‰
+    char ac;//ÓÃÓÚ´æ´¢ÊäÈëµÄ¼üÖµ²¢ÏÔÊ¾
+    char str[2];//ÓÃÓÚ´æ´¢ÊäÈë×Ö·û²¢ÇÒ´«¸øÍ¼ĞÎÄ£Ê½ÏÂÎÄ±¾Êä³öº¯Êı£¨×Ö·û´®£©
     int num = *number;
     int pos = x + 2 + num * 20;
     str[1] = '\0';
-    mouse_recover(mouse);//å±è”½é¼ æ ‡
-    dis_16hz(pos, y + 9, "å››è‡³å…«ä½", 0);
+    mouse_recover(mouse);//ÆÁ±ÎÊó±ê
+    dis_16hz(pos, y + 9, "ËÄÖÁ°ËÎ»", 0);
     delay(500);
-    while (bioskey(1))//bioskey(1)æŸ¥è¯¢æ˜¯å¦æŒ‰ä¸‹ä¸€ä¸ªé”®ï¼Œè‹¥æŒ‰ä¸‹ï¼Œåˆ™è¿”å›éé›¶å€¼
+    while (bioskey(1))//bioskey(1)²éÑ¯ÊÇ·ñ°´ÏÂÒ»¸ö¼ü£¬Èô°´ÏÂ£¬Ôò·µ»Ø·ÇÁãÖµ
     {
         getch();
     }
     SVGA_Bar(pos, y + 9, pos + 100, y + 30, -1);
-    SVGA_Straight(pos + 2, y + 9, 16, 0);//ç”»å…‰æ ‡
+    SVGA_Straight(pos + 2, y + 9, 16, 0);//»­¹â±ê
     while ((ac = getch()) != 13) {
         if (((ac >= '0') && (ac <= '9')) || (ac >= 'a') && (ac <= 'z')) {
-            SVGA_Straight(pos + 2, y + 9, 16, -1);//é®ä½ä¹‹å‰çš„å…‰æ ‡
+            SVGA_Straight(pos + 2, y + 9, 16, -1);//ÕÚ×¡Ö®Ç°µÄ¹â±ê
             data[num++] = ac;
             str[0] = ac;
-            dis_16zf(pos, y + 9, str, 0);//ä½¿ç”¨å­—æ¨¡è¾“å‡ºå­—ç¬¦åˆ°åŸç‚¹
-            pos = pos + 20;//æ¨ªåæ ‡åŠ ä¸Š20ä½œä¸ºä¸‹ä¸€ä¸ªç‚¹çš„åæ ‡
-            SVGA_Straight(pos + 2, y + 9, 16, 0);//ç”»å…‰æ ‡
-        } else if (((ac == 127) || (ac == 8)) && (num > 0))//æŒ‰ä¸‹delé”®ï¼Œbackspaceï¼Œåˆ™åˆ é™¤å­—ç¬¦
+            dis_16zf(pos, y + 9, str, 0);//Ê¹ÓÃ×ÖÄ£Êä³ö×Ö·ûµ½Ô­µã
+            pos = pos + 20;//ºá×ø±ê¼ÓÉÏ20×÷ÎªÏÂÒ»¸öµãµÄ×ø±ê
+            SVGA_Straight(pos + 2, y + 9, 16, 0);//»­¹â±ê
+        } else if (((ac == 127) || (ac == 8)) && (num > 0))//°´ÏÂdel¼ü£¬backspace£¬ÔòÉ¾³ı×Ö·û
         {
-            SVGA_Straight(pos + 2, y + 9, 16, -1);//é®ä½ç”»å…‰æ ‡
+            SVGA_Straight(pos + 2, y + 9, 16, -1);//ÕÚ×¡»­¹â±ê
             data[num] = 0;
             num--;
-            pos = pos - 20;//æ¨ªåæ ‡å‡å»20ä½œä¸ºä¸‹ä¸€ä¸ªå­—ç¬¦çš„åæ ‡
-            SVGA_Bar(pos, y, pos + 20, y + 30, -1);//ç”»ç™½è‰²çŸ©å½¢æ©ç›–ä½ä¹‹å‰çš„å­—ç¬¦
+            pos = pos - 20;//ºá×ø±ê¼õÈ¥20×÷ÎªÏÂÒ»¸ö×Ö·ûµÄ×ø±ê
+            SVGA_Bar(pos, y, pos + 20, y + 30, -1);//»­°×É«¾ØĞÎÑÚ¸Ç×¡Ö®Ç°µÄ×Ö·û
             SVGA_Straight(pos + 2, y + 9, 16, 0);
         }
         if (num > 8) {
             SVGA_Bar(182, 128, 749, 551, 0x000EFF);
-            dis_24hz(393, 327, "ç”¨æˆ·åä½æ•°è¿‡å¤š", 0);
-            //readbmp(182,128,"pic\\too.bmp");//æç¤ºå¯†ç ä½æ•°è¿‡å¤š
+            dis_24hz(393, 327, "ÓÃ»§ÃûÎ»Êı¹ı¶à", 0);
+            //readbmp(182,128,"pic\\too.bmp");//ÌáÊ¾ÃÜÂëÎ»Êı¹ı¶à
             delay(500);
             return -1;
         }
     }
     SVGA_Straight(pos + 2, y + 9, 16, -1);
-    mouse_reset(mouse);//é‡ç½®é¼ æ ‡
-    data[num] = '\0';//æœ€åä¸€ä½æ”¾ä¸Šç»ˆæ­¢ç¬¦ï¼Œæ–¹ä¾¿fscanè¯»å–
-    number[0] = num;//å°†æœ€åçš„å¯†ç ä½æ•°ä¼ å›åˆ°ä¸»å‡½æ•°ä¸­
+    mouse_reset(mouse);//ÖØÖÃÊó±ê
+    data[num] = '\0';//×îºóÒ»Î»·ÅÉÏÖÕÖ¹·û£¬·½±ãfscan¶ÁÈ¡
+    number[0] = num;//½«×îºóµÄÃÜÂëÎ»Êı´«»Øµ½Ö÷º¯ÊıÖĞ
     if (num < 4) {
         SVGA_Bar(182, 128, 749, 551, 0x000EFF);
-        dis_24hz(393, 327, "ç”¨æˆ·åä½æ•°è¿‡å°‘", 0);
-        //readbmp(182,128,"pic\\too.bmp");//æç¤ºå¯†ç ä½æ•°è¿‡å¤š
+        dis_24hz(393, 327, "ÓÃ»§ÃûÎ»Êı¹ıÉÙ", 0);
+        //readbmp(182,128,"pic\\too.bmp");//ÌáÊ¾ÃÜÂëÎ»Êı¹ı¶à
         delay(500);
         return -1;
     }
