@@ -38,7 +38,7 @@ Function List£º
 	16.void flash(void)
 	¿ª»ú¶¯»­
 **********************************************************/
-#include"./header/regist.h"
+#include"./header/login.h"
 
 /**********************************************************
 Function£º		Begin

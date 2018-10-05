@@ -6,7 +6,7 @@
 #include"./header/mouse.h"
 #include"./header/SVGA.h"
 #include"./header/head.h"
-#include"./header/regist.h"
+#include"./header/login.h"
 
 void main() {
 
