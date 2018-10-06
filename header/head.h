@@ -10,6 +10,12 @@
 #include"./header/SVGA.h"
 #define Null 0
 
+typedef enum {
+    false, true
+} bool;
+
+
+
 typedef struct        //鼠标结构
 {
     short far * save_mouse;          //保存鼠标指针覆盖区域

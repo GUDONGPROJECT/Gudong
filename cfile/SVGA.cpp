@@ -248,9 +248,11 @@ void PartBmp(const int top,
     long int Resx, Resy;
     long int PartWidth, PartHeight;
     short *buffer = NULL;//设置显示屏一行显示1024个像素
-    short far
+    short
+    far
     *
-    const VideoBuffer = (short far
+    const VideoBuffer = (short
+    far
     *)0xA0000000L;//设定显存指针不变
     if ((fpbmp = fopen(path, "rb")) == NULL) {
         printf("Cannot open the picture");
@@ -366,9 +368,11 @@ void readbmp(int x, int y, char *path) {
     register char page_new = 0;//换页标识
     static char page_old = 0;
     short *buffer = NULL;//设置显示屏一行显1024个字节
-    short far
+    short
+    far
     *
-    const VideoBuffer = (short far
+    const VideoBuffer = (short
+    far
     *)0xA0000000L;//设定显存指针不变
     if ((fpbmp = fopen(path, "rb")) == NULL)//若无法打开指定图像，终止程??
     {
@@ -463,9 +467,11 @@ void readbmp(int x, int y, char *path) {
 ********************************/
 void put_pixel(int x, int y, int color) {
 /*显存指针常量，指向显存首地址，指针本身不允许修改*/
-    unsigned int far
+    unsigned int
+    far
     *
-    const video_buffer = (unsigned int far
+    const video_buffer = (unsigned int
+    far
     *)0xa0000000L;
 /*要切换的页面号*/
     unsigned char new_page;
@@ -489,8 +495,10 @@ void put_pixel(int x, int y, int color) {
 void SVGA_Horizon(const int x1, const int y1, const int length, const int color) {
     register char page_old = (x1 + y1 * 1024) >> 15;
     register char page_new;
-    short far
-    *Videobuffer =(short far
+    short
+    far
+    * Videobuffer = (short
+    far
     *)0xA0000000L;
     long int position = 0;
     int x = 0;//move for x
@@ -632,8 +640,10 @@ void SVGA_Straight(const x, const y, const length, const color) {
 void SVGA_Bar(const int x1, const int y1, const int x2, const int y2, const int color) {
     register char page_old = (x1 + y1 * 1024) >> 15;
     register char page_new = 0;
-    short far
-    *Videobuffer =(short far
+    short
+    far
+    * Videobuffer = (short
+    far
     *)0xA0000000L;
     long int position = 0;
     int x = 0, y = 0;
@@ -713,24 +723,25 @@ short far
 *
 video_buffer =
 (
-short far
+        short
+far
 *)0xA0000000L;  //初始化指向屏幕点显存的指针，初始化位置（左上角）
 oldpage = (y1 * (long) 1024 + x1) >> 15;    //初始化页码
 newpage = oldpage;
 selectpage(oldpage);
-for(
+for (
 i = 0;
 i<n;
 i++)
 {
-for(
+for (
 j = 0;
 j<m;
-j++,k++)
+j++, k++)
 {
 position = (i + y1) * (long) 1024 + j + x1;
 newpage = position >> 15;
-if(newpage!=oldpage)            //调用换页函数
+if (newpage!=oldpage)            //调用换页函数
 {
 selectpage(newpage);
 oldpage = newpage;
@@ -766,14 +777,15 @@ short far
 *
 Videobuffer =
 (
-short far
+        short
+far
 *)0xA0000000L;
-if(x2>1024)
+if (x2>1024)
 {
 printf("the Blancket area is in the select part");//超出屏幕则不予以显示
 return;
 }
-if(y2>768)
+if (y2>768)
 {
 printf("the Blancket area is in the select part");
 return;
@@ -782,17 +794,17 @@ position = x1 + y1 * 1024L;
 page_old = position >> 15;
 page_new = page_old;
 selectpage(page_old);
-for(
+for (
 j = 0;
 j<y2-
 y1;
 j++)
 {
-for(
+for (
 i = 0;
 i<x2-
 x1;
-i++,k++)
+i++, k++)
 {
 position = 1024L * (y1 + j) + x1 + i;
 page_new = position >> 15;//65536个字节换一页
@@ -821,8 +833,10 @@ Return：		当前颜色
 
 **********************************************************/
 int Getcolor(const int x, const int y) {
-    short far
-    *Videobuffer =(short far
+    short
+    far
+    * Videobuffer = (short
+    far
     *)0xA0000000L;
     int color;
     long int position;
@@ -863,9 +877,11 @@ void maskbmp(int x, int y, char *path) {
     register char page_new = 0;//换页标识
     static char page_old = 0;
     short *buffer = NULL;//设置显示屏一行显1024个字节
-    short far
+    short
+    far
     *
-    const VideoBuffer = (short far
+    const VideoBuffer = (short
+    far
     *)0xA0000000L;//设定显存指针不变
     if ((fpbmp = fopen(path, "rb")) == NULL)//若无法打开指定图像，终止程??
     {
@@ -982,9 +998,11 @@ void enlarge(int x, int y, int n, char *path) {
     register char page_new = 0;//换页标识
     static char page_old = 0;
     short *buffer = NULL;//设置显示屏一行显1024个字节
-    short far
+    short
+    far
     *
-    const VideoBuffer = (short far
+    const VideoBuffer = (short
+    far
     *)0xA0000000L;//设定显存指针不变
     if ((fpbmp = fopen(path, "rb")) == NULL)//若无法打开指定图像，终止程序
     {
@@ -1076,6 +1094,7 @@ void enlarge(int x, int y, int n, char *path) {
         buffer = NULL;
     }
 }
+
 /**********************************************************
 Function：		CircleBar
 
@@ -1094,8 +1113,8 @@ Output：	    圆角实心矩形
 Return：		NONE
 
 **********************************************************/
-void CircleBar(const int x1,const int y1,const int x2,const int y2,const int radius,const int color) {
-    SVGA_Ball(x1,y1,radius,color);
-    SVGA_Ball(x2,y2,radius,color);
-    SVGA_Bar(x1, y1-radius, x2, y2+radius, color);
+void CircleBar(const int x1, const int y1, const int x2, const int y2, const int radius, const int color) {
+    SVGA_Ball(x1, y1, radius, color);
+    SVGA_Ball(x2, y2, radius, color);
+    SVGA_Bar(x1, y1 - radius, x2, y2 + radius, color);
 }

@@ -123,36 +123,37 @@ void Begin_draw(void) {
  * @param fun 传入函数
  * @param
  */
-//
-//void mouseDetector(int lx, int ly, int rx, int ry, int color, int (*fun) (MOUSE *, PEOPLE *), MOUSE *mouse, PEOPLE *people, int *state) {
-//    if (mouse->pos_x > lx && mouse->pos_y > ly && mouse->pos_x < rx && mouse->pos_y < ry) {
-//        mouse_recover(mouse);  //将箭头鼠标屏蔽
-//        SVGA_Rectangular(302, 263, 632, 308, 255);     //在相应位置画蓝框
-//        mouse_reset(mouse);     //重新显示箭头鼠标
-//        while (1) {
-//            mouse_position(mouse);
-//            drawmouse(mouse);
-//            //点击鼠标则进入相关函数
-//            if (mouse->button == 1) {
-//                delay(400);
-//                mouse_recover(mouse);
-//                state = Login(mouse, people);
-//                mouse_reset(mouse);
-//                if (state == 1) {
-//                    fun(mouse, people);
-//                    return 1;
-//                };
-//                break;
-//            }
-//            if (mouse->pos_x < lx || mouse->pos_y < ly || mouse->pos_x > rx || mouse->pos_y > ry) {
-//                mouse_recover(mouse);  //将箭头鼠标屏蔽
-//                SVGA_Rectangular(302, 263, 632, 308, -1);      //在相应位置画白框覆盖蓝框
-//                mouse_reset(mouse);     //重新显示箭头鼠标
-//                break;
-//            }
-//        }
-//    }
-//}
+
+bool mouseDetector(int lx, int ly, int rx, int ry, int color, int (*fun) (MOUSE *, PEOPLE *), MOUSE *mouse, PEOPLE *people, bool isClicked) {
+    if (mouse->pos_x > lx && mouse->pos_y > ly && mouse->pos_x < rx && mouse->pos_y < ry) {
+        mouse_recover(mouse);  //将箭头鼠标屏蔽
+        SVGA_Rectangular(302, 263, 632, 308, color);     //在相应位置画蓝框
+        mouse_reset(mouse);     //重新显示箭头鼠标
+        while (1) {
+            mouse_position(mouse);
+            drawmouse(mouse);
+            //点击鼠标则进入相关函数
+            if (mouse->button == 1) {
+                delay(400);
+                mouse_recover(mouse);
+                isClicked = Login(mouse, people);
+                mouse_reset(mouse);
+                if (isClicked == 1) {
+                    fun(mouse, people);
+                    return true;
+                };
+                break;
+            }
+            if (mouse->pos_x < lx || mouse->pos_y < ly || mouse->pos_x > rx || mouse->pos_y > ry) {
+                mouse_recover(mouse);  //将箭头鼠标屏蔽
+                SVGA_Rectangular(302, 263, 632, 308, -1);      //在相应位置画白框覆盖蓝框
+                mouse_reset(mouse);     //重新显示箭头鼠标
+                break;
+            }
+        }
+    }
+    return false;
+}
 
 /**********************************************************
 Function：		Begin——menu
@@ -166,7 +167,7 @@ Output：		NONE
 Return：		功能序号
 **********************************************************/
 int Begin_menu(MOUSE *mouse, PEOPLE *people) {
-    int state = 0;
+    bool isClicked = false;
     Begin_draw();
     mouse_reset(mouse);//重置鼠标
     while (1) {
@@ -174,7 +175,9 @@ int Begin_menu(MOUSE *mouse, PEOPLE *people) {
         drawmouse(mouse);//绘制鼠标
 
         // 用户注册
-//        mouseDetector(302, 263, 632, 308, 255, NULL, mouse, people, &state);
+        if (mouseDetector(302, 263, 632, 308, 255, NULL, mouse, people, isClicked) != false)
+            return 1;
+
         //管理员登录
         if (mouse->pos_x > 302 && mouse->pos_y > 413 && mouse->pos_x < 632 && mouse->pos_y < 458) {
             mouse_recover(mouse);  //将箭头鼠标屏蔽
@@ -186,9 +189,9 @@ int Begin_menu(MOUSE *mouse, PEOPLE *people) {
                 if (mouse->button == 1) {              //点击鼠标则进入相关函数
                     delay(100);
                     mouse_recover(mouse);
-                    state = registLogin(mouse);
+                    isClicked = (bool)registLogin(mouse);
                     mouse_reset(mouse);
-                    if (state == 1) {
+                    if (isClicked == true) {
                         //	menu2(mouse);
                         return 2;
                     }
