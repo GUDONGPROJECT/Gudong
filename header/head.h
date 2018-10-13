@@ -14,8 +14,6 @@ typedef enum {
     false, true
 } bool;
 
-
-
 typedef struct        //鼠标结构
 {
     short far * save_mouse;          //保存鼠标指针覆盖区域
@@ -86,6 +84,23 @@ typedef struct {
 //    virtual void Show(void);
 //};
 
-enum State{MAINLOG,SPORT,FIND,CIRCLE,THINGS,MINE};
+enum State {
+    MAINLOG,
+    SPORT,
+    FIND,
+    CIRCLE,
+    THINGS,
+    MINE
+};
+
+enum LoginPageJump {
+    WECHAT,
+    WEIBO,
+    QQ,
+    PHONE_NUMBER,
+    MAIL,
+    REGIST,
+    BACK
+};
 
 #endif
