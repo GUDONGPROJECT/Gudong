@@ -94,11 +94,8 @@ enum State {
 };
 
 enum LoginPageJump {
-    WECHAT,
-    WEIBO,
-    QQ,
-    PHONE_NUMBER,
-    MAIL,
+    SPORTPAGE,
+    UNDEFINED,
     REGIST,
     BACK
 };

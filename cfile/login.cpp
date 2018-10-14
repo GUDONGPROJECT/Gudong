@@ -39,7 +39,7 @@ Function List：
 	开机动画
 **********************************************************/
 #include"./header/login.h"
-
+#include "./header/MAINUI.H"
 /**********************************************************
 Function：		Begin
 
@@ -52,19 +52,20 @@ Output：		调用下一级函数
 Return：		NONE
 **********************************************************/
 void Begin(MOUSE *mouse) {
-    LoginPageJump loginPageJump = MAIL;
+    LoginPageJump loginPageJump = UNDEFINED;
     PEOPLE people;
     while (1) {
         loginPageJump = Begin_menu(mouse, &people);
-        if (loginPageJump == QQ) {
-//			menu1(mouse,&people);
-        }
         if (loginPageJump == REGIST) {
-//			menu2(mouse);
+
+        }
+        if (loginPageJump == SPORTPAGE) {
+			SportMain(mouse,&people);
         }
         if (loginPageJump == BACK) {
             exit(0);
         }
+        delay(500);
     }
 }
 
@@ -171,7 +172,7 @@ LoginPageJump Begin_menu(MOUSE *mouse, PEOPLE *people) {
             return REGIST;
         // 用户登录
         if (mouseDetector(16*size-16*4,126*size-8, 16*size-16*4+16*3+4*2,126*size-8+16, 255, Login, mouse, people))
-            return PHONE_NUMBER;
+            return SPORTPAGE;
         // 返回
         if (mouseDetector(4*size, 8*size, 6*size, 12*size, 255, Back, mouse, people))
             return BACK;
@@ -327,7 +328,7 @@ bool Regist(MOUSE *mouse, PEOPLE *people)//判断按键并且执行函数功能
                     txtname = NULL;
                 }
                 mouse_recover(mouse);
-                Begin_draw();
+//                Begin_draw();
                 return true;
             } else {
                 mouse_recover(mouse);
@@ -359,7 +360,7 @@ bool Regist(MOUSE *mouse, PEOPLE *people)//判断按键并且执行函数功能
             }
             //Begin_menu(mouse);
             mouse_recover(mouse);
-            Begin_draw();
+//            Begin_draw();
             return true;
         }
     }
@@ -536,7 +537,7 @@ bool Login(MOUSE *mouse, PEOPLE *people) {
             mouse_reset(mouse);
             if (state == 1) {
                 mouse_recover(mouse);
-                Begin_draw();
+//                Begin_draw();
                 strcpy(people->name, name);
                 if (name != NULL) {
                     free(name);
@@ -553,7 +554,7 @@ bool Login(MOUSE *mouse, PEOPLE *people) {
                 return true;
             } else if (state == 2) {
                 mouse_recover(mouse);
-                Begin_draw();
+//                Begin_draw();
                 if (name != NULL) {
                     free(name);
                     name = NULL;
@@ -591,7 +592,7 @@ bool Login(MOUSE *mouse, PEOPLE *people) {
             }
             //Begin_menu(mouse);
             mouse_recover(mouse);
-            Begin_draw();
+//            Begin_draw();
             return false;
         }
     }
@@ -759,7 +760,7 @@ int registLogin(MOUSE *mouse) {
                     key1 = NULL;
                 }
                 mouse_recover(mouse);
-                Begin_draw();
+//                Begin_draw();
                 return 1;
             } else {
                 mouse_recover(mouse);
@@ -777,7 +778,7 @@ int registLogin(MOUSE *mouse) {
             }
             //Begin_menu(mouse);
             mouse_recover(mouse);
-            Begin_draw();
+//            Begin_draw();
             return 0;
         }
     }
