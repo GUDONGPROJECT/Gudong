@@ -1,5 +1,5 @@
 #include "./header/MainUI.h"
-State SportMain(MOUSE *mouse) {
+State SportMain(MOUSE *mouse,PEOPLE *people) {
     Sport state = RUN;
     float size = 5.5;
     mouse_reset(mouse);//÷ÿ÷√ Û±Í

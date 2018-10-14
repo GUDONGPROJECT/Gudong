@@ -13,7 +13,7 @@
 void Draw_Sport_Run(void);
 void Draw_Sport_Walk(void);
 void Draw_Sport_Ride(void);
-State SportMain(MOUSE *mouse);
+State SportMain(MOUSE *mouse,PEOPLE *people);
 enum Sport{RUN,WALK,RIDE};
 
 #endif
