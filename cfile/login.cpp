@@ -40,6 +40,7 @@ Function List£º
 **********************************************************/
 #include"./header/login.h"
 #include "./header/MAINUI.H"
+#include "./header/headUtil.h"
 /**********************************************************
 Function£º		Begin
 
@@ -176,6 +177,7 @@ LoginPageJump Begin_menu(MOUSE *mouse, PEOPLE *people) {
         // ·µ»Ø
         if (mouseDetector(4*size, 8*size, 6*size, 12*size, 255, Back, mouse, people))
             return BACK;
+        headDisplay(2, 5, BLACK, DARK_GRAY);
     }
 }
 
