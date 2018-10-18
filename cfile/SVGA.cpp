@@ -37,9 +37,9 @@ Function List：
 	设置显示模式
     2.void selectpage(register char page);
 	用于控制内存页区域切换
-    3.void PartBmp(const int top,const int bottom,const int left,const int right,const int x,const int y,const char *path);
+    3.void (const int top,const int bottom,const int left,const int right,const int x,const int y,const char *path);
 	用于显示图像内部分图像
-    4.void readbmp(int x, int y,char*path);
+    4.void (int x, int y,char*path);
 	用于读取bmp文件
     5.void put_pixel(int x,int y,int color); 
     画点函数

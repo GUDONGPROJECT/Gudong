@@ -862,7 +862,7 @@ Function：		Rkey
 
 Description：	用于读取用户在登录注册时输入的密码
 
-Input：			char *data        用来存储输入的字符串
+Input：			char *        用来存储输入的字符串
 				int x             文本框的横坐标
 				int y			  文本框的纵坐标
 
