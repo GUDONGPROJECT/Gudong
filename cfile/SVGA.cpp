@@ -53,7 +53,7 @@ Function List：
 	画实心矩形函数
     10.void SVGA_Cricle(const int x1,const int y1,const int r,const int color);
 	画空心圆函数
-    11.void SVGA_Ball(const int x1,const int y1,const int r,const int color);
+    11.void (const int x1,const int y1,const int r,const int color);
 	画实心圆函数
     12.void get_image(const int x1,const int y1,const int x2,const y2,short far *buffer);
 	取屏幕上部分图像的函数（不支持换页）
@@ -1117,4 +1117,52 @@ void CircleBar(const int x1, const int y1, const int x2, const int y2, const int
     SVGA_Ball(x1, y1, radius, color);
     SVGA_Ball(x2, y2, radius, color);
     SVGA_Bar(x1, y1 - radius, x2, y2 + radius, color);
+}
+/**********************************************************
+Function：		Pieslice
+
+Description：	用于画出扇形
+
+Input：
+				int x        圆弧的圆心x坐标
+				int y        圆弧的圆心y坐标
+				int stangle  起始角度
+				int endangle 结束角度
+				int radius   圆弧的半径
+				int color    圆弧的颜色
+
+Output：	    圆角实心矩形
+
+Return：		NONE
+
+**********************************************************/
+void Arc(int x,int y,int stangle,int endangle,int radius,int color){
+    float i;
+    for (i = stangle; i < endangle; i = i + PI / 180) {
+        put_pixel(x1 + r * cos(i), y1 + radius * sin(i), color);
+    }
+}
+/**********************************************************
+Function：		Pieslice
+
+Description：	用于画出扇形
+
+Input：
+				int x        扇形的圆心x坐标
+				int y        扇形的圆心y坐标
+				int stangle  起始角度
+				int endangle 结束角度
+				int radius   扇形的半径
+				int color    填充的颜色
+
+Output：	    圆角实心矩形
+
+Return：		NONE
+
+**********************************************************/
+void Pieslice(int x,int y,int stangle,int endangle,int radius, int color){
+    int R;
+    for (R = 0; R < radius; R++) {
+        Arc(x, y,stangle,endangle, R, color);
+    }
 }
