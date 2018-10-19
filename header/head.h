@@ -32,6 +32,8 @@ typedef struct {           //用户结构
     int jilu[6];  //若游览了该景点，改数据为1
     int money[6];//钱数
     int pay;
+    int exeTimes;   //运动次数
+    int exeLen;     //单位为米
 } PEOPLE;
 
 
