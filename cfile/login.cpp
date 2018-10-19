@@ -66,7 +66,6 @@ void Begin(MOUSE *mouse) {
         if (loginPageJump == BACK) {
             exit(0);
         }
-        delay(500);
     }
 }
 
@@ -141,7 +140,7 @@ bool mouseDetector(int lx, int ly, int rx, int ry, int color, bool (*fun) (MOUSE
             }
             if (mouse->pos_x < lx || mouse->pos_y < ly || mouse->pos_x > rx || mouse->pos_y > ry) {
                 mouse_recover(mouse);  //将箭头鼠标屏蔽
-                SVGA_Rectangular(lx, ly, rx, ry, -1);      //在相应位置画白框覆盖蓝框
+                SVGA_Rectangular(lx, ly, rx, ry, DARK_GRAY);      //在相应位置画白框覆盖蓝框
                 mouse_reset(mouse);     //重新显示箭头鼠标
                 break;
             }
@@ -169,13 +168,13 @@ LoginPageJump Begin_menu(MOUSE *mouse, PEOPLE *people) {
         drawmouse(mouse);//绘制鼠标
         float size = 5.5;
         // 用户注册
-        if (mouseDetector(53*size-40,126*size-8, 53*size-40+16*5+4*4, 126*size-8+16, 255, Regist, mouse, people))
+        if (mouseDetector(53*size-40,126*size-9, 53*size-40+16*5+4*4, 126*size-8+16, WHITE, Regist, mouse, people))
             return REGIST;
         // 用户登录
-        if (mouseDetector(16*size-16*4,126*size-8, 16*size-16*4+16*3+4*2,126*size-8+16, 255, Login, mouse, people))
+        if (mouseDetector(16*size-16*4,126*size-9, 16*size-16*4+16*3+4*2,126*size-8+16, WHITE, Login, mouse, people))
             return SPORTPAGE;
         // 返回
-        if (mouseDetector(4*size, 8*size, 6*size, 12*size, 255, Back, mouse, people))
+        if (mouseDetector(4*size, 8*size, 6*size, 12*size, WHITE, Back, mouse, people))
             return BACK;
         headDisplay(2, 5, BLACK, DARK_GRAY);
     }
@@ -330,7 +329,7 @@ bool Regist(MOUSE *mouse, PEOPLE *people)//判断按键并且执行函数功能
                     txtname = NULL;
                 }
                 mouse_recover(mouse);
-//                Begin_draw();
+                Begin_draw();
                 return true;
             } else {
                 mouse_recover(mouse);
@@ -362,7 +361,7 @@ bool Regist(MOUSE *mouse, PEOPLE *people)//判断按键并且执行函数功能
             }
             //Begin_menu(mouse);
             mouse_recover(mouse);
-//            Begin_draw();
+            Begin_draw();
             return true;
         }
     }
@@ -539,6 +538,7 @@ bool Login(MOUSE *mouse, PEOPLE *people) {
             mouse_reset(mouse);
             if (state == 1) {
                 mouse_recover(mouse);
+                // 登录成功无需重绘
 //                Begin_draw();
                 strcpy(people->name, name);
                 if (name != NULL) {
@@ -556,7 +556,7 @@ bool Login(MOUSE *mouse, PEOPLE *people) {
                 return true;
             } else if (state == 2) {
                 mouse_recover(mouse);
-//                Begin_draw();
+                Begin_draw();
                 if (name != NULL) {
                     free(name);
                     name = NULL;
@@ -594,7 +594,7 @@ bool Login(MOUSE *mouse, PEOPLE *people) {
             }
             //Begin_menu(mouse);
             mouse_recover(mouse);
-//            Begin_draw();
+            Begin_draw();
             return false;
         }
     }
@@ -762,7 +762,7 @@ int registLogin(MOUSE *mouse) {
                     key1 = NULL;
                 }
                 mouse_recover(mouse);
-//                Begin_draw();
+                Begin_draw();
                 return 1;
             } else {
                 mouse_recover(mouse);
@@ -780,7 +780,7 @@ int registLogin(MOUSE *mouse) {
             }
             //Begin_menu(mouse);
             mouse_recover(mouse);
-//            Begin_draw();
+            Begin_draw();
             return 0;
         }
     }
