@@ -228,7 +228,7 @@ Return：		NONE
 				
 **********************************************************/
 bool Regist(MOUSE *mouse, PEOPLE *people) {
-    char *name = (char) malloc(15);//定义用于存储姓名
+	char *name = (char *) malloc(15);//定义用于存储姓名
     char *key = (char *) malloc(15);//用于存储密码
     char *key1 = (char *) malloc(15);//用于检验用户密码是否正确
     char *txtname = (char *) malloc(35);//用于存储文件名

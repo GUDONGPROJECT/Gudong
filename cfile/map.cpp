@@ -12,7 +12,7 @@ bool drawMap() {
 	// 米单位像素
     const float meter = 4;
 	// 东操大背景
-	const int bg = LIGHT_GRAY;
+	const int bg = MOSS_GREEN;
 	// 操场背景
 	const int bgPlayground = BLACK;
 	// 划线颜色
