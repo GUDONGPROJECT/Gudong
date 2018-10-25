@@ -12,9 +12,13 @@ bool drawMap() {
 	// 米单位像素
     const float meter = 4;
 	// 东操大背景
-	const int bg = MOSS_GREEN;
-	// 操场背景
-	const int bgPlayground = YELLOW_GREEN;
+	const int bg = LIGHT_GRAY;
+    // 操场背景
+	const int bgPlayground = PINK;
+	// 球场背景
+//	const int bgSoccerGround = COBALT_GREEN;
+//    const int bgSoccerGround = DARK_SEA_GREEN;
+    const int bgSoccerGround = PALE_GREEN;
 	// 划线颜色
 	const int fgLine = WHITE;
 //    const int xx = 31.84 * 4 * 2;
@@ -26,7 +30,12 @@ bool drawMap() {
     SVGA_Bar(375, 0, 1024, 768, bg);
     // 背景色
     SVGA_Bar(699.5 - 12 * meter - 31.84 * meter, 384 - 77 * meter, 699.5 + 12 * meter + 31.84 * meter, 384 + 77 * meter, bgPlayground);
-    SVGA_Bar(699.5 - 31.84 * meter, 384 - 90 * meter, 699.5 + 31.84 * meter, 384 + 90 * meter, bgPlayground);
+    SVGA_Bar(699.5 - 31.84 * meter, 384 - 89 * meter, 699.5 + 31.84 * meter, 384 + 89 * meter, bgPlayground);
+    // 四个角上的弧
+    SVGA_Ball(699.5 - 31.84 * meter, 384 - 77 * meter, 12 * meter, bgPlayground);
+    SVGA_Ball(699.5 + 31.84 * meter, 384 - 77 * meter, 12 * meter, bgPlayground);
+    SVGA_Ball(699.5 - 31.84 * meter, 384 + 77 * meter, 12 * meter, bgPlayground);
+    SVGA_Ball(699.5 + 31.84 * meter, 384 + 77 * meter, 12 * meter, bgPlayground);
     // 上半圆
     SVGA_Cricle(699.5, 384 - 50 * meter, 31.84 * meter, fgLine);
     SVGA_Cricle(699.5, 384 - 50 * meter, 31.84 * meter + 2 * meter, fgLine);
@@ -41,7 +50,22 @@ bool drawMap() {
 //    SVGA_Cricle(699.5, 384 + 50 * meter, 31.84 * meter + 8 * meter, fgLine);
     // 覆盖下半圆和上半圆
     SVGA_Bar(699.5 - 39.84 * meter, 384 - 50 * meter, 699.5 + 39.84 * meter, 384 + 50 * meter, bgPlayground);
+    // 球场背景
+    SVGA_Bar(699.5 - 31.84 * meter, 384 - 50 * meter, 699.5 + 31.84 * meter, 384 + 50 * meter, bgSoccerGround);
+    // 球场中圆
     SVGA_Cricle(mPen.x, mPen.y, 5 * meter, fgLine);
+    // 上方禁区
+    SVGA_Cricle(mPen.x, mPen.y - 43 * meter, 6 * meter, fgLine);
+    SVGA_Bar(mPen.x - 12 * meter, mPen.y - 50 * meter, mPen.x + 12 * meter, mPen.y - 40 * meter, fgLine);
+    SVGA_Bar(mPen.x - 12 * meter + 1, mPen.y - 50 * meter + 1, mPen.x + 12 * meter - 1, mPen.y - 40 * meter - 1, bgSoccerGround);
+    SVGA_Bar(mPen.x - 6 * meter, mPen.y - 50 * meter, mPen.x + 6 * meter, mPen.y - 45 * meter, fgLine);
+    SVGA_Bar(mPen.x - 6 * meter + 1, mPen.y - 50 * meter + 1, mPen.x + 6 * meter - 1, mPen.y - 45 * meter - 1, bgSoccerGround);
+    // 下方禁区
+    SVGA_Cricle(mPen.x, mPen.y + 43 * meter, 6 * meter, fgLine);
+    SVGA_Bar(mPen.x - 12 * meter, mPen.y + 40 * meter, mPen.x + 12 * meter, mPen.y + 50 * meter, fgLine);
+    SVGA_Bar(mPen.x - 12 * meter + 1, mPen.y + 40 * meter + 1, mPen.x + 12 * meter - 1, mPen.y + 50 * meter - 1, bgSoccerGround);
+    SVGA_Bar(mPen.x - 6 * meter, mPen.y + 45 * meter, mPen.x + 6 * meter, mPen.y + 50 * meter, fgLine);
+    SVGA_Bar(mPen.x - 6 * meter + 1, mPen.y + 45 * meter + 1, mPen.x + 6 * meter - 1, mPen.y + 50 * meter - 1, bgSoccerGround);
     // 向左向右的球场中线
 //    SVGA_Line(699.5, 384, 699.5 + 31.84 * meter, 384, fgLine);
     SVGA_Line(mPen.x, mPen.y, mPen.x - 31.84 * meter, mPen.y, fgLine);
