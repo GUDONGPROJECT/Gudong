@@ -14,7 +14,7 @@ bool drawMap() {
 	// 东操大背景
 	const int bg = MOSS_GREEN;
 	// 操场背景
-	const int bgPlayground = BLACK;
+	const int bgPlayground = YELLOW_GREEN;
 	// 划线颜色
 	const int fgLine = WHITE;
 //    const int xx = 31.84 * 4 * 2;
