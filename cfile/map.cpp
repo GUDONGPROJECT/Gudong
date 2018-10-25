@@ -92,4 +92,13 @@ bool drawMap() {
 	mPen.y += 100 * meter;
 	// 画球场底线
 	SVGA_Line(mPen.x + 6 * meter, mPen.y, mPen.x - 31.84 * 2 * meter - 6 * meter, mPen.y, fgLine);
+
+	/**
+	 * 运动开始时间
+	 * 运动结束时间 -- --
+	 * 耐力值
+	 * 实时速度
+	 * 距离
+	 * 运动时长
+	 */
 }
