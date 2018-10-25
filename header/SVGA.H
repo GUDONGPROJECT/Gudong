@@ -29,7 +29,7 @@ void put_pixel(int x, int y, int color);
 
 void SVGA_Horizon(const int x1, const int y1, const int length, const int color);
 
-void SVGA_Line(int x1, int y1, int x2, int y2, unsigned char color);
+void SVGA_Line(int x1, int y1, int x2, int y2, const int color);
 
 void SVGA_Rectangular(const int x1, const int x2, const int y1, const int y2, const int color);
 

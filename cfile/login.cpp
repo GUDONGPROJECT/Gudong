@@ -41,6 +41,7 @@ Function List：
 #include"./header/login.h"
 #include "./header/MAINUI.H"
 #include "./header/headUtil.h"
+#include "./header/map.h"
 /**********************************************************
 Function：		Begin
 
@@ -103,6 +104,7 @@ void Begin_draw(void) {
     //画左上角返回按钮
     SVGA_Line(6*size,8*size,4*size,10*size,BLACK);
     SVGA_Line(6*size,12*size,4*size,10*size,BLACK);
+    drawMap();
 }
 
 /**
@@ -225,9 +227,8 @@ Output：		注册函数的使用
 Return：		NONE
 				
 **********************************************************/
-bool Regist(MOUSE *mouse, PEOPLE *people)//判断按键并且执行函数功能
-{
-    char *name = (char *) malloc(15);//定义用于存储姓名
+bool Regist(MOUSE *mouse, PEOPLE *people) {
+    char *name = (char) malloc(15);//定义用于存储姓名
     char *key = (char *) malloc(15);//用于存储密码
     char *key1 = (char *) malloc(15);//用于检验用户密码是否正确
     char *txtname = (char *) malloc(35);//用于存储文件名

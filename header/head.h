@@ -53,6 +53,11 @@ typedef struct {
 
 } ANGLE;
 
+typedef struct {
+    float x;
+    float y;
+} Pen;
+
 //class Button {
 //    char *fun;      //按钮被点击后触发的事件接口
 //    char *name;     //按钮的名字

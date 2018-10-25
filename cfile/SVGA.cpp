@@ -96,7 +96,7 @@ Output：		屏幕上画出直线
 Return：		None
 Others：		None
 **********************************************************/
-void SVGA_Line(int x1, int y1, int x2, int y2, unsigned char color) {
+void SVGA_Line(int x1, int y1, int x2, int y2, const int color) {
     int dx, dy;      /*直线x、y坐标差值*/
     int dx2, dy2;    /*加快运算速度的中间值*/
     int xinc, yinc;    /*判断想、y增加方向的符号值*/
