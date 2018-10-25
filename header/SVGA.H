@@ -57,8 +57,8 @@ void SVGA_Triangle(int x1, int y1, int x2, int y2, int x3, int y3, unsigned char
 
 void CircleBar(const int x1,const int y1,const int x2,const int y2,const int radius,const int color);
 
-void Arc(int x,int y,int stangle,int endangle,int radius,int color);
+void Arc(int x,int y, float stangle, float endangle,int radius,int color);
 
-void Pieslice(int x,int y,int stangle,int endangle,int radius,int color);
+void Pieslice(int x,int y, float stangle, float endangle,int radius,int color);
 
 #endif

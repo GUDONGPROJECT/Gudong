@@ -1136,10 +1136,10 @@ Output：	    圆角实心矩形
 Return：		NONE
 
 **********************************************************/
-void Arc(int x,int y,int stangle,int endangle,int radius,int color){
+void Arc(int x,int y,float stangle,float endangle,int radius,int color){
     float i;
-    for (i = stangle; i < endangle; i = i + PI / 180) {
-        put_pixel(x1 + r * cos(i), y1 + radius * sin(i), color);
+    for (i = stangle; i <= endangle; i = i + PI / 180) {
+        put_pixel(x + radius * cos(i), y - radius * sin(i), color);
     }
 }
 /**********************************************************
@@ -1160,9 +1160,9 @@ Output：	    圆角实心矩形
 Return：		NONE
 
 **********************************************************/
-void Pieslice(int x,int y,int stangle,int endangle,int radius, int color){
+void Pieslice(int x,int y,float stangle,float endangle,int radius, int color){
     int R;
-    for (R = 0; R < radius; R++) {
+    for (R = 0; R <= radius; R++) {
         Arc(x, y,stangle,endangle, R, color);
     }
 }
