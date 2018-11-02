@@ -16,4 +16,6 @@
 #include <time.h>
 
 bool headDisplay(float x, float y, int color, int bg);
+void drawClock(float x, float y, int color, int bg);
+void drawClockOnce(float x, float y, int color);
 #endif //GUDONG_HEADUTIL_H

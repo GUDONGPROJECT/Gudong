@@ -178,7 +178,9 @@ LoginPageJump Begin_menu(MOUSE *mouse, PEOPLE *people) {
         // ·µ»Ø
         if (mouseDetector(4*size, 8*size, 6*size, 12*size, WHITE, Back, mouse, people))
             return BACK;
+        char * blankP = " ";
         headDisplay(2, 5, BLACK, DARK_GRAY);
+        drawStatus(blankP, blankP, blankP, blankP);
     }
 }
 

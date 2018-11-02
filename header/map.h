@@ -16,5 +16,6 @@
 #include"./header/head.h"
 
 bool drawMap();
+void drawStatus(char * endurance, char * velocity, char * length, char * totalTime);
 
 #endif //GUDONG_MAP_H

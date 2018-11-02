@@ -3,84 +3,85 @@
 //
 
 #include "./header/map.h"
+#include "./header/headUtil.h"
 
 // lx from 375 ly from 0
 // rx to  1024 ry to 768
 // middle x 324.5 middle y 384
 
 bool drawMap() {
-	// ç±³å•ä½åƒç´ 
+	// Ã×µ¥Î»ÏñËØ
     const float meter = 4;
-	// ä¸œæ“å¤§èƒŒæ™¯
+	// ¶«²Ù´ó±³¾°
 	const int bg = LIGHT_GRAY;
-    // æ“åœºèƒŒæ™¯
+    // ²Ù³¡±³¾°
 	const int bgPlayground = PINK;
-	// çƒåœºèƒŒæ™¯
+	// Çò³¡±³¾°
 //	const int bgSoccerGround = COBALT_GREEN;
 //    const int bgSoccerGround = DARK_SEA_GREEN;
     const int bgSoccerGround = PALE_GREEN;
-	// åˆ’çº¿é¢œè‰²
+	// »®ÏßÑÕÉ«
 	const int fgLine = WHITE;
 //    const int xx = 31.84 * 4 * 2;
 //    const int yy = 100 * 4 + 31.84 * 4 * 2;
 //    Pen mapPixel[xx][2] = {0};
-	// ç”»ç¬”è¾…åŠ©ç»“æ„ä½“
+	// »­±Ê¸¨Öú½á¹¹Ìå
     Pen mPen = {699.5, 384};
-	// åˆ·ä¸œæ“å¤§èƒŒæ™¯
+	// Ë¢¶«²Ù´ó±³¾°
     SVGA_Bar(375, 0, 1024, 768, bg);
-    // èƒŒæ™¯è‰²
+    // ±³¾°É«
     SVGA_Bar(699.5 - 12 * meter - 31.84 * meter, 384 - 77 * meter, 699.5 + 12 * meter + 31.84 * meter, 384 + 77 * meter, bgPlayground);
     SVGA_Bar(699.5 - 31.84 * meter, 384 - 89 * meter, 699.5 + 31.84 * meter, 384 + 89 * meter, bgPlayground);
-    // å››ä¸ªè§’ä¸Šçš„å¼§
+    // ËÄ¸ö½ÇÉÏµÄ»¡
     SVGA_Ball(699.5 - 31.84 * meter, 384 - 77 * meter, 12 * meter, bgPlayground);
     SVGA_Ball(699.5 + 31.84 * meter, 384 - 77 * meter, 12 * meter, bgPlayground);
     SVGA_Ball(699.5 - 31.84 * meter, 384 + 77 * meter, 12 * meter, bgPlayground);
     SVGA_Ball(699.5 + 31.84 * meter, 384 + 77 * meter, 12 * meter, bgPlayground);
-    // ä¸ŠåŠåœ†
+    // ÉÏ°ëÔ²
     SVGA_Cricle(699.5, 384 - 50 * meter, 31.84 * meter, fgLine);
     SVGA_Cricle(699.5, 384 - 50 * meter, 31.84 * meter + 2 * meter, fgLine);
     SVGA_Cricle(699.5, 384 - 50 * meter, 31.84 * meter + 4 * meter, fgLine);
     SVGA_Cricle(699.5, 384 - 50 * meter, 31.84 * meter + 6 * meter, fgLine);
 //    SVGA_Cricle(699.5, 384 - 50 * meter, 31.84 * meter + 8 * meter, fgLine);
-    // ä¸‹åŠåœ†
+    // ÏÂ°ëÔ²
     SVGA_Cricle(699.5, 384 + 50 * meter, 31.84 * meter, fgLine);
     SVGA_Cricle(699.5, 384 + 50 * meter, 31.84 * meter + 2 * meter, fgLine);
     SVGA_Cricle(699.5, 384 + 50 * meter, 31.84 * meter + 4 * meter, fgLine);
     SVGA_Cricle(699.5, 384 + 50 * meter, 31.84 * meter + 6 * meter, fgLine);
 //    SVGA_Cricle(699.5, 384 + 50 * meter, 31.84 * meter + 8 * meter, fgLine);
-    // è¦†ç›–ä¸‹åŠåœ†å’Œä¸ŠåŠåœ†
+    // ¸²¸ÇÏÂ°ëÔ²ºÍÉÏ°ëÔ²
     SVGA_Bar(699.5 - 39.84 * meter, 384 - 50 * meter, 699.5 + 39.84 * meter, 384 + 50 * meter, bgPlayground);
-    // çƒåœºèƒŒæ™¯
+    // Çò³¡±³¾°
     SVGA_Bar(699.5 - 31.84 * meter, 384 - 50 * meter, 699.5 + 31.84 * meter, 384 + 50 * meter, bgSoccerGround);
-    // çƒåœºä¸­åœ†
+    // Çò³¡ÖĞÔ²
     SVGA_Cricle(mPen.x, mPen.y, 5 * meter, fgLine);
-    // ä¸Šæ–¹ç¦åŒº
+    // ÉÏ·½½ûÇø
     SVGA_Cricle(mPen.x, mPen.y - 43 * meter, 6 * meter, fgLine);
     SVGA_Bar(mPen.x - 12 * meter, mPen.y - 50 * meter, mPen.x + 12 * meter, mPen.y - 40 * meter, fgLine);
     SVGA_Bar(mPen.x - 12 * meter + 1, mPen.y - 50 * meter + 1, mPen.x + 12 * meter - 1, mPen.y - 40 * meter - 1, bgSoccerGround);
     SVGA_Bar(mPen.x - 6 * meter, mPen.y - 50 * meter, mPen.x + 6 * meter, mPen.y - 45 * meter, fgLine);
     SVGA_Bar(mPen.x - 6 * meter + 1, mPen.y - 50 * meter + 1, mPen.x + 6 * meter - 1, mPen.y - 45 * meter - 1, bgSoccerGround);
-    // ä¸‹æ–¹ç¦åŒº
+    // ÏÂ·½½ûÇø
     SVGA_Cricle(mPen.x, mPen.y + 43 * meter, 6 * meter, fgLine);
     SVGA_Bar(mPen.x - 12 * meter, mPen.y + 40 * meter, mPen.x + 12 * meter, mPen.y + 50 * meter, fgLine);
     SVGA_Bar(mPen.x - 12 * meter + 1, mPen.y + 40 * meter + 1, mPen.x + 12 * meter - 1, mPen.y + 50 * meter - 1, bgSoccerGround);
     SVGA_Bar(mPen.x - 6 * meter, mPen.y + 45 * meter, mPen.x + 6 * meter, mPen.y + 50 * meter, fgLine);
     SVGA_Bar(mPen.x - 6 * meter + 1, mPen.y + 45 * meter + 1, mPen.x + 6 * meter - 1, mPen.y + 50 * meter - 1, bgSoccerGround);
-    // å‘å·¦å‘å³çš„çƒåœºä¸­çº¿
+    // Ïò×óÏòÓÒµÄÇò³¡ÖĞÏß
 //    SVGA_Line(699.5, 384, 699.5 + 31.84 * meter, 384, fgLine);
     SVGA_Line(mPen.x, mPen.y, mPen.x - 31.84 * meter, mPen.y, fgLine);
 	SVGA_Line(mPen.x, mPen.y, mPen.x + 31.84 * meter, mPen.y, fgLine);
     mPen.x -= 31.84 * meter;
-	// ç”»ç¬”èµ°åˆ°çƒåœºå·¦ä¸Šè§’
+	// »­±Ê×ßµ½Çò³¡×óÉÏ½Ç
     SVGA_Line(mPen.x, mPen.y, mPen.x, mPen.y - 50 * meter, fgLine);
     mPen.y -= 50 * meter;
-	// ç”»å·¦ä¾§çš„è·‘é“
+	// »­×ó²àµÄÅÜµÀ
 	SVGA_Line(mPen.x, mPen.y, mPen.x - 6 * meter, mPen.y, fgLine);
 	SVGA_Line(mPen.x, mPen.y, mPen.x, mPen.y + 100 * meter, fgLine);
 	SVGA_Line(mPen.x - 2 * meter, mPen.y, mPen.x - 2 * meter, mPen.y + 100 * meter, fgLine);
 	SVGA_Line(mPen.x - 4 * meter, mPen.y, mPen.x - 4 * meter, mPen.y + 100 * meter, fgLine);
 	SVGA_Line(mPen.x - 6 * meter, mPen.y, mPen.x - 6 * meter, mPen.y + 100 * meter, fgLine);
-	// ç”»ç¬”èµ°å‘çƒåœºå³ä¸Šè§’
+	// »­±Ê×ßÏòÇò³¡ÓÒÉÏ½Ç
     SVGA_Line(mPen.x, mPen.y, mPen.x + 31.84 * 2 * meter, mPen.y, fgLine);
     mPen.x += 31.84 * 2 * meter;
 	SVGA_Line(mPen.x, mPen.y, mPen.x + 6 * meter, mPen.y, fgLine);
@@ -88,17 +89,40 @@ bool drawMap() {
 	SVGA_Line(mPen.x + 2 * meter, mPen.y, mPen.x + 2 * meter, mPen.y + 100 * meter, fgLine);
 	SVGA_Line(mPen.x + 4 * meter, mPen.y, mPen.x + 4 * meter, mPen.y + 100 * meter, fgLine);
 	SVGA_Line(mPen.x + 6 * meter, mPen.y, mPen.x + 6 * meter, mPen.y + 100 * meter, fgLine);
-	// ç”»ç¬”èµ°å‘çƒåœºå³ä¸‹è§’
+	// »­±Ê×ßÏòÇò³¡ÓÒÏÂ½Ç
 	mPen.y += 100 * meter;
-	// ç”»çƒåœºåº•çº¿
+	// »­Çò³¡µ×Ïß
 	SVGA_Line(mPen.x + 6 * meter, mPen.y, mPen.x - 31.84 * 2 * meter - 6 * meter, mPen.y, fgLine);
 
 	/**
-	 * è¿åŠ¨å¼€å§‹æ—¶é—´
-	 * è¿åŠ¨ç»“æŸæ—¶é—´ -- --
-	 * è€åŠ›å€¼
-	 * å®æ—¶é€Ÿåº¦
-	 * è·ç¦»
-	 * è¿åŠ¨æ—¶é•¿
+	 * ÔË¶¯¿ªÊ¼Ê±¼ä
+	 * ÔË¶¯½áÊøÊ±¼ä -- --
+	 * ÄÍÁ¦Öµ
+	 * ÊµÊ±ËÙ¶È
+	 * ¾àÀë
+	 * ÔË¶¯Ê±³¤
 	 */
+//	 drawStatus();
+}
+
+void drawStatus(char * endurance, char * velocity, char * length, char * totalTime) {
+    float x = 375;
+    float y = 0;
+    dis_24hz(x += 5, y += 8,"ÔË¶¯¿ªÊ¼Ê±¼ä", WHITE);
+    drawClockOnce(x, y += 26, WHITE);
+
+    dis_24hz(x, y +=28,"ÔË¶¯½áÊøÊ±¼ä", WHITE);
+    drawClock(x, y += 26, WHITE, LIGHT_GRAY);
+
+    dis_24hz(x, y += 28,"ÄÍÁ¦Öµ", WHITE);
+    dis_24hz(x, y += 28, endurance, WHITE);
+
+    dis_24hz(x, y += 28,"ÊµÊ±ËÙ¶È", WHITE);
+    dis_24hz(x, y += 28, velocity, WHITE);
+
+    dis_24hz(x, y += 28,"ÔË¶¯¾àÀë", WHITE);
+    dis_24hz(x, y += 28, length, WHITE);
+
+    dis_24hz(x, y += 28,"×ÜÔË¶¯Ê±³¤", WHITE);
+    dis_24hz(x, y += 28, totalTime, WHITE);
 }
