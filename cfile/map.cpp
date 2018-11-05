@@ -94,35 +94,38 @@ bool drawMap() {
 	// 画球场底线
 	SVGA_Line(mPen.x + 6 * meter, mPen.y, mPen.x - 31.84 * 2 * meter - 6 * meter, mPen.y, fgLine);
 
-	/**
-	 * 运动开始时间
-	 * 运动结束时间 -- --
-	 * 耐力值
-	 * 实时速度
-	 * 距离
-	 * 运动时长
-	 */
-//	 drawStatus();
 }
+
+/**
+ * 画出地图左侧的状态栏
+ *
+ * @param endurance 耐力值
+ * @param velocity 实时速度
+ * @param length 运动距离
+ * @param totalTime 运动时间
+ */
 
 void drawStatus(char * endurance, char * velocity, char * length, char * totalTime) {
     float x = 375;
     float y = 0;
-    dis_24hz(x += 5, y += 8,"运动开始时间", WHITE);
+    dis_24hz(x += 5, y += 8,"运动开始时间", DARK_GRAY);
     drawClockOnce(x, y += 26, WHITE);
 
-    dis_24hz(x, y +=28,"运动结束时间", WHITE);
+    dis_24hz(x, y +=28,"运动结束时间", DARK_GRAY);
     drawClock(x, y += 26, WHITE, LIGHT_GRAY);
 
-    dis_24hz(x, y += 28,"耐力值", WHITE);
-    dis_24hz(x, y += 28, endurance, WHITE);
+    dis_24hz(x, y += 28,"耐力值", DARK_GRAY);
+    dis_24zf(x, y += 28, endurance, WHITE);
 
-    dis_24hz(x, y += 28,"实时速度", WHITE);
-    dis_24hz(x, y += 28, velocity, WHITE);
+    dis_24hz(x, y += 28,"实时速度", DARK_GRAY);
+    dis_24zf(x, y += 28, velocity, WHITE);
+    dis_16hz(x + 72 + 4, y + 4, "米每分", WHITE);
 
-    dis_24hz(x, y += 28,"运动距离", WHITE);
-    dis_24hz(x, y += 28, length, WHITE);
+    dis_24hz(x, y += 28,"运动距离", DARK_GRAY);
+    dis_24zf(x, y += 28, length, WHITE);
+    dis_16hz(x + 48 + 4, y + 4, "千米", WHITE);
 
-    dis_24hz(x, y += 28,"总运动时长", WHITE);
-    dis_24hz(x, y += 28, totalTime, WHITE);
+    dis_24hz(x, y += 28,"总运动时长", DARK_GRAY);
+    dis_24zf(x, y += 28, "100", WHITE);
+    dis_16hz(x + 72 + 4, y + 4, "分钟", WHITE);
 }

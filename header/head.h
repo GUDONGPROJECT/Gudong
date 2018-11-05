@@ -97,14 +97,11 @@ enum State {
     FIND,
     CIRCLE,
     THINGS,
-    MINE
-};
-
-enum LoginPageJump {
-    SPORTPAGE,
+    MINE,
     UNDEFINED,
+    BACK,
     REGIST,
-    BACK
+    SPORTPAGE
 };
 
 #endif

@@ -13,7 +13,7 @@
 //#include"./header/fishing.h"
 void Begin(MOUSE *mouse);
 
-LoginPageJump Begin_menu(MOUSE *mouse, PEOPLE *people);
+State Begin_menu(MOUSE *mouse, PEOPLE *people);
 
 void Begin_draw(void);
 
@@ -39,7 +39,7 @@ void flash(void);
 
 int Rkey(MOUSE *mouse, char *data, int *number, int x, int y);
 
-int Rname(MOUSE *mouse, char *data, int *number, int x, int y);
+bool Rname(MOUSE *mouse, char *data, int *number, int x, int y);
 
 void Create_path(char *name, char *textname);
 

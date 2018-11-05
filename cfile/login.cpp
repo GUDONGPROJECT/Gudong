@@ -54,18 +54,21 @@ Output：		调用下一级函数
 Return：		NONE
 **********************************************************/
 void Begin(MOUSE *mouse) {
-    LoginPageJump loginPageJump = UNDEFINED;
+    State state = UNDEFINED;
     PEOPLE people;
     while (1) {
-        loginPageJump = Begin_menu(mouse, &people);
-        if (loginPageJump == REGIST) {
+        state = Begin_menu(mouse, &people);
+        if (state == REGIST) {
 
         }
-        if (loginPageJump == SPORTPAGE) {
+        if (state == SPORTPAGE) {
 			SportMain(mouse,&people);
         }
-        if (loginPageJump == BACK) {
+        if (state == BACK) {
             exit(0);
+        }
+        if (state == THINGS) {
+            
         }
     }
 }
@@ -162,7 +165,7 @@ Output：		NONE
 
 Return：		功能序号
 **********************************************************/
-LoginPageJump Begin_menu(MOUSE *mouse, PEOPLE *people) {
+State Begin_menu(MOUSE *mouse, PEOPLE *people) {
     Begin_draw();
     mouse_reset(mouse);//重置鼠标
     while (1) {
@@ -230,10 +233,14 @@ Return：		NONE
 				
 **********************************************************/
 bool Regist(MOUSE *mouse, PEOPLE *people) {
-	char *name = (char *) malloc(15);//定义用于存储姓名
-    char *key = (char *) malloc(15);//用于存储密码
-    char *key1 = (char *) malloc(15);//用于检验用户密码是否正确
-    char *txtname = (char *) malloc(35);//用于存储文件名
+    // 定义用于存储姓名
+	char *name = (char *) malloc(15);
+    // 用于存储密码
+    char *key = (char *) malloc(15);
+    // 用于检验用户密码是否正确
+    char *key1 = (char *) malloc(15);
+    //用于存储文件名
+    char *txtname = (char *) malloc(35);
     FILE *fp;
     int state = 0;
     int num1 = 0;
@@ -242,16 +249,21 @@ bool Regist(MOUSE *mouse, PEOPLE *people) {
     float size = 5.5;
     Regist_draw();
     mouse_reset(mouse);
-    for (;;)//来回按键
+    //来回按键
+    for (;;)
     {
-        mouse_position(mouse);//获取鼠标位置
-        drawmouse(mouse);//绘制鼠标
+        // 获取鼠标位置
+        mouse_position(mouse);
+        // 绘制鼠标
+        drawmouse(mouse);
+        // 如果用户将鼠标放置在用户名白框内
         if (mouse->pos_x > 6*size && mouse->pos_y > 40*size-36 && mouse->pos_x < 62*size && mouse->pos_y < 62*size &&
-            mouse->button == 1)//如果用户将鼠标放置在用户名白框内
-        {
-            delay(100);//可以防止双击
-            if (Rname(mouse, name, &num1, 15*size, 40*size-36) == -1)//xy为用户名左上角白框
-            {
+            mouse->button == 1) {
+            // 可以防止双击
+            delay(100);
+            // xy为用户名左上角白框
+            // 注册失败的情况
+            if (Rname(mouse, name, &num1, 15*size, 40*size-36) == false) {
                 mouse_recover(mouse);
                 Regist_draw();
                 mouse_reset(mouse);
@@ -259,10 +271,11 @@ bool Regist(MOUSE *mouse, PEOPLE *people) {
                 num2 = 0;
                 num3 = 0;
             }
-            if (num1 != 0)//防止鼠标只是去晃一圈的
-            {
-                Create_path(name, txtname);//生成文件路径
-                //是否在此设置报错项目
+            // 防止鼠标只是去晃一圈的
+            if (num1 != 0) {
+                // 生成文件路径
+                Create_path(name, txtname);
+                // 是否在此设置报错项目
                 fp = fopen(txtname, "r+");
                 if (fp != NULL) {
                     fclose(fp);
@@ -944,56 +957,73 @@ Output：		用户输入的用户名
 Return：		输入状态序列号
 
 **********************************************************/
-int Rname(MOUSE *mouse, char *data, int *number, int x, int y) {
-    char ac;//用于存储输入的键值并显示
-    char str[2];//用于存储输入字符并且传给图形模式下文本输出函数（字符串）
+bool Rname(MOUSE *mouse, char *data, int *number, int x, int y) {
+    // 用于存储输入的键值并显示
+    char ac;
+    // 用于存储输入字符并且传给图形模式下文本输出函数（字符串）
+    char str[2];
+    // number是num1的地址,
     int num = *number;
     int pos = x + 2 + num * 20;
+    float size = 5.5;
     str[1] = '\0';
     mouse_recover(mouse);//屏蔽鼠标
     dis_16hz(pos, y + 9, "请输入11位手机号", 0);
     delay(500);
-    while (bioskey(1))//bioskey(1)查询是否按下一个键，若按下，则返回非零值
-    {
+    // bioskey(1)查询是否按下一个键，若按下，则返回非零值
+    while (bioskey(1)) {
         getch();
     }
     SVGA_Bar(pos, y + 9, pos + 200, y + 30, -1);
-    SVGA_Straight(pos + 2, y + 9, 16, 0);//画光标
+    // 画光标
+    SVGA_Straight(pos + 2, y + 9, 16, 0);
     while ((ac = getch()) != 13) {
         if (((ac >= '0') && (ac <= '9'))) {
-            SVGA_Straight(pos + 2, y + 9, 16, -1);//遮住之前的光标
+            // 遮住之前的光标
+            SVGA_Straight(pos + 2, y + 9, 16, -1);
+            // num是data指的下标
             data[num++] = ac;
             str[0] = ac;
-            dis_16zf(pos, y + 9, str, 0);//使用字模输出字符到原点
-            pos = pos + 20;//横坐标加上20作为下一个点的坐标
+            // 使用字模输出字符到原点
+            dis_16zf(pos, y + 9, str, 0);
+            // 横坐标加上20作为下一个点的坐标
+            pos = pos + 20;
             SVGA_Straight(pos + 2, y + 9, 16, 0);//画光标
-        } else if (((ac == 127) || (ac == 8)) && (num > 0))//按下del键，backspace，则删除字符
-        {
-            SVGA_Straight(pos + 2, y + 9, 16, -1);//遮住画光标
+        } else if (((ac == 127) || (ac == 8)) && (num > 0)) {
+            // 按下del键，backspace，则删除字符
+            // 遮住画的光标
+            SVGA_Straight(pos + 2, y + 9, 16, -1);
             data[num] = 0;
             num--;
-            pos = pos - 20;//横坐标减去20作为下一个字符的坐标
-            SVGA_Bar(pos, y, pos + 20, y + 30, -1);//画白色矩形掩盖住之前的字符
+            // 横坐标减去20作为下一个字符的坐标
+            pos = pos - 20;
+            // 画白色矩形掩盖住之前的字符
+            SVGA_Bar(pos, y, pos + 20, y + 30, -1);
             SVGA_Straight(pos + 2, y + 9, 16, 0);
         }
         if (num > 11) {
-            SVGA_Bar(182, 128, 749, 551, 0x000EFF);
-            dis_24hz(393, 327, "手机号位数过多", 0);
+            SVGA_Bar(6*size, 228, 62*size, 451, DARK_GRAY);
+            SVGA_Bar(6*size+2, 228+2, 62*size-2, 451-2, LIGHT_GRAY);
+            dis_24hz(19*size, 327, "手机号位数过多", 0);
             //readbmp(182,128,"pic\\too.bmp");//提示密码位数过多
-            delay(500);
-            return -1;
+            delay(1500);
+            return false;
         }
     }
     SVGA_Straight(pos + 2, y + 9, 16, -1);
-    mouse_reset(mouse);//重置鼠标
-    data[num] = '\0';//最后一位放上终止符，方便fscan读取
-    number[0] = num;//将最后的密码位数传回到主函数中
+    //重置鼠标
+    mouse_reset(mouse);
+    //最后一位放上终止符，方便fscan读取
+    data[num] = '\0';
+    //将最后的密码位数传回到主函数中
+    number[0] = num;
     if (num < 4) {
-        SVGA_Bar(182, 128, 749, 551, 0x000EFF);
+        SVGA_Bar(6*size, 228, 62*size, 451, DARK_GRAY);
+        SVGA_Bar(6*size+2, 228+2, 62*size-2, 451-2, LIGHT_GRAY);
         dis_24hz(393, 327, "手机号位数过少", 0);
         //readbmp(182,128,"pic\\too.bmp");//提示密码位数过多
-        delay(500);
-        return -1;
+        delay(1500);
+        return false;
     }
-    return 1;
+    return true;
 }

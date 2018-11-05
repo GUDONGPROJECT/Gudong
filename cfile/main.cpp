@@ -9,6 +9,8 @@
 #include"./header/login.h"
 #include"./header/mainUI.h"
 
+#include "./things.h"
+
 void main() {
 
     MOUSE mouse;
@@ -21,6 +23,11 @@ void main() {
     mouse.oldy = mouse.pos_y = 384;
     //State state=SPORT;
     //SportMain(&mouse);
+
+
     Begin(&mouse);
+    // 调试things界面
+//    thingsPage(&mouse, NULL);
+    getchar();
 }
 

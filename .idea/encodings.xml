@@ -8,6 +8,7 @@
     <file url="file://$PROJECT_DIR$/cfile/login.cpp" charset="GB2312" />
     <file url="file://$PROJECT_DIR$/cfile/map.cpp" charset="GB2312" />
     <file url="file://$PROJECT_DIR$/cfile/mouse.cpp" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/cfile/things.cpp" charset="GB2312" />
     <file url="file://$PROJECT_DIR$/header/headUtil.h" charset="GB2312" />
   </component>
 </project>
