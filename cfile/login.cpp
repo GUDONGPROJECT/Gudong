@@ -38,10 +38,13 @@ Function List：
 	16.void flash(void)
 	开机动画
 **********************************************************/
+
 #include"./header/login.h"
 #include "./header/MAINUI.H"
 #include "./header/headUtil.h"
 #include "./header/map.h"
+#include "./header/IoUtil.h"
+
 /**********************************************************
 Function：		Begin
 
@@ -183,7 +186,7 @@ State Begin_menu(MOUSE *mouse, PEOPLE *people) {
             return BACK;
         char * blankP = " ";
         headDisplay(2, 5, BLACK, DARK_GRAY);
-        drawStatus(blankP, blankP, blankP, blankP);
+		drawStatus(blankP, blankP, blankP, blankP, blankP);
     }
 }
 
@@ -854,26 +857,6 @@ int RL_check(char *txtname, char *key1) {
         }
         return 0;
     }
-}
-
-/**********************************************************
-Function：		Create_path
-
-Description：	用于生成用户的用户名文件路径
-
-Input：
-				char *name       用户的用户名
-				char *textname   用户名所对应的用户路径
-
-Output：	    NONE
-
-Return：		NONE
-
-**********************************************************/
-void Create_path(char *name, char *textname) {
-    stpcpy(textname, "txt\\");
-    strcat(textname, name);
-    strcat(textname, ".txt");
 }
 
 /**********************************************************
