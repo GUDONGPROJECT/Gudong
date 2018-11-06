@@ -105,7 +105,7 @@ bool drawMap() {
  * @param totalTime 运动时间
  */
 
-void drawStatus(char * endurance, char * velocity, char * length, char * totalTime) {
+void drawStatus(char * endurance, char * velocity, char * length, char * totalTimeMin, char * totalTimeSecond) {
     float x = 375;
     float y = 0;
     dis_24hz(x += 5, y += 8,"运动开始时间", DARK_GRAY);
@@ -126,6 +126,57 @@ void drawStatus(char * endurance, char * velocity, char * length, char * totalTi
     dis_16hz(x + 48 + 4, y + 4, "千米", WHITE);
 
     dis_24hz(x, y += 28,"总运动时长", DARK_GRAY);
-    dis_24zf(x, y += 28, "100", WHITE);
-    dis_16hz(x + 72 + 4, y + 4, "分钟", WHITE);
+    dis_24zf(x, y += 28, totalTimeMin, WHITE);
+    dis_16hz(x + 54 + 4, y + 4, "分钟", WHITE);
+    dis_24zf(x, y += 28, totalTimeSecond, WHITE);
+    dis_16hz(x + 72 + 4, y + 4, "秒", WHITE);
+}
+
+/**
+ *
+ * 清除耐力值
+ *
+ */
+
+void cleanEndurance() {
+    SVGA_Bar(380, 144, 380 + 3 * 24, 144 + 24, LIGHT_GRAY);
+}
+
+/**
+ *
+ * 清除速度
+ *
+ */
+void cleanVelocity() {
+    SVGA_Bar(380, 200, 380 + 3 * 24, 200 + 24, LIGHT_GRAY);
+}
+
+/**
+ *
+ * 清除运动距离
+ *
+ */
+
+void cleanLength() {
+    SVGA_Bar(380, 256, 380 + 2 * 24, 256 + 24, LIGHT_GRAY);
+}
+
+/**
+ *
+ * 清除运动时间的分钟
+ *
+ */
+
+void cleanTotalTimeMin() {
+    SVGA_Bar(380, 312, 380 + 2 * 24, 312 + 24, LIGHT_GRAY);
+}
+
+/**
+ *
+ * 清除运动时间的秒钟
+ *
+ */
+
+void cleanTotalTimeSecond() {
+    SVGA_Bar(380, 340, 380 + 2 * 24, 340 + 24, LIGHT_GRAY);
 }

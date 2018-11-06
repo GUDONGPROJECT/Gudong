@@ -38,10 +38,13 @@ Function List：
 	16.void flash(void)
 	开机动画
 **********************************************************/
+
 #include"./header/login.h"
 #include "./header/MAINUI.H"
 #include "./header/headUtil.h"
 #include "./header/map.h"
+#include "./header/IoUtil.h"
+
 /**********************************************************
 Function：		Begin
 
@@ -183,7 +186,7 @@ State Begin_menu(MOUSE *mouse, PEOPLE *people) {
             return BACK;
         char * blankP = " ";
         headDisplay(2, 5, BLACK, DARK_GRAY);
-        drawStatus(blankP, blankP, blankP, blankP);
+		drawStatus(blankP, blankP, blankP, blankP, blankP);
     }
 }
 
@@ -857,26 +860,6 @@ int RL_check(char *txtname, char *key1) {
 }
 
 /**********************************************************
-Function：		Create_path
-
-Description：	用于生成用户的用户名文件路径
-
-Input：
-				char *name       用户的用户名
-				char *textname   用户名所对应的用户路径
-
-Output：	    NONE
-
-Return：		NONE
-
-**********************************************************/
-void Create_path(char *name, char *textname) {
-    stpcpy(textname, "txt\\");
-    strcat(textname, name);
-    strcat(textname, ".txt");
-}
-
-/**********************************************************
 Function：		Rkey
 
 Description：	用于读取用户在登录注册时输入的密码
@@ -1020,7 +1003,7 @@ bool Rname(MOUSE *mouse, char *data, int *number, int x, int y) {
     if (num < 4) {
         SVGA_Bar(6*size, 228, 62*size, 451, DARK_GRAY);
         SVGA_Bar(6*size+2, 228+2, 62*size-2, 451-2, LIGHT_GRAY);
-        dis_24hz(393, 327, "手机号位数过少", 0);
+        dis_24hz(19*size, 327, "手机号位数过少", 0);
         //readbmp(182,128,"pic\\too.bmp");//提示密码位数过多
         delay(1500);
         return false;
