@@ -115,7 +115,7 @@ void drawStatus(char * endurance, char * velocity, char * length, char * totalTi
     drawClock(x, y += 26, WHITE, LIGHT_GRAY);
 
     dis_24hz(x, y += 28,"耐力值", DARK_GRAY);
-    dis_24zf(x, y += 28, "100", BLACK);
+    dis_24zf(x, y += 28, endurance, WHITE);
 
     dis_24hz(x, y += 28,"实时速度", DARK_GRAY);
     dis_24zf(x, y += 28, velocity, WHITE);

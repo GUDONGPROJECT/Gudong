@@ -1003,7 +1003,7 @@ bool Rname(MOUSE *mouse, char *data, int *number, int x, int y) {
     if (num < 4) {
         SVGA_Bar(6*size, 228, 62*size, 451, DARK_GRAY);
         SVGA_Bar(6*size+2, 228+2, 62*size-2, 451-2, LIGHT_GRAY);
-        dis_24hz(393, 327, "手机号位数过少", 0);
+        dis_24hz(19*size, 327, "手机号位数过少", 0);
         //readbmp(182,128,"pic\\too.bmp");//提示密码位数过多
         delay(1500);
         return false;
