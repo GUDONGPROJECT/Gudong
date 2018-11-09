@@ -7,6 +7,7 @@
 
 #include"head.h"
 #include "SVGA.H"
+#include "map.h"
 #include <math.h>
 #include <time.h>
 #include <sys/timeb.h>
@@ -24,7 +25,7 @@
 #define lowV 2
 #define minV 0
 #define maxA 2
-#define minA -3
+#define minA -1
 //enum VMode{KEEP,CHANGE};
 
 enum Speed{HIGH,MID,LOW,ZERO};
@@ -63,5 +64,7 @@ public:
     int TimeLen(void);
 
 };
+
+char* ToString(int x,char* s);
 
 #endif GUDONG_RUN_H

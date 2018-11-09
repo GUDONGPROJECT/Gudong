@@ -115,7 +115,7 @@ bool Character::UpdatePos(void) {
             v -= a * deltaT;
         }
     }
-    else if(a==minV&&v!=minV) {
+    else if(a==minA&&v!=minV) {
         v += a * deltaT;
     }
     inScale();
@@ -128,7 +128,9 @@ bool Character::UpdatePos(void) {
         energy -= 0.1 * temp;
         if(energy<=80) {
             speed = MID;
-            if(a!=minA)
+//            dis_16zf(700,i,ToString(a,s),BLACK);
+//            i+=16;
+            if(a==0)
                 a=maxA;
         }
     }
@@ -136,7 +138,7 @@ bool Character::UpdatePos(void) {
         energy -= 3 * temp / 80;
         if(energy<=50) {
             speed = LOW;
-            if(a!=minA)
+            if(a==0)
                 a = maxA;
         }
     }
@@ -144,7 +146,7 @@ bool Character::UpdatePos(void) {
         energy -= 0.04 * temp;
         if(energy<=10) {
             speed = ZERO;
-            if(a!=minA)
+            if(a==0)
                 a = maxA;
         }
     }
@@ -215,7 +217,9 @@ void Character::OnKbhit(char key) {
 //开始执行运动循环
 void Character::Run(void/*PEOPLE *people*/){
     char p;
+    char s[10];
     UpdateShow();
+    drawStatus(ToString(energy,s), ToString(v,s), ToString(len,s), "100"/*时间ToString(,s)*/);
     while(1) {
         if (kbhit())
             p=getch();
@@ -282,6 +286,15 @@ void Character::Run(void/*PEOPLE *people*/){
     time(&now);
     endTime = localtime(&now);
 }
+
+char* ToString(int x,char* s){
+//    int y=x;
+//    for(int i=0;y>0;y/=10,i++);
+//    char* s[i+1];
+    itoa(x,s,10);
+    return s;
+}
+
 ////获得开始运动的时刻
 //void Character::StartTime(struct tm * sTime){
 //    sTime=startTime;
