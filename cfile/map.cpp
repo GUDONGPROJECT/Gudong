@@ -123,7 +123,7 @@ void drawStatus(char * endurance, char * velocity, char * length, char * totalTi
 
     dis_24hz(x, y += 28,"运动距离", DARK_GRAY);
     dis_24zf(x, y += 28, length, WHITE);
-    dis_16hz(x + 48 + 4, y + 4, "千米", WHITE);
+    dis_16hz(440+48/*x + 48 + 4*/, y + 4, "千米", WHITE);
 
     dis_24hz(x, y += 28,"总运动时长", DARK_GRAY);
     dis_24zf(x, y += 28, totalTimeMin, WHITE);
@@ -158,7 +158,7 @@ void cleanVelocity() {
  */
 
 void cleanLength() {
-    SVGA_Bar(380, 256, 380 + 2 * 24, 256 + 24, LIGHT_GRAY);
+    SVGA_Bar(380, 256, 440+48, 256 + 24, LIGHT_GRAY);
 }
 
 /**

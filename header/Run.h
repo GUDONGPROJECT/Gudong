@@ -8,6 +8,7 @@
 #include"head.h"
 #include "SVGA.H"
 #include "map.h"
+#include "headUtil.h"
 #include <math.h>
 #include <time.h>
 #include <sys/timeb.h>
@@ -45,6 +46,7 @@ class Character{
     struct timeb lastTimey;
     struct tm *startTime;
     struct tm *endTime;
+//    time_t st;
     float len;
     Speed speed;
     float energy;
