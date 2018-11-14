@@ -4,6 +4,7 @@
 
 #ifndef GUDONG_THINGS_H
 #define GUDONG_THINGS_H
+#define SIZE 5.5
 
 #include<stdio.h>
 #include<string.h>
@@ -24,6 +25,15 @@ void trainDraw(MOUSE *mouse, PEOPLE * people);
 void helpDraw(MOUSE *mouse, PEOPLE * people);
 
 State thingsPage(MOUSE *mouse,PEOPLE *people);
+
+void drawRecommendDetail();
+
+void drawTrainDetail();
+
+void drawHelpDetail();
+void loadAllData(FILE *fp);
+
+void showRecommendMsg(float x, float y, int * color, MsgP msgP);
 
 enum Things {
     RECOMMEND,

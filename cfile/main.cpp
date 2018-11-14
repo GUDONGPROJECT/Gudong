@@ -8,6 +8,7 @@
 #include"./header/head.h"
 #include"./header/login.h"
 #include"./header/mainUI.h"
+#include "./header/IoUtil.h"
 
 #include "./things.h"
 
@@ -24,13 +25,21 @@ void main() {
     far *)malloc(320);    //给鼠标分配存储空间
     mouse.oldx = mouse.pos_x = 512;
     mouse.oldy = mouse.pos_y = 384;
-    //State state=SPORT;
-    //SportMain(&mouse);
 
 
-    Begin(&mouse);
+    // 愣头青的调试
+//    State state=SPORT;
+//    SportMain(&mouse);
+
+//    Begin(&mouse);
     // 调试things界面
-//    thingsPage(&mouse, NULL);
+    thingsPage(&mouse, NULL);
+
+    char *path;
+    path = (char *) malloc(50 * sizeof(char));
+    MsgP msgP = (MsgP) malloc (sizeof(Msg));
+    createMsgPath("1", path);
+    inputMsg(path, msgP);
     getchar();
 }
 

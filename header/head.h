@@ -36,6 +36,15 @@ typedef struct {           //用户结构
     int exeLen;     //单位为米
 } PEOPLE;
 
+typedef struct Node{
+    char author[30];
+    char title[30];
+    char type[30];
+    char readNum[20];
+    Node * next;
+    Node * last;
+}Msg, * MsgP;
+
 
 typedef struct {
     char syllable[10];

@@ -284,23 +284,26 @@ bool Regist(MOUSE *mouse, PEOPLE *people) {
                     fclose(fp);
                     //readbmp(182,128,"pic\\chongfu.bmp");//提示用户名有重复,重新载入用户注册界面
                     mouse_recover(mouse);
-                    SVGA_Bar(182, 128, 749, 551, 0x000EFF);
-                    dis_24hz(393, 327, "用户名已存在", 0);
-                    delay(500);
+                    SVGA_Bar(6*size, 228, 62*size, 451, DARK_GRAY);
+                    SVGA_Bar(6*size+2, 228+2, 62*size-2, 451-2, LIGHT_GRAY);
+                    dis_24hz(19*size, 327, "手机号已注册", 0);
+                    delay(1500);
                     Regist_draw();
                     mouse_reset(mouse);
                     num1 = 0;
                     num2 = 0;
                     num3 = 0;
                 } else {
+                    // 用户名检测校验成功
                     fclose(fp);
                 }
             }
         } else if (mouse->pos_x > 6*size && mouse->pos_y > 65*size-36 && mouse->pos_x < 62*size&& mouse->pos_y < 65*size &&
                    mouse->button == 1) {
-            delay(100);//可以防止双击
-            if (Rkey(mouse, key, &num2, 20*size, 65*size-36) == -1)//录入第一次的密码
-            {
+            // 可以防止双击
+            delay(100);
+            // 录入第一次的密码
+            if (Rkey(mouse, key, &num2, 20*size, 65*size-36) == -1) {
                 mouse_recover(mouse);
                 Regist_draw();
                 mouse_reset(mouse);
@@ -310,7 +313,9 @@ bool Regist(MOUSE *mouse, PEOPLE *people) {
             }
         } else if (mouse->pos_x > 6*size && mouse->pos_y > 90*size-36 && mouse->pos_x < 62*size && mouse->pos_y < 90*size &&
                    mouse->button == 1) {
-            delay(100);//可以防止双击
+            // 可以防止双击
+            delay(100);
+            // 录入第二次的密码
             if (Rkey(mouse, key1, &num3, 20*size, 90*size-36) == -1) {
                 mouse_recover(mouse);
                 Regist_draw();
@@ -318,19 +323,23 @@ bool Regist(MOUSE *mouse, PEOPLE *people) {
                 num1 = 0;
                 num2 = 0;
                 num3 = 0;
-            }//录入第二次的密码
-            //是否设置报错，key1
+            }
+            // 是否设置报错，key1
         } else if (mouse->pos_x > 2*size && mouse->pos_y > 106*size-5*size && mouse->pos_x < 66*size && mouse->pos_y < 116*size &&
-                   mouse->button == 1)//点击注册按钮
+                   mouse->button == 1)
         {
-            delay(100);//可以防止双击
+            // 点击注册按钮
+            // 可以防止双击
+            delay(100);
             mouse_recover(mouse);
-            state = R_check(txtname, key, key1);//注册成功，则函数返回主界面
+            // 注册成功，则函数返回主界面
+            state = R_check(txtname, key, key1);
             mouse_reset(mouse);
             if (state == 1) {
                 fp = fopen("txt\\username.txt", "a+");
                 fprintf(fp, "%s\n", name);
                 fclose(fp);
+                // 释放堆空间
                 if (name != NULL) {
                     free(name);
                     name = NULL;
@@ -359,9 +368,10 @@ bool Regist(MOUSE *mouse, PEOPLE *people) {
                 num3 = 0;
             }
         } else if (mouse->pos_x > 577 && mouse->pos_y > 453 && mouse->pos_x < 686 && mouse->pos_y < 497 &&
-                   mouse->button == 1)//按到返回按钮，则退回到上一层界面
-        {
-            delay(100);//可以防止双击
+                   mouse->button == 1) {
+            // 按到返回按钮，则退回到上一层界面
+            // 可以防止双击
+            delay(100);
             if (name != NULL) {
                 free(name);
                 name = NULL;
@@ -421,55 +431,6 @@ void Regist_draw(void) {
     dis_16hz(34*size+16*2,124*size-8,"点此登录",GREEN);
 }
 
-/**********************************************************
-Function：		R_check
-
-Description：	用于检测用户用户名密码是否符合标准
-
-Input：			char *txtname     用来存储用户的文件名地址
-			    char *key         用户第一次输入的密码
-				char *key1        用户第二次输入的密码
-				
-Output：		提示用户注册状态，保存用户名文件，生成用户文件
-
-Return：		注册状态序号
-				
-**********************************************************/
-int R_check(char *txtname, char *key, char *key1)//判断函数是否可以可录入，以及录入函数
-{
-    FILE *fp;
-    if (strcmp(key, key1) != 0) {
-        //readbmp(182,128,"pic\\notmatch.bmp");//提示前后两次的密码不相同，重新载入界面
-        SVGA_Bar(182, 128, 749, 551, 0x000EFF);
-        dis_24hz(393, 327, "前后密码不一致", 0);
-        delay(700);
-        //Regist(mouse,people);
-        return 0;
-    } else {
-        fp = fopen(txtname, "r+");
-        if (fp != NULL) {
-            fclose(fp);
-            //readbmp(182,128,"pic\\chongfu.bmp");//提示用户名有重复,重新载入用户登录界面
-            SVGA_Bar(182, 128, 749, 551, 0x000EFF);
-            dis_24hz(393, 327, "用户名有重复", 0);
-            delay(700);
-            //Regist(mouse,people);//载入登录界面
-            return 0;
-        } else {
-            fclose(fp);
-            fp = fopen(txtname, "w+");
-            fprintf(fp, "%s\n", key);
-            fprintf(fp, "%s\n", "0 0 0 0 0 0 0 0 0 0 ");
-            fclose(fp);
-            //readbmp(182,128,"pic\\okay.bmp");
-            SVGA_Bar(182, 128, 749, 551, 0x000EFF);
-            dis_24hz(393, 327, "您已注册成功", 0);
-            delay(700);
-            //Begin_menu(mouse);
-            return 1;
-        }
-    }
-}
 
 /**********************************************************
 Function：
@@ -486,31 +447,31 @@ Return：		功能序号
 **********************************************************/
 bool Login(MOUSE *mouse, PEOPLE *people) {
     char *name = (char *) malloc(15);
-//定义用于存储姓名
+    // 定义用于存储姓名
     char *key = (char *) malloc(15);
-//用于存储密码
+    // 用于存储密码
     char *txtname = (char *) malloc(35);
-//用于存储文件名
+    // 用于存储文件名
     FILE *fp;
     int num1 = 0;
     int num2 = 0;
     int state = 0;
     float const size = 5.5;
-//readbmp(182,128,"pic\\Login.bmp");
+    //readbmp(182,128,"pic\\Login.bmp");
     Login_draw();
-//载入登陆界面
+    // 载入登陆界面
     mouse_reset(mouse);
     for (;;) {
         mouse_position(mouse);
-        //获取鼠标位置
+        // 获取鼠标位置
         drawmouse(mouse);
-        //绘制鼠标
-        //　移到鼠标区
+        // 绘制鼠标
+        // 移到鼠标区
         if (mouse->pos_x > 6*size && mouse->pos_y > 47*size-36 && mouse->pos_x < 62*size && mouse->pos_y < 47*size &&
             mouse->button == 1)
         {
             delay(100);
-            //可以防止双击
+            // 可以防止双击
             if (Rname(mouse, name, &num1, 6*size, 41*size-10) == -1) {
                 mouse_recover(mouse);
                 Login_draw();
@@ -524,9 +485,10 @@ bool Login(MOUSE *mouse, PEOPLE *people) {
                 if (fp == NULL) {
                     //readbmp(182,128,"pic\\notexist.bmp");//提示用户名不存在
                     mouse_recover(mouse);
-                    SVGA_Bar(182, 128, 749, 551, 0x000EFF);
-                    dis_24hz(393, 327, "用户名不存在", 0);
-                    delay(700);
+                    SVGA_Bar(6*size, 228, 62*size, 451, DARK_GRAY);
+                    SVGA_Bar(6*size+2, 228+2, 62*size-2, 451-2, LIGHT_GRAY);
+                    dis_24hz(19*size, 327, "该手机号不存在", 0);
+                    delay(1500);
                     fclose(fp);
                     //Login(mouse,people);
                     Login_draw();
@@ -538,9 +500,10 @@ bool Login(MOUSE *mouse, PEOPLE *people) {
                 }
             }
         } else if (mouse->pos_x > 6*size && mouse->pos_y > 57*size-36 && mouse->pos_x < 62*size && mouse->pos_y < 57*size &&
-                   mouse->button == 1)//点击登录按钮登录
-        {
-            delay(100);//可以防止双击
+                   mouse->button == 1) {
+            // 点击登录按钮登录
+            // 可以防止双击
+            delay(100);
             if (Rkey(mouse, key, &num2, 6*size, 51*size-10) == -1) {
                 mouse_recover(mouse);
                 Login_draw();
@@ -549,9 +512,10 @@ bool Login(MOUSE *mouse, PEOPLE *people) {
                 num2 = 0;
             }
         } else if (mouse->pos_x > 2*size && mouse->pos_y > 65*size && mouse->pos_x < 66*size && mouse->pos_y < 75*size &&
-                   mouse->button == 1)//点击登录按钮
-        {
-            delay(100);//可以防止双击
+                   mouse->button == 1) {
+            // 点击登录按钮
+            // 可以防止双击
+            delay(100);
             mouse_recover(mouse);
             state = L_check(people, txtname, key);
             mouse_reset(mouse);
@@ -590,6 +554,7 @@ bool Login(MOUSE *mouse, PEOPLE *people) {
                 }
                 return false;
             } else {
+                // 仍旧停留在登录界面
                 mouse_recover(mouse);
                 Login_draw();
                 mouse_reset(mouse);
@@ -598,7 +563,8 @@ bool Login(MOUSE *mouse, PEOPLE *people) {
             }
         } else if (mouse->pos_x > 4*size && mouse->pos_y > 8*size && mouse->pos_x < 6*size && mouse->pos_y < 12*size &&
                    mouse->button == 1) {
-            delay(100);//可以防止双击
+            // 可以防止双击
+            delay(100);
             if (name != NULL) {
                 free(name);
                 name = NULL;
@@ -666,14 +632,18 @@ Return：		用户登录状态序列号
 **********************************************************/
 int L_check(PEOPLE *people, char *txtname, char *key1) {
     FILE *fp;
-    char *key = (char *) malloc(15);//用于存储正确的密码
+    // 用于存储正确的密码
+    char *key = (char *) malloc(15);
     char ac;
+    float size = 5.5;
     fp = fopen(txtname, "r+");
     if (fp == NULL) {
         //readbmp(182,128,"pic\\notexist.bmp");//提示用户名不存在
-        SVGA_Bar(182, 128, 749, 551, 0x000EFF);
-        dis_24hz(393, 327, "用户名不存在", 0);
-        delay(700);
+        SVGA_Bar(6*size, 228, 62*size, 451, DARK_GRAY);
+        SVGA_Bar(6*size+2, 228+2, 62*size-2, 451-2, LIGHT_GRAY);
+        dis_24hz(19*size, 327, "该手机号不存在", 0);
+        delay(1500);
+        // 不明白为什么要释放一次
         if (key != NULL) {
             free(key);
             key = NULL;
@@ -682,7 +652,8 @@ int L_check(PEOPLE *people, char *txtname, char *key1) {
     }
     fscanf(fp, "%s\n", key);
     if (strcmp(key, key1) == 0) {
-        fclose(fp);//若密码正确，则进入主菜单界面
+        // 若密码正确，则进入主菜单界面
+        fclose(fp);
         strcpy(people->key, key);
         strcpy(people->txtname, txtname);
         if (key != NULL) {
@@ -693,13 +664,14 @@ int L_check(PEOPLE *people, char *txtname, char *key1) {
         //menu1(mouse,people);
     } else {
         fseek(fp, 0, 0);
-        if (fgetc(fp) == EOF)//黑名单可以写在这
-        {
+        // 黑名单可以写在这
+        if (fgetc(fp) == EOF) {
             fclose(fp);
             //readbmp(182,128,"pic\\black.bmp");//提示用户已经被加入黑名单，退出到主界面
-            SVGA_Bar(182, 128, 749, 551, 0x000EFF);
-            dis_24hz(393, 327, "您在黑名单上", 0);
-            delay(500);
+            SVGA_Bar(6*size, 228, 62*size, 451, DARK_GRAY);
+            SVGA_Bar(6*size+2, 228+2, 62*size-2, 451-2, LIGHT_GRAY);
+            dis_24hz(19*size, 327, "您在黑名单上", 0);
+            delay(1500);
             //Begin_menu(mouse);
             if (key != NULL) {
                 free(key);
@@ -709,8 +681,9 @@ int L_check(PEOPLE *people, char *txtname, char *key1) {
         }
         fclose(fp);
         //readbmp(182,128,"pic\\erro.bmp");//若密码不存在，则提示密码错误
-        SVGA_Bar(182, 128, 749, 551, 0x000EFF);
-        dis_24hz(393, 327, "您的密码错误", 0);
+        SVGA_Bar(6*size, 228, 62*size, 451, DARK_GRAY);
+        SVGA_Bar(6*size+2, 228+2, 62*size-2, 451-2, LIGHT_GRAY);
+        dis_24hz(19*size, 327, "您输入的密码有误", 0);
         delay(700);
         //Login(mouse,people);//回到登录函数
         if (key != NULL) {
@@ -874,51 +847,70 @@ Return：		输入状态序列号
 
 **********************************************************/
 int Rkey(MOUSE *mouse, char *data, int *number, int x, int y) {
-    char ac;//用于存储输入的键值并显示
+    // 用于存储输入的键值并显示
+    char ac;
     int num = *number;
     int pos = x + 2 + num * 20;
-    mouse_recover(mouse);//屏蔽鼠标
+    float size = 5.5;
+    // 屏蔽鼠标
+    mouse_recover(mouse);
     dis_16hz(pos, y + 9, "请输入四至八位的密码", 0);
     delay(500);
-    while (bioskey(1))//bioskey(1)查询是否按下一个键，若按下，则返回非零值
+    // bioskey(1)查询是否按下一个键，若按下，则返回非零值
+    while (bioskey(1))
     {
         getch();
     }
     SVGA_Bar(pos, y + 2, pos + 200, y + 30, -1);
-    SVGA_Straight(pos + 2, y + 9, 16, 0);//显示光标
+    // 显示光标
+    SVGA_Straight(pos + 2, y + 9, 16, 0);
     while ((ac = getch()) != 13) {
         if (((ac >= '0') && (ac <= '9')) || (ac >= 'a') && (ac <= 'z')) {
-            SVGA_Straight(pos + 2, y + 9, 16, -1);//遮住之前的光标
+            // 遮住之前的光标
+            SVGA_Straight(pos + 2, y + 9, 16, -1);
             data[num++] = ac;
-            SVGA_Ball(pos + 10, y + 15, 5, 0);//使用outtext输出字符到原点
-            pos = pos + 20;//横坐标加上20作为下一个点的坐标
-            SVGA_Straight(pos + 2, y + 9, 16, 0);//画下一个光标
-        } else if (((ac == 127) || (ac == 8)) && (num > 0))//按下del键，backspace，则删除字符
-        {
+            // 使用outtext输出字符到原点
+            SVGA_Ball(pos + 10, y + 15, 5, 0);
+            // 横坐标加上20作为下一个点的坐标
+            pos = pos + 20;
+            // 画下一个光标
+            SVGA_Straight(pos + 2, y + 9, 16, 0);
+        } else if (((ac == 127) || (ac == 8)) && (num > 0)) {
+            // 按下del键，backspace，则删除字符
             SVGA_Straight(pos + 2, y + 9, 16, -1);
             data[num] = 0;
             num--;
-            pos = pos - 20;//横坐标减去20作为下一个字符的坐标
-            SVGA_Bar(pos, y + 5, pos + 19, y + 30, -1);//画白色矩形掩盖住之前的字符
+            // 横坐标减去20作为下一个字符的坐标
+            pos = pos - 20;
+            // 画白色矩形掩盖住之前的字符
+            SVGA_Bar(pos, y + 5, pos + 19, y + 30, -1);
             SVGA_Straight(pos + 2, y + 9, 16, 0);
         }
         if (num > 8) {
-            SVGA_Bar(182, 128, 749, 551, 0x000EFF);
-            dis_24hz(393, 327, "密码位数过多", 0);
+            SVGA_Bar(6*size, 228, 62*size, 451, DARK_GRAY);
+            SVGA_Bar(6*size+2, 228+2, 62*size-2, 451-2, LIGHT_GRAY);
+            dis_24hz(19*size, 327, "密码位数过多", 0);
             //readbmp(182,128,"pic\\too.bmp");
-            delay(500);//提示密码位数过多
+            // 提示密码位数过多
+            delay(1500);
             return -1;
         }
     }
-    SVGA_Straight(pos + 2, y + 9, 16, -1);//遮住所有的光标
-    mouse_reset(mouse);//重置鼠标
-    data[num] = '\0';//最后一位放上终止符，方便fscan读取
-    number[0] = num;//将最后的密码位数传回到主函数中
+    // 遮住所有的光标
+    SVGA_Straight(pos + 2, y + 9, 16, -1);
+    // 重置鼠标
+    mouse_reset(mouse);
+    // 最后一位放上终止符，方便fscan读取
+    data[num] = '\0';
+    // 将最后的密码位数传回到主函数中
+    number[0] = num;
     if (num < 4) {
-        SVGA_Bar(182, 128, 749, 551, 0x000EFF);
-        dis_24hz(393, 327, "密码位数过少", 0);
+        SVGA_Bar(6*size, 228, 62*size, 451, DARK_GRAY);
+        SVGA_Bar(6*size+2, 228+2, 62*size-2, 451-2, LIGHT_GRAY);
+        dis_24hz(19*size, 327, "密码位数过多", 0);
         //readbmp(182,128,"pic\\too.bmp");
-        delay(500);//提示密码位数过多
+        // 提示密码位数过多
+        delay(500);
         return -1;
     }
     return 1;
