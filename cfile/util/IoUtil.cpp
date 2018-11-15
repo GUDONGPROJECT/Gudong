@@ -98,6 +98,7 @@ void createMsgPath(char *fileName, char *path) {
  */
 void inputMsg(char *path, MsgP msgP) {
     float size = 5.5;
+    int i;
 
     FILE *fp = fopen(path, "r+");
     if (fp == NULL) {
@@ -107,6 +108,7 @@ void inputMsg(char *path, MsgP msgP) {
     }
 
     int offset = 0;
+    int flag = 1;
 
 //    loadData(fp, &offset, msgP->author);
 //    loadData(fp, &offset, msgP->title);
@@ -117,6 +119,10 @@ void inputMsg(char *path, MsgP msgP) {
     loadDataWithLine(fp, 30, msgP->title);
     loadDataWithLine(fp, 30, msgP->type);
     loadDataWithLine(fp, 20, msgP->readNum);
+
+    for (i = 0; flag; i++) {
+        flag = loadDataWithLine(fp, 100, msgP->text[i]);
+    }
 
     printf("1 %s\n", msgP->author);
     printf("2 %s\n", msgP->title);
@@ -144,7 +150,7 @@ void loadData(FILE *fp, int *offset, char *buffer) {
 //    fp+=1;
 }
 
-void loadDataWithLine(FILE *fp, int length, char *sz) {
+int loadDataWithLine(FILE *fp, int length, char *sz) {
     char * find;
     if (!feof(fp)) {
         memset(sz, '\0', length);
@@ -157,6 +163,8 @@ void loadDataWithLine(FILE *fp, int length, char *sz) {
     // 如果find不为空指针
     if(find)
         *find = '\0';
+    // 返回是否有下一行
+    return !feof(fp);
 }
 
 int getNextLinePos(FILE *p) {

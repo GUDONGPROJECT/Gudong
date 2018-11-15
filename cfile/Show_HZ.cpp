@@ -117,6 +117,11 @@ void dis_16hz(int x0, int y0, char *s, int color) {
     }
     while (*s != NULL)            //当存储汉字的字符串为空时结束程序
     {
+        if (*s == ' ' || *s == ',' || *s == '.') {
+            x1 += 20;            //显示完一个汉字后横坐标后移一位
+            s += 1;            //指向后一个汉字
+            continue;
+        }
         get_16hz(hzk_p, s, mat);
         y2 = y1;
         for (i = 0; i < 16; i++)        //该循环用于显示单个汉字

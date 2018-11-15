@@ -31,9 +31,9 @@ void main() {
 //    State state=SPORT;
 //    SportMain(&mouse);
 
-//    Begin(&mouse);
+    Begin(&mouse);
     // 调试things界面
-    thingsPage(&mouse, NULL);
+//    thingsPage(&mouse, NULL);
 
     char *path;
     path = (char *) malloc(50 * sizeof(char));

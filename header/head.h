@@ -43,6 +43,7 @@ typedef struct Node{
     char readNum[20];
     Node * next;
     Node * last;
+    char text[100][100];
 }Msg, * MsgP;
 
 

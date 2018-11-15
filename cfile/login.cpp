@@ -44,6 +44,8 @@ Function List：
 #include "./header/headUtil.h"
 #include "./header/map.h"
 #include "./header/IoUtil.h"
+#include "./header/things.h"
+#include "./header/Find.h"
 
 /**********************************************************
 Function：		Begin
@@ -60,18 +62,26 @@ void Begin(MOUSE *mouse) {
     State state = UNDEFINED;
     PEOPLE people;
     while (1) {
-        state = Begin_menu(mouse, &people);
+        if (state == UNDEFINED) {
+            state = Begin_menu(mouse, &people);
+        }
         if (state == REGIST) {
 
         }
         if (state == SPORTPAGE) {
-			SportMain(mouse,&people);
+			state = SportMain(mouse, &people);
         }
         if (state == BACK) {
             exit(0);
         }
         if (state == THINGS) {
-            
+            state = thingsPage(mouse, &people);
+        }
+        if (state == MINE) {
+            ;
+        }
+        if (state == FIND) {
+            state = findPage(mouse, &people);
         }
     }
 }
@@ -942,7 +952,8 @@ bool Rname(MOUSE *mouse, char *data, int *number, int x, int y) {
     int pos = x + 2 + num * 20;
     float size = 5.5;
     str[1] = '\0';
-    mouse_recover(mouse);//屏蔽鼠标
+    // 屏蔽鼠标
+    mouse_recover(mouse);
     dis_16hz(pos, y + 9, "请输入11位手机号", 0);
     delay(500);
     // bioskey(1)查询是否按下一个键，若按下，则返回非零值

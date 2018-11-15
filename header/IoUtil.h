@@ -26,5 +26,5 @@ int getNextLinePos(FILE *p);
 
 void loadData(FILE * fp, int * offset, char * buffer);
 
-void loadDataWithLine(FILE *fp, int length, char *sz);
+int loadDataWithLine(FILE *fp, int length, char *sz);
 #endif //GUDONG_IOUTIL_H
