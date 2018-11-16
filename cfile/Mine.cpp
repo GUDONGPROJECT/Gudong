@@ -374,16 +374,16 @@ void Record::Show(){
         s[1]=s[0];
         s[0]='0';
     }
-    dis_16zf(90*size,2*size,s,LIGHT_GRAY);
-    SVGA_Ball(90*size+33,2*size+3,2,LIGHT_GRAY);
-    SVGA_Ball(90*size+33,2*size+13,2,LIGHT_GRAY);
+    dis_16zf(100*size,2*size,s,LIGHT_GRAY);
+    SVGA_Ball(100*size+33,2*size+3,2,LIGHT_GRAY);
+    SVGA_Ball(100*size+33,2*size+13,2,LIGHT_GRAY);
     ToString(min,s);
     if(strlen(s)!=2){
         s[2]='\0';
         s[1]=s[0];
         s[0]='0';
     }
-    dis_16zf(90*size+34,2*size,s,LIGHT_GRAY);
+    dis_16zf(100*size+34,2*size,s,LIGHT_GRAY);
     //显示运动日期
     dis_16zf(70*size,2*size,ToString(year,s),LIGHT_GRAY);
     SVGA_Ball(70*size+65,2*size+13,3,LIGHT_GRAY);
