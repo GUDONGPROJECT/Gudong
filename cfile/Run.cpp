@@ -1,59 +1,20 @@
 #include"Run.h"
 
-////开始进入运动
-int Begin_Run(void){
-    short far *bg;
-    char p;
-    drawMap();
-    get_image(639, 324,759, 444, bg);
-    Draw_Start();
-    while(1){
-        if (kbhit()) {
-            p = getch();
-            if (p == ' ') {
-                put_image(639, 324, 759, 444, bg);
-                dis_24zf(687,372,"3",WHITE);
-                delay(1000);
-                put_image(639, 324, 759, 444, bg);
-                dis_24zf(687,372,"2",WHITE);
-                delay(1000);
-                put_image(639, 324, 759, 444, bg);
-                dis_24zf(687,372,"1",WHITE);
-                delay(1000);
-                put_image(639, 324, 759, 444, bg);
-                dis_16zf(683,378,"GO",WHITE);
-                delay(1000);
-                put_image(639, 324, 759, 444, bg);
-                return 1;
-            }
-        }
-    }
-}
-
-void Draw_Start(void){
-    SVGA_Ball(699,384,60,GREEN);
-    SVGA_Bar(689,369,719,399,WHITE);
-    Pieslice(720,384,Pi/2,5*Pi/6,31, GREEN);
-    Pieslice(720,384,-5*Pi/6,-Pi/2,31, GREEN);
-}
-
+//画暂停图像
 void Draw_Pause(void){
     SVGA_Ball(634,384,60,GREEN);
     SVGA_Bar(624,369,654,399,WHITE);
     Pieslice(655,384,Pi/2,5*Pi/6,31, GREEN);
     Pieslice(655,384,-5*Pi/6,-Pi/2,31, GREEN);
-//    SVGA_Ball(699,384,60,GREEN);
-//    SVGA_Bar(684,369,689,399,WHITE);
-//    SVGA_Bar(709,369,714,399,WHITE);
     SVGA_Ball(764,384,60,GREEN);
     SVGA_Bar(749,369,779,399,WHITE);
 }
 
 ////构造函数，初始化Character
-Character::Character(PEOPLE *people0,int state0){
+Character::Character(char* txt,int state0){
     // 初始化各种参数
     state=state0;
-    people=people0;
+    strcpy(txtname,txt);
     x=500;
     y=500;
     angle=Pi*90/180;
@@ -62,9 +23,7 @@ Character::Character(PEOPLE *people0,int state0){
     len=0;
     speed=HIGH;
     energy=100;
-    time_t now;
-    time(&now);
-    startTime = localtime(&now);
+    GetBg();
 //    w=0;
 }
 
@@ -89,7 +48,6 @@ Character::~Character(void){
         zS[2]='\0';
         zS[1]=zS[0];
         zS[0]='0';
-//        dis_24zf(699 - 48, 65 * size-12, "0", WHITE);
         dis_24zf(699 - 48, 65 * size-12, zS, WHITE);
     }
     SVGA_Ball(699 ,65 * size-12+21,3, WHITE);
@@ -100,7 +58,6 @@ Character::~Character(void){
         pS[2]='\0';
         pS[1]=pS[0];
         pS[0]='0';
-//        dis_24zf(699 , 65 * size-12, "0", WHITE);
         dis_24zf(699 , 65 * size-12, pS, WHITE);
     }
     dis_16hz(699 - 8 * 5, 65 * size+24, "运动总公里", LIGHT_GRAY);
@@ -114,13 +71,10 @@ Character::~Character(void){
         mT[2]='\0';
         mT[1]=mT[0];
         mT[0]='0';
-//        dis_16zf(494 - 48, 90 * size, "0", WHITE);
         dis_16zf(494 - 48, 90 * size, mT, WHITE);
     }
     SVGA_Ball(500 ,90 * size+5,2, WHITE);
     SVGA_Ball(500 ,90 * size+11,2, WHITE);
-//    SVGA_Ball(34 * size ,35 * size+21,3, WHITE);
-//    SVGA_Ball(34 * size ,35 * size+21,3, WHITE);
     if(strlen(sT)==2) {
         dis_16zf(494+16 , 90 * size, sT, WHITE);
     }
@@ -128,7 +82,6 @@ Character::~Character(void){
         sT[2]='\0';
         sT[1]=sT[0];
         sT[0]='0';
-//        dis_16zf(494 + 16 , 90 * size, "0", WHITE);
         dis_16zf(494 + 16, 90 * size, sT, WHITE);
     }
     dis_16hz(494 - 16, 96 * size, "分", LIGHT_GRAY);
@@ -145,13 +98,10 @@ Character::~Character(void){
         zV[2]='\0';
         zV[1]=zV[0];
         zV[0]='0';
-//        dis_16zf(904 - 48, 90 * size, "0", WHITE);
         dis_16zf(904 - 32, 90 * size, zV, WHITE);
     }
     SVGA_Ball(907 ,90 * size+12,3, WHITE);
     dis_16zf(904,90*size,":",WHITE);
-//    SVGA_Ball(34 * size ,35 * size+21,3, WHITE);
-//    SVGA_Ball(34 * size ,35 * size+21,3, WHITE);
     if(strlen(pV)==2) {
         dis_16zf(904+16 , 90 * size, pV, WHITE);
     }
@@ -159,7 +109,6 @@ Character::~Character(void){
         pV[2]='\0';
         pV[1]=pV[0];
         pV[0]='0';
-//        dis_16zf(904 + 16 , 90 * size, "0", WHITE);
         dis_16zf(904 + 16, 90 * size, pV, WHITE);
     }
     dis_16hz(904 - 24, 100 * size, "米每秒", LIGHT_GRAY);
@@ -168,25 +117,22 @@ Character::~Character(void){
     if(state==RUN) {
         key[0]='#';//代表为跑步
         key[1]='\0';
-        DataIn(people, key,zS, pS, mT, sT, zV, pV, startTime->tm_year + 1900, startTime->tm_mon + 1, startTime->tm_mday,
+        DataIn(txtname, key,zS, pS, mT, sT, zV, pV, startTime->tm_year + 1900, startTime->tm_mon + 1, startTime->tm_mday,
                startTime->tm_hour, startTime->tm_min);
-        people->runLen+=s;
     }
     else if(state==WALK){
         key[0]='*';//代表为跑步
         key[1]='\0';
-        DataIn(people,key, zS, pS, mT, sT, zV, pV, startTime->tm_year + 1900, startTime->tm_mon + 1, startTime->tm_mday,
+        DataIn(txtname,key, zS, pS, mT, sT, zV, pV, startTime->tm_year + 1900, startTime->tm_mon + 1, startTime->tm_mday,
                startTime->tm_hour, startTime->tm_min);
-        people->walkLen+=s;
     }
     else if(state==RIDE){
         key[0]='&';//代表为跑步
         key[1]='\0';
-        DataIn(people,key, zS, pS, mT, sT, zV, pV, startTime->tm_year + 1900, startTime->tm_mon + 1, startTime->tm_mday,
+        DataIn(txtname,key, zS, pS, mT, sT, zV, pV, startTime->tm_year + 1900, startTime->tm_mon + 1, startTime->tm_mday,
                startTime->tm_hour, startTime->tm_min);
-        people->rideLen+=s;
     }
-    people->exeTimes++;
+
 }
 
 ////显示Character
@@ -355,16 +301,10 @@ bool Character::UpdatePos(void) {
 }
 ////更新Character的显示
 void Character::UpdateShow(void) {
-    PutBg();    //Error:多出三点
+    PutBg();
     GetBg();
     Show();
 }
-
-//bool Character::IsMove(void){
-//    if(v!=0)
-//        return true;
-//    return false;
-//}
 
 ////检测Character的各种物理参数是否在指定范围内，若不，进行更正
 void Character::inScale(void) {
@@ -387,14 +327,6 @@ void Character::inScale(void) {
 }
 ////对键盘输入的响应
 int Character::OnKbhit(char key) {
-//    if(key=='w'||key=='W')
-//        a=maxA;
-//    else if(key=='s'||key=='S')
-//        a=minA;
-//    if(key=='w'||key=='W'){
-//        x+=5*cos(angle);
-//        y-=5*sin(angle);
-//    }
     if(key=='w'||key=='W') {
         if (v==0&&a==0)
             a = maxA;
@@ -405,8 +337,6 @@ int Character::OnKbhit(char key) {
             a = minA;
         return 0;
     }
-//    else if(key=='s'||key=='S')
-//        a=minA;
     else if(key=='a'||key=='A') {
         angle += 5 * Pi / 180;
         return 0;
@@ -452,7 +382,7 @@ int Character::OnKbhit(char key) {
         return 0;
 }
 ////开始执行运动循环
-void Character::Run(void){
+void Character::Run(int& exeS){
     int ifPause=0;
     char p='#';
     char s[10];
@@ -461,12 +391,10 @@ void Character::Run(void){
     time_t st;
     time(&now);
     time(&st);
+    startTime = localtime(&now);
     ftime(&lastTimex);
     ftime(&lastTimey);
-    GetBg();
-//    time(&now);
     delta=0;
-//    drawMap();
     UpdateShow();
     drawStatus("100", "0", "0", "0","0");
     cleanLength();
@@ -480,8 +408,10 @@ void Character::Run(void){
         if (kbhit())
             p=getch();
         if(ifPause=OnKbhit(p)) {
-            if(ifPause==1)
+            if(ifPause==1) {
+                exeS=len;
                 break;
+            }
         }
         //运动，更新位置时，刷新人物位置显示
         if(energy>10&&(UpdatePos()||p=='a'||p=='A'||p=='d'||p=='D'))
@@ -550,9 +480,6 @@ void Character::Run(void){
         }
         //将p置为空
         p='#';
-
-//        float x = 375;
-//        float y = 0;
         //当体力更新时，跟新体力显示
         if(energy0!=(int)energy) {
             cleanEndurance();
@@ -588,7 +515,7 @@ void Character::Run(void){
         v0=v;
         energy0=energy;
         len0=len;
-///////////////////////////////////////////
+        //刷新运动时长
         time(&now);
         if(ifPause==2)
             st+=now-st-delta;
@@ -604,11 +531,6 @@ void Character::Run(void){
             cleanTotalTimeSecond();
             dis_24zf(380, 340,ToString(delta%60,s) , WHITE);
         }
-//        else{
-//            cleanTotalTimeSecond();
-//            dis_24zf(380, 340,ToString(0,s) , WHITE);
-//        }
-///////////////////////////////////////////
         //更新运动结束时间
         drawClock(380, 88, WHITE, LIGHT_GRAY);
     }
@@ -620,27 +542,4 @@ char* ToString(int x,char* s){
     return s;
 }
 
-void Character::ShowResult(void){
-    ;
-}
 
-////获得开始运动的时刻
-//void Character::StartTime(struct tm * sTime){
-//    sTime=startTime;
-//}
-////获得结束运动的时刻
-//void Character::EndTime(struct tm * eTime){
-//    eTime=endTime;
-//}
-////获得此次运动的路程长度
-//int Character::Len(void){
-//    return len;
-//}
-////获得此次运动的时长
-//int Character::TimeLen(void){
-//    return (startTime->tm_hour-endTime->tm_hour)*3600+(startTime->tm_min-endTime->tm_min)*60+(startTime->tm_sec-endTime->tm_sec);
-//}
-////    if(a>maxA)
-////        a =maxA;
-////    else if(a<minA)
-////        a=minA;

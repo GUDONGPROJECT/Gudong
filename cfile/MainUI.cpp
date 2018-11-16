@@ -3,6 +3,9 @@ State SportMain(MOUSE *mouse,PEOPLE *people) {
     Sport state = RUN;
     float size = 5.5;
     mouse_reset(mouse);//重置鼠标
+    char txtname[35];
+    short far *bg=(short far *)malloc(sizeof(short far));
+    strcpy(txtname,people->txtname);
     while (1) {
         //当位于跑步界面时
         if (state == RUN) {
@@ -32,18 +35,28 @@ State SportMain(MOUSE *mouse,PEOPLE *people) {
                         mouse->pos_y > 95 * size - sqrt(pow(10 * size, 2) - pow((mouse->pos_x - 34 * size), 2)) &&
                         mouse->pos_y < 95 * size + sqrt(pow(10 * size, 2) - pow((mouse->pos_x - 34 * size), 2))){
                         //跳转至开始跑步的界面
-                        if(Begin_Run()) {
+//                        short far *bg=(short far *)malloc(sizeof(short far));
+                        drawMap();
+                        get_image(639, 324,759, 444, bg);
+                        if(Begin_Run(bg)) {
                             while(1) {
-                                Character runningMan(people, RUN);
-                                runningMan.Run();
+                                int s;
+                                Character runningMan(txtname, RUN);
+                                runningMan.Run(s);
+                                people->runLen+=s;
+                                people->exeTimes++;
                                 break;
                             }
                             Update(people,RUN);
                         }
+//                        free(bg);
+//                        bg=NULL;
                     }
                     //当鼠标点击区域为下方5栏
                     if (mouse->pos_y > 130 * size && mouse->pos_y < 140 * size) {
                         //当点击运动圈
+                        free(bg);
+                        bg=NULL;
                         if (mouse->pos_x < 14.5 * size)
                             return CIRCLE;
                         //当点击发现
@@ -88,17 +101,27 @@ State SportMain(MOUSE *mouse,PEOPLE *people) {
                         mouse->pos_y > 95 * size - sqrt(pow(10 * size, 2) - pow((mouse->pos_x - 34 * size), 2)) &&
                         mouse->pos_y < 95 * size + sqrt(pow(10 * size, 2) - pow((mouse->pos_x - 34 * size), 2))){
                         //跳转至开始跑步的界面
-                        if(Begin_Run()) {
+//                        short far *bg=(short far *)malloc(sizeof(short far));
+                        drawMap();
+                        get_image(639, 324,759, 444, bg);
+                        if(Begin_Run(bg)) {
                             while(1) {
-                                Character runningMan(people, WALK);
-                                runningMan.Run();
+                                int s;
+                                Character runningMan(txtname, WALK);
+                                runningMan.Run(s);
+                                people->walkLen+=s;
+                                people->exeTimes++;
                                 break;
                             }
                             Update(people,WALK);
                         }
+//                        free(bg);
+//                        bg=NULL;
                     }
                     //当鼠标点击区域为下方5栏
                     if (mouse->pos_y > 130 * size && mouse->pos_y < 140 * size) {
+                        free(bg);
+                        bg=NULL;
                         //当点击运动圈
                         if (mouse->pos_x < 14.5 * size)
                             return CIRCLE;
@@ -139,36 +162,32 @@ State SportMain(MOUSE *mouse,PEOPLE *people) {
                         state = WALK;
                         break;
                     }
-//                    //是否点击GO按钮
-//                    if (mouse->pos_y > 93 * size && mouse->pos_y < 103 * size &&
-//                        mouse->pos_x > 11 * size - sqrt(pow(5 * size, 2) - pow((mouse->pos_y - 98 * size), 2)) &&
-//                        mouse->pos_y < 28 * size + sqrt(pow(5 * size, 2) - pow((mouse->pos_y - 98 * size), 2))){
-//                        //跳转至开始跑步的界面
-//                        if(Begin_Run()) {
-//                            Character runningMan(people);
-//                            runningMan.Run();
-//                        }
                     //是否点击GO按钮
                     if (mouse->pos_x > 24 * size && mouse->pos_x < 44 * size &&
                         mouse->pos_y > 95 * size - sqrt(pow(10 * size, 2) - pow((mouse->pos_x - 34 * size), 2)) &&
                         mouse->pos_y < 95 * size + sqrt(pow(10 * size, 2) - pow((mouse->pos_x - 34 * size), 2))){
                         //跳转至开始跑步的界面
-                        if(Begin_Run()) {
+//                        short far *bg=(short far *)malloc(sizeof(short far));
+                        drawMap();
+                        get_image(639, 324,759, 444, bg);
+                        if(Begin_Run(bg)) {
                             while(1) {
-                                Character runningMan(people, RIDE);
-                                runningMan.Run();
+                                int s;
+                                Character runningMan(txtname, RIDE);
+                                runningMan.Run(s);
+                                people->rideLen+=s;
+                                people->exeTimes++;
                                 break;
                             }
                             Update(people,RIDE);
                         }
+//                        free(bg);
+//                        bg=NULL;
                     }
-                    //是否点击共享单车按钮
-                    if (mouse->pos_y > 93 * size && mouse->pos_y < 103 * size &&
-                        mouse->pos_x > 40 * size - sqrt(pow(5 * size, 2) - pow((mouse->pos_y - 98 * size), 2)) &&
-                        mouse->pos_y < 57 * size + sqrt(pow(5 * size, 2) - pow((mouse->pos_y - 98 * size), 2)));
-                    //进入开始骑行界面
                     //当鼠标点击区域为下方5栏
                     if (mouse->pos_y > 130 * size && mouse->pos_y < 140 * size) {
+                        free(bg);
+                        bg=NULL;
                         //当点击运动圈
                         if (mouse->pos_x < 14.5 * size)
                             return CIRCLE;
@@ -187,23 +206,6 @@ State SportMain(MOUSE *mouse,PEOPLE *people) {
                 drawmouse(mouse);
             }
         }
-        //当点击鼠标
-        /*if(mouse->button == 1) {
-            //当鼠标点击区域为下方5栏
-            if( mouse->pos_y > 130 * size && mouse->pos_y < 140 * size){
-                //当点击运动圈
-                if(mouse->pos_x<14.5*size)
-                    return CIRCLE;
-                //当点击发现
-                if(mouse->pos_x<27.5*size &&mouse->pos_x>14.5*size)
-                    return FIND;
-                //当点击干货
-                if(mouse->pos_x>40.5*size&&mouse->pos_x<53.5*size)
-                    return THINGS;
-                //当点击我的
-                if(mouse->pox_x>53.5*size)
-                    return MINE;
-            }*/
     }
 }
 /**********************************************************
@@ -442,6 +444,38 @@ void Update(PEOPLE* people,Sport state) {
     }
 }
 
+////开始进入运动
+bool Begin_Run(short far *bg){
+    //画开始按钮
+    char p;
+    SVGA_Ball(699,384,60,GREEN);
+    SVGA_Bar(689,369,719,399,WHITE);
+    Pieslice(720,384,Pi/2,5*Pi/6,31, GREEN);
+    Pieslice(720,384,-5*Pi/6,-Pi/2,31, GREEN);
+    while(1){
+        if (kbhit()) {
+            p = getch();
+            if (p == ' ') {
+                put_image(639, 324, 759, 444, bg);
+                dis_24zf(687,372,"3",WHITE);
+                delay(1000);
+                put_image(639, 324, 759, 444, bg);
+                dis_24zf(687,372,"2",WHITE);
+                delay(1000);
+                put_image(639, 324, 759, 444, bg);
+                dis_24zf(687,372,"1",WHITE);
+                delay(1000);
+                put_image(639, 324, 759, 444, bg);
+                dis_16zf(683,378,"GO",WHITE);
+                delay(1000);
+                put_image(639, 324, 759, 444, bg);
+//                free(&bg);
+//                delete bg;
+                return true;
+            }
+        }
+    }
+}
 
 
 

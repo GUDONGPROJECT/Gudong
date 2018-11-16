@@ -28,7 +28,31 @@ void main() {
     far *)malloc(320);    //给鼠标分配存储空间
     mouse.oldx = mouse.pos_x = 512;
     mouse.oldy = mouse.pos_y = 384;
-
+//    PEOPLE people;
+//    strcat(people.txtname,"C:\\Gudong\\txt\\13461421.TXT");
+//
+////    dis_24zf(500,250,"hhh",RED);
+////    drawMap();
+//    Run(RUN);
+//    strcat(people.txtname,"C:\\Gudong\\txt\\13461421.TXT");
+//    if(Begin_Run()) {
+//    drawMap();
+//        dis_24zf(500,250,"hhh",RED);
+//        while(1) {
+//            getch();dis_24zf(500,400,"hhh",RED);
+//            Character runningMan(/*&people,*/RUN);
+//    dis_24zf(500,350,"hhh",RED);
+//    getch();dis_24zf(500,300,"hhh",RED);
+//            runningMan.Run();
+//
+//
+//            getch();
+//            break;
+//        }
+//        dis_24zf(500,250,"hhh",RED);
+        getch();
+//        Update(&people,WALK);
+//    }
 
     // 愣头青的调试
 //    State state=SPORT;
@@ -40,11 +64,11 @@ void main() {
     // 调试Find界面
 //    findPage(&mouse, NULL);
 
-    char *path;
-    path = (char *) malloc(50 * sizeof(char));
-    MsgP msgP = (MsgP) malloc (sizeof(Msg));
-    createMsgPath("1", path);
-    inputMsg(path, msgP);
-    getchar();
+//    char *path;
+//    path = (char *) malloc(50 * sizeof(char));
+//    MsgP msgP = (MsgP) malloc (sizeof(Msg));
+//    createMsgPath("1", path);
+//    inputMsg(path, msgP);
+//    getchar();
 }
 

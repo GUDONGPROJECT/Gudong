@@ -1,7 +1,7 @@
 #include "UserIO.h"
 
-void DataIn(PEOPLE *people,char* key,char* zS,char* pS,char* mT,char* sT,char* zV,char* pV,int year,int mon,int day,int hour,int min){
-    FILE* fp=fopen(people->txtname, "a+");
+void DataIn(char* txtname,char* key,char* zS,char* pS,char* mT,char* sT,char* zV,char* pV,int year,int mon,int day,int hour,int min){
+    FILE* fp=fopen(txtname, "a+");
     fprintf(fp,"%s %s %s %s %s %s %s %d %d %d %d %d\n",key,zS,pS,mT,sT,zV,pV,year,mon,day,hour,min);
     fclose(fp);
 }

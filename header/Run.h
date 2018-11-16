@@ -38,25 +38,23 @@ class Character{
     int y;
     float v;
     float a;
-    PEOPLE *people;
+    char txtname[35];
     long delta;
-//    float w;
     int bgX;
     int bgY;
     float angle;
     short far *bg;
-//    time_t st;
     struct timeb lastTime;
     struct timeb lastTimex;
     struct timeb lastTimey;
     struct tm *startTime;
-//    time_t st;
+    struct tm *endTime;
     float len;
     Speed speed;
     float energy;
     int state;//用于存储在进行的运动种类
 public:
-    Character(PEOPLE *people0,int state0);
+    Character(char* txt,int state0);
     ~Character(void);
     void Show(void);
     void PutBg(void);
@@ -65,7 +63,7 @@ public:
     void UpdateShow(void);
     void inScale(void);
     int OnKbhit(char key);
-    void Run(void/*PEOPLE *people*/);
+    void Run(int& exeS/*PEOPLE *people*/);
     void StartTime(struct tm * sTime);
     void EndTime(struct tm * eTime);
     int Len(void);
@@ -73,8 +71,6 @@ public:
     void ShowResult(void);
 };
 
-int Begin_Run(void);
-void Draw_Start(void);
 void Draw_Pause(void);
 char* ToString(int x,char* s);
 

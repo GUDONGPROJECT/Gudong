@@ -14,7 +14,7 @@
 #include"./header/SVGA.h"
 #include"./header/Show_HZ.h"
 
-void DataIn(PEOPLE *people,char* key,char* zS,char* pS,char* mT,char* sT,char* zV,char* pV,int year,int mon,int day,int hour,int min);
+void DataIn(char* txtname,char* key,char* zS,char* pS,char* mT,char* sT,char* zV,char* pV,int year,int mon,int day,int hour,int min);
 bool GetRecord(FILE* fp,char* zS,char* pS,char* mT,char* sT,char* zV,char* pV,int& year,int& mon,int& day,int& hour,int& min);
 bool GetData(FILE* fp,char* key,char* zS,char* pS,char* mT,char* sT,char* zV,char* pV,int& year,int& mon,int& day,int& hour,int& min);
 
