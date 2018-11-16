@@ -65,7 +65,7 @@ void Begin(MOUSE *mouse) {
     while (1) {
         if (state == UNDEFINED) {
             state = Begin_menu(mouse, &people);
-            InitPeople(&people);
+//            InitPeople(&people);
         }
         if (state == REGIST) {
 
