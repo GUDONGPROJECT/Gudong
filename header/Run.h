@@ -50,7 +50,6 @@ class Character{
     struct timeb lastTimex;
     struct timeb lastTimey;
     struct tm *startTime;
-    struct tm *endTime;
 //    time_t st;
     float len;
     Speed speed;
@@ -74,7 +73,7 @@ public:
     void ShowResult(void);
 };
 
-bool Begin_Run(void);
+int Begin_Run(void);
 void Draw_Start(void);
 void Draw_Pause(void);
 char* ToString(int x,char* s);

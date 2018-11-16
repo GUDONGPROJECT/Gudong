@@ -16,5 +16,6 @@ void Draw_Sport_Walk(PEOPLE *people);
 void Draw_Sport_Ride(PEOPLE *people);
 State SportMain(MOUSE *mouse,PEOPLE *people);
 enum Sport{RUN,WALK,RIDE};
+void Update(PEOPLE* people,Sport state);
 
 #endif

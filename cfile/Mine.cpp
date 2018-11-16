@@ -103,7 +103,7 @@ State MineMain(MOUSE *mouse,PEOPLE *people) {
                         p = p->next;
                 }
                 while(1) {
-                    if (mouse->button == 1) {
+                    if (mouse->button == 1&& mouse->pos_x <= 374) {
                         //如果点击第一个运动记录
                         if (mouse->pos_y >= BASEH && mouse->pos_y <= BASEH+DELTA-1) {
                             if(i>=1)
@@ -134,6 +134,7 @@ State MineMain(MOUSE *mouse,PEOPLE *people) {
                                     p = p->next;
                                 //清空原页面
                                 SVGA_Bar(0,BASEH,68*5.5,BASEH+4*DELTA,WHITE);
+                                mouse->button = 0;
                                 break;
                             }
                         }
@@ -145,6 +146,7 @@ State MineMain(MOUSE *mouse,PEOPLE *people) {
                                 }
                                 //清空原页面
                                 SVGA_Bar(0,BASEH,68*5.5,BASEH+4*DELTA,WHITE);
+                                mouse->button = 0;
                                 break;
                             }
                         }
@@ -362,8 +364,32 @@ void Record::Dis(int h){
 };
 void Record::Show(){
     float size=5.5;
+    char s[5];
     //画页面大背景色
     SVGA_Bar(375,0,1024,768,DARK_GRAY);
+    //显示运动时刻
+    ToString(hour,s);
+    if(strlen(s)!=2){
+        s[2]='\0';
+        s[1]=s[0];
+        s[0]='0';
+    }
+    dis_16zf(90*size,2*size,s,LIGHT_GRAY);
+    SVGA_Ball(90*size+33,2*size+3,2,LIGHT_GRAY);
+    SVGA_Ball(90*size+33,2*size+13,2,LIGHT_GRAY);
+    ToString(min,s);
+    if(strlen(s)!=2){
+        s[2]='\0';
+        s[1]=s[0];
+        s[0]='0';
+    }
+    dis_16zf(90*size+34,2*size,s,LIGHT_GRAY);
+    //显示运动日期
+    dis_16zf(70*size,2*size,ToString(year,s),LIGHT_GRAY);
+    SVGA_Ball(70*size+65,2*size+13,3,LIGHT_GRAY);
+    dis_16zf(70*size+66,2*size,ToString(mon,s),LIGHT_GRAY);
+    SVGA_Ball(70*size+99,2*size+13,3,LIGHT_GRAY);
+    dis_16zf(70*size+100,2*size,ToString(day,s),LIGHT_GRAY);
     //显示运动距离
     dis_24zf(699 - 48, 65 * size-12, zS, WHITE);
     SVGA_Ball(699 ,65 * size-12+21,3, WHITE);

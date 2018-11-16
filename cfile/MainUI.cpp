@@ -33,9 +33,12 @@ State SportMain(MOUSE *mouse,PEOPLE *people) {
                         mouse->pos_y < 95 * size + sqrt(pow(10 * size, 2) - pow((mouse->pos_x - 34 * size), 2))){
                         //跳转至开始跑步的界面
                         if(Begin_Run()) {
-                            Character runningMan(people, RUN);
-                            runningMan.Run();
-//                            Draw_Sport_Run(people);
+                            while(1) {
+                                Character runningMan(people, RUN);
+                                runningMan.Run();
+                                break;
+                            }
+                            Update(people,RUN);
                         }
                     }
                     //当鼠标点击区域为下方5栏
@@ -86,9 +89,12 @@ State SportMain(MOUSE *mouse,PEOPLE *people) {
                         mouse->pos_y < 95 * size + sqrt(pow(10 * size, 2) - pow((mouse->pos_x - 34 * size), 2))){
                         //跳转至开始跑步的界面
                         if(Begin_Run()) {
-                            Character runningMan(people, WALK);
-                            runningMan.Run();
-//                            Draw_Sport_Walk(people);
+                            while(1) {
+                                Character runningMan(people, WALK);
+                                runningMan.Run();
+                                break;
+                            }
+                            Update(people,WALK);
                         }
                     }
                     //当鼠标点击区域为下方5栏
@@ -148,9 +154,12 @@ State SportMain(MOUSE *mouse,PEOPLE *people) {
                         mouse->pos_y < 95 * size + sqrt(pow(10 * size, 2) - pow((mouse->pos_x - 34 * size), 2))){
                         //跳转至开始跑步的界面
                         if(Begin_Run()) {
-                            Character runningMan(people, RIDE);
-                            runningMan.Run();
-//                            Draw_Sport_Ride(people);
+                            while(1) {
+                                Character runningMan(people, RIDE);
+                                runningMan.Run();
+                                break;
+                            }
+                            Update(people,RIDE);
                         }
                     }
                     //是否点击共享单车按钮
@@ -391,6 +400,46 @@ void Draw_Sport_Ride(PEOPLE* people) {
     dis_16hz(34 * size - 16, 136 * size - 8, "运动", GREEN);
     dis_16hz(47 * size - 16, 136 * size - 8, "干货", LIGHT_GRAY);
     dis_16hz(60 * size - 16, 136 * size - 8, "我的", LIGHT_GRAY);
+}
+/**********************************************************
+Function：		Update
+
+Description：	更新运动距离的数据
+
+Input：			PEOPLE* people
+               SPORT state
+
+Output：		运动距离
+
+Return：		NONE
+**********************************************************/
+void Update(PEOPLE* people,Sport state) {
+    float size=5.5;
+    int s;
+    if(state==RUN)
+        s = people->runLen;
+    else if(state==WALK)
+        s = people->walkLen;
+    else if(state==RIDE)
+        s = people->rideLen;
+    char pS[3]; //跑步总公里的小数部分
+    char zS[3]; //跑步总公里的整数部分
+    itoa(s / 1000, zS, 10);
+    itoa((s % 1000 - s % 10) / 10, pS, 10);
+    SVGA_Bar(34 * size - 48,35 * size,34 * size + 72,35 * size+24,WHITE);
+    if (strlen(zS) == 2) {
+        dis_24zf(34 * size - 48, 35 * size, zS, BLACK);
+    } else {
+        dis_24zf(34 * size - 48, 35 * size, "0", BLACK);
+        dis_24zf(34 * size - 24, 35 * size, zS, BLACK);
+    }
+    SVGA_Ball(34 * size, 35 * size + 21, 3, BLACK);
+    if (strlen(pS) == 2) {
+        dis_24zf(34 * size, 35 * size, pS, BLACK);
+    } else {
+        dis_24zf(34 * size, 35 * size, "0", BLACK);
+        dis_24zf(34 * size + 24, 35 * size, pS, BLACK);
+    }
 }
 
 

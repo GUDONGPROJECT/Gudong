@@ -1,7 +1,7 @@
 #include"Run.h"
 
 ////开始进入运动
-bool Begin_Run(void/*PEOPLE* people*/){
+int Begin_Run(void){
     short far *bg;
     char p;
     drawMap();
@@ -24,7 +24,7 @@ bool Begin_Run(void/*PEOPLE* people*/){
                 dis_16zf(683,378,"GO",WHITE);
                 delay(1000);
                 put_image(639, 324, 759, 444, bg);
-                return true;
+                return 1;
             }
         }
     }
@@ -62,6 +62,9 @@ Character::Character(PEOPLE *people0,int state0){
     len=0;
     speed=HIGH;
     energy=100;
+    time_t now;
+    time(&now);
+    startTime = localtime(&now);
 //    w=0;
 }
 
@@ -458,7 +461,6 @@ void Character::Run(void){
     time_t st;
     time(&now);
     time(&st);
-    startTime = localtime(&now);
     ftime(&lastTimex);
     ftime(&lastTimey);
     GetBg();
@@ -610,10 +612,6 @@ void Character::Run(void){
         //更新运动结束时间
         drawClock(380, 88, WHITE, LIGHT_GRAY);
     }
-    //获得运动结束时间
-//    time_t now;
-    time(&now);
-    endTime = localtime(&now);
 }
 
 ////将整数转为字符串并返回该字符串
