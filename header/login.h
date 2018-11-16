@@ -44,7 +44,7 @@ bool Rname(MOUSE *mouse, char *data, int *number, int x, int y);
 
 void Create_path(char *name, char *textname);
 
-bool Back(MOUSE *mouse, PEOPLE *people);
+bool getTrue(MOUSE *mouse, PEOPLE *people);
 
 void InitPeople(PEOPLE* people);
 

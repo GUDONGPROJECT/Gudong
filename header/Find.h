@@ -21,4 +21,6 @@ State findPage(MOUSE *mouse, PEOPLE *people);
 
 void findDraw(MOUSE *mouse, PEOPLE *people);
 
+void drawSignal(int i);
+
 #endif //GUDONG_FIND_H

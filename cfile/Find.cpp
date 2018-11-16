@@ -7,52 +7,64 @@
 #include "./header/headUtil.h"
 
 State findPage(MOUSE *mouse, PEOPLE *people) {
-    mouse_reset(mouse);
-    SVGA_Bar(0, 0, 68 * SIZE, 1024, WHITE);
+
     findDraw(mouse, people);
-    while (1) {
+    mouse_reset(mouse);
+    int i = 0;
+    while (++i) {
+        drawSignal(i);
         //获取鼠标位置
         mouse_position(mouse);
         mouse_reset(mouse);
-        while (1) {
-            //当点击鼠标
-            if (mouse->button == 1) {
+        //当点击鼠标
+        if (mouse->button == 1) {
 
-                if (mouse->pos_y > 130 * SIZE && mouse->pos_y < 140 * SIZE) {
-                    //当点击运动圈
-                    if (mouse->pos_x < 14.5 * SIZE) {
-                         
-                        return CIRCLE;
-                    }
-                    //当点击发现
-                    if (mouse->pos_x > 40.5 * SIZE && mouse->pos_x < 53.5 * SIZE) {
-                         
-                        return THINGS;
-                    }
-                    //当点击运动
-                    if (mouse->pos_x > 27.5 * SIZE && mouse->pos_x < 40.5 * SIZE) {
-                         
-                        return SPORTPAGE;
-                    }
-                    //当点击我的
-                    if (mouse->pos_x > 53.5 * SIZE) {
-                         
-                        return MINE;
-                    }
+            if (mouse->pos_y > 130 * SIZE && mouse->pos_y < 140 * SIZE) {
+                //当点击运动圈
+                if (mouse->pos_x < 14.5 * SIZE) {
+
+                    return CIRCLE;
+                }
+                //当点击发现
+                if (mouse->pos_x > 40.5 * SIZE && mouse->pos_x < 53.5 * SIZE) {
+
+                    return THINGS;
+                }
+                //当点击运动
+                if (mouse->pos_x > 27.5 * SIZE && mouse->pos_x < 40.5 * SIZE) {
+
+                    return SPORTPAGE;
+                }
+                //当点击我的
+                if (mouse->pos_x > 53.5 * SIZE) {
+
+                    return MINE;
                 }
             }
-            mouse_position(mouse);
-            drawmouse(mouse);
-            // 展示顶部时间
-            headDisplay(2, 5, BLACK, WHITE);
         }
+        mouse_position(mouse);
+        drawmouse(mouse);
+        // 展示顶部时间
+        headDisplay(2, 5, BLACK, WHITE);
+
+        if (i > 55) {
+            i = 1;
+        }
+
     }
+}
+
+void drawSignal(int i) {
+    const float Y = 768 / 2;
+    const float X = 34 * SIZE;
+    SVGA_Ball(X, Y, 12 * SIZE, LIGHT_GRAY);
+//    void Arc(int x,int y,float stangle,float endangle,int radius,int color)
+    Arc(X, Y, 60, -60, 20 * SIZE, LIGHT_GRAY);
 }
 
 void findDraw(MOUSE *mouse, PEOPLE *people) {
     // 循环变量
     int i;
-
     // 画上下的绿白背景
     SVGA_Bar(0, 0, 68 * SIZE, 140 * SIZE, WHITE);
     // 三个tab下方的灰线
@@ -65,7 +77,6 @@ void findDraw(MOUSE *mouse, PEOPLE *people) {
     SVGA_Cricle(6 * SIZE, 10 * SIZE, 2 * SIZE, WHITE);
     SVGA_Line(6 * SIZE + 2 * SIZE * sin(45), 10 * SIZE + 2 * SIZE * sin(45),
               6 * SIZE + 3 * SIZE * sin(45), 10 * SIZE + 3 * SIZE * sin(45), WHITE);
-
     // 底部5个按钮
     dis_16hz(8 * SIZE - 8 * 3, 136 * SIZE - 8, "运动圈", LIGHT_GRAY);
     dis_16hz(21 * SIZE - 16, 136 * SIZE - 8, "发现", GREEN);

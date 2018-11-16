@@ -46,6 +46,7 @@ Function List：
 #include "./header/IoUtil.h"
 #include "./header/things.h"
 #include "./header/Find.h"
+#include "./header/Circle.h"
 
 /**********************************************************
 Function：		Begin
@@ -83,6 +84,9 @@ void Begin(MOUSE *mouse) {
         }
         if (state == FIND) {
             state = findPage(mouse, &people);
+        }
+        if (state == CIRCLE) {
+            state = circlePage(mouse, &people);
         }
     }
 }
@@ -187,14 +191,21 @@ State Begin_menu(MOUSE *mouse, PEOPLE *people) {
         drawmouse(mouse);//绘制鼠标
         float size = 5.5;
         // 用户注册
-        if (mouseDetector(53*size-40,126*size-9, 53*size-40+16*5+4*4, 126*size-8+16, WHITE, Regist, mouse, people))
+        if (mouseDetector(53*size-40,126*size-9, 53*size-40+16*5+4*4, 126*size-8+16, WHITE, Regist, mouse, people)) {
             return REGIST;
+        }
         // 用户登录
-        if (mouseDetector(16*size-16*4,126*size-9, 16*size-16*4+16*3+4*2,126*size-8+16, WHITE, Login, mouse, people))
+        if (mouseDetector(16*size-16*4,126*size-9, 16*size-16*4+16*3+4*2,126*size-8+16, WHITE, Login, mouse, people)) {
             return SPORTPAGE;
+        }
         // 返回
-        if (mouseDetector(4*size, 8*size, 6*size, 12*size, WHITE, Back, mouse, people))
+        if (mouseDetector(4*size, 8*size, 6*size, 12*size, WHITE, getTrue, mouse, people)) {
             return BACK;
+        }
+        // 微信登录
+        if (mouseDetector(2 * size, 97 * size, 66 * size, 107 * size, WHITE, getTrue, mouse, people)) {
+            return SPORTPAGE;
+        }
         char * blankP = " ";
         headDisplay(2, 5, BLACK, DARK_GRAY);
 		drawStatus(blankP, blankP, blankP, blankP, blankP);
@@ -230,7 +241,7 @@ void flash(void) {
  *
  * @return
  */
-bool Back(MOUSE *mouse, PEOPLE *people) {
+bool getTrue(MOUSE *mouse, PEOPLE *people) {
     return true;
 }
 
