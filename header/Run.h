@@ -9,6 +9,8 @@
 #include "SVGA.H"
 #include "map.h"
 #include "headUtil.h"
+#include "UserIO.h"
+#include "MAINUI.H"
 #include <math.h>
 #include <time.h>
 #include <sys/timeb.h>
@@ -36,11 +38,14 @@ class Character{
     int y;
     float v;
     float a;
+    PEOPLE *people;
+    long delta;
 //    float w;
     int bgX;
     int bgY;
     float angle;
     short far *bg;
+//    time_t st;
     struct timeb lastTime;
     struct timeb lastTimex;
     struct timeb lastTimey;
@@ -50,23 +55,28 @@ class Character{
     float len;
     Speed speed;
     float energy;
+    int state;//用于存储在进行的运动种类
 public:
-    Character(void/*int _x=500,int _y=500,float _angle=90*/);
+    Character(PEOPLE *people0,int state0);
+    ~Character(void);
     void Show(void);
     void PutBg(void);
     void GetBg(void);
     bool UpdatePos(void);
     void UpdateShow(void);
     void inScale(void);
-    void OnKbhit(char key);
+    int OnKbhit(char key);
     void Run(void/*PEOPLE *people*/);
     void StartTime(struct tm * sTime);
     void EndTime(struct tm * eTime);
     int Len(void);
     int TimeLen(void);
-
+    void ShowResult(void);
 };
 
+bool Begin_Run(void);
+void Draw_Start(void);
+void Draw_Pause(void);
 char* ToString(int x,char* s);
 
 #endif GUDONG_RUN_H

@@ -6,6 +6,7 @@
 #include<dos.h>
 #include<bios.h>
 #include<graphics.h>
+#include "Mine.h"
 #include"./header/mouse.h"
 #include"./header/SVGA.h"
 #include"./header/Show_HZ.h"
@@ -44,5 +45,7 @@ bool Rname(MOUSE *mouse, char *data, int *number, int x, int y);
 void Create_path(char *name, char *textname);
 
 bool Back(MOUSE *mouse, PEOPLE *people);
+
+void InitPeople(PEOPLE* people);
 
 #endif

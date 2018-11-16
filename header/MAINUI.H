@@ -6,14 +6,14 @@
 #include<dos.h>
 #include<bios.h>
 #include<graphics.h>
+#include"Run.h"
 #include"./header/mouse.h"
 #include"./header/SVGA.h"
 #include"./header/Show_HZ.h"
 #include"./header/head.h"
-void Draw_Sport_Run(void);
-void Draw_Sport_Walk(void);
-void Draw_Sport_Ride(void);
-void Draw_Mine(PEOPLE &people);
+void Draw_Sport_Run(PEOPLE *people);
+void Draw_Sport_Walk(PEOPLE *people);
+void Draw_Sport_Ride(PEOPLE *people);
 State SportMain(MOUSE *mouse,PEOPLE *people);
 enum Sport{RUN,WALK,RIDE};
 

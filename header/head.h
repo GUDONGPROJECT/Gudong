@@ -33,7 +33,9 @@ typedef struct {           //用户结构
     int money[6];//钱数
     int pay;
     int exeTimes;   //运动次数
-    int exeLen;     //单位为米
+    int runLen;     //单位为米
+    int walkLen;     //单位为米
+    int rideLen;     //单位为米
 } PEOPLE;
 
 typedef struct Node{

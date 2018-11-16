@@ -64,6 +64,7 @@ void Begin(MOUSE *mouse) {
     while (1) {
         if (state == UNDEFINED) {
             state = Begin_menu(mouse, &people);
+            InitPeople(&people);
         }
         if (state == REGIST) {
 
@@ -78,7 +79,7 @@ void Begin(MOUSE *mouse) {
             state = thingsPage(mouse, &people);
         }
         if (state == MINE) {
-            ;
+            state = MineMain(mouse, &people);
         }
         if (state == FIND) {
             state = findPage(mouse, &people);
@@ -1012,4 +1013,68 @@ bool Rname(MOUSE *mouse, char *data, int *number, int x, int y) {
         return false;
     }
     return true;
+}
+
+/**********************************************************
+Function：		InitPeople
+
+Description：	用于读取并用户的信息并存入people
+
+Input：		    PEOPLE *people    用户结构体
+
+Output：		得到用户信息的people
+
+Return：		NULL
+
+**********************************************************/
+void InitPeople(PEOPLE* people){
+    int flag=0;
+    int temp;
+    people->exeTimes=0;
+    people->runLen=0;
+    people->walkLen=0;
+    people->rideLen=0;
+    int year, mon, day, hour, min;
+    char s[10];
+    char key[2];
+    char mT[3];
+    char sT[3];
+    char zS[3];
+    char pS[3];
+    char zV[3];
+    char pV[3];
+    FILE *fp = fopen(people->txtname, "r+");
+    for(int i=0;i<11;i++) //不含密码，循环10次到开始，含密码循环11次
+        fscanf(fp, "%s", s);
+    while (1) {
+        if (GetData(fp, key, zS, pS, mT, sT, zV, pV, year, mon, day, hour, min)) {
+            people->exeTimes++;
+            if(key[0]=='#') {
+                temp=atoi(zS) * 1000 + atoi(pS) * 10;
+                people->runLen += temp;
+                flag=1;
+            }
+            else if(key[0]=='*'){
+                temp=atoi(zS) * 1000 + atoi(pS) * 10;
+                people->walkLen += temp;
+                flag=2;
+            }
+            else if(key[0]=='&'){
+                temp=atoi(zS) * 1000 + atoi(pS) * 10;
+                people->rideLen += temp;
+                flag=3;
+            }
+        }
+        else {
+            break;
+        }
+    }
+    fclose(fp);
+    if(flag==1)
+        people->runLen -= temp;
+    else if(flag==2)
+        people->walkLen -= temp;
+    else if(flag==3)
+        people->rideLen -= temp;
+    people->exeTimes--;
 }
