@@ -41,11 +41,17 @@ typedef struct {           //用户结构
 typedef struct Node{
     char author[30];
     char title[30];
+    char level[15];
+    char time [5];
+    char joinedNum[12];
     char type[30];
     char readNum[20];
+    int color;
+    int image;
+    int icon;
     Node * next;
     Node * last;
-    char text[100][100];
+    char text[20][100];
 }Msg, * MsgP;
 
 

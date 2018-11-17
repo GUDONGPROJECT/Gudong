@@ -33,7 +33,7 @@ void recommendDraw(MOUSE *mouse, PEOPLE *people, MsgP MsgP);
 
 void trainDraw(MOUSE *mouse, PEOPLE * people);
 
-void helpDraw(MOUSE *mouse, PEOPLE * people);
+void helpDraw(MOUSE *mouse, PEOPLE * people, MsgP msgP);
 
 State thingsPage(MOUSE *mouse,PEOPLE *people);
 
@@ -41,11 +41,13 @@ void drawRecommendDetail(MsgP MsgP);
 
 void drawTrainDetail();
 
-void drawHelpDetail();
+void drawHelpDetail(MsgP msgP);
 
 void loadAllData(FILE *fp);
 
 void showRecommendMsg(float x, float y, int * color, MsgP msgP);
+
+void showHelpMsg(float x, float y, MsgP msgP);
 
 void showMsgDetail(MsgP msgP);
 

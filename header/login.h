@@ -48,4 +48,7 @@ bool getTrue(MOUSE *mouse, PEOPLE *people);
 
 void InitPeople(PEOPLE* people);
 
+bool quickLogin(MOUSE *mouse, PEOPLE *peopleP, char *loginWay);
+
+bool quickWechatLogin(MOUSE *mouse, PEOPLE *peopleP);
 #endif

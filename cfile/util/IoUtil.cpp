@@ -3,19 +3,20 @@
 //
 
 #include "./header/IoUtil.h"
+#include "./header/head.h"
 
 /**********************************************************
-Functionï¼š		Create_path
+Function£º		Create_path
 
-Descriptionï¼š	ç”¨äºç”Ÿæˆç”¨æˆ·çš„ç”¨æˆ·åæ–‡ä»¶è·¯å¾„
+Description£º	ÓÃÓÚÉú³ÉÓÃ»§µÄÓÃ»§ÃûÎÄ¼şÂ·¾¶
 
-Inputï¼š
-				char *name       ç”¨æˆ·çš„ç”¨æˆ·å
-				char *textname   ç”¨æˆ·åæ‰€å¯¹åº”çš„ç”¨æˆ·è·¯å¾„
+Input£º
+				char *name       ÓÃ»§µÄÓÃ»§Ãû
+				char *textname   ÓÃ»§ÃûËù¶ÔÓ¦µÄÓÃ»§Â·¾¶
 
-Outputï¼š	    NONE
+Output£º	    NONE
 
-Returnï¼š		NONE
+Return£º		NONE
 
 **********************************************************/
 void Create_path(char *name, char *textname) {
@@ -25,28 +26,28 @@ void Create_path(char *name, char *textname) {
 }
 
 /**********************************************************
-Functionï¼š		R_check
+Function£º		R_check
 
-Descriptionï¼š	ç”¨äºæ£€æµ‹ç”¨æˆ·ç”¨æˆ·åå¯†ç æ˜¯å¦ç¬¦åˆæ ‡å‡†
+Description£º	ÓÃÓÚ¼ì²âÓÃ»§ÓÃ»§ÃûÃÜÂëÊÇ·ñ·ûºÏ±ê×¼
 
-Inputï¼š			char *txtname     ç”¨æ¥å­˜å‚¨ç”¨æˆ·çš„æ–‡ä»¶ååœ°å€
-			    char *key         ç”¨æˆ·ç¬¬ä¸€æ¬¡è¾“å…¥çš„å¯†ç 
-				char *key1        ç”¨æˆ·ç¬¬äºŒæ¬¡è¾“å…¥çš„å¯†ç 
+Input£º			char *txtname     ÓÃÀ´´æ´¢ÓÃ»§µÄÎÄ¼şÃûµØÖ·
+			    char *key         ÓÃ»§µÚÒ»´ÎÊäÈëµÄÃÜÂë
+				char *key1        ÓÃ»§µÚ¶ş´ÎÊäÈëµÄÃÜÂë
 
-Outputï¼š		æç¤ºç”¨æˆ·æ³¨å†ŒçŠ¶æ€ï¼Œä¿å­˜ç”¨æˆ·åæ–‡ä»¶ï¼Œç”Ÿæˆç”¨æˆ·æ–‡ä»¶
+Output£º		ÌáÊ¾ÓÃ»§×¢²á×´Ì¬£¬±£´æÓÃ»§ÃûÎÄ¼ş£¬Éú³ÉÓÃ»§ÎÄ¼ş
 
-Returnï¼š		æ³¨å†ŒçŠ¶æ€åºå·
+Return£º		×¢²á×´Ì¬ĞòºÅ
 
 **********************************************************/
 int R_check(char *txtname, char *key, char *key1) {
-    // åˆ¤æ–­å‡½æ•°æ˜¯å¦å¯ä»¥å¯å½•å…¥ï¼Œä»¥åŠå½•å…¥å‡½æ•°
+    // ÅĞ¶Ïº¯ÊıÊÇ·ñ¿ÉÒÔ¿ÉÂ¼Èë£¬ÒÔ¼°Â¼Èëº¯Êı
     FILE *fp;
     float size = 5.5;
     if (strcmp(key, key1) != 0) {
-        //readbmp(182,128,"pic\\notmatch.bmp");//æç¤ºå‰åä¸¤æ¬¡çš„å¯†ç ä¸ç›¸åŒï¼Œé‡æ–°è½½å…¥ç•Œé¢
+        //readbmp(182,128,"pic\\notmatch.bmp");//ÌáÊ¾Ç°ºóÁ½´ÎµÄÃÜÂë²»ÏàÍ¬£¬ÖØĞÂÔØÈë½çÃæ
         SVGA_Bar(6 * size, 228, 62 * size, 451, DARK_GRAY);
         SVGA_Bar(6 * size + 2, 228 + 2, 62 * size - 2, 451 - 2, LIGHT_GRAY);
-        dis_24hz(19 * size, 327, "å‰åå¯†ç è¾“å…¥ä¸ä¸€è‡´", 0);
+        dis_24hz(19 * size, 327, "Ç°ºóÃÜÂëÊäÈë²»Ò»ÖÂ", 0);
         delay(1500);
         //Regist(mouse,people);
         return 0;
@@ -54,13 +55,13 @@ int R_check(char *txtname, char *key, char *key1) {
         fp = fopen(txtname, "r+");
         if (fp != NULL) {
             fclose(fp);
-            //readbmp(182,128,"pic\\chongfu.bmp");//æç¤ºç”¨æˆ·åæœ‰é‡å¤,é‡æ–°è½½å…¥ç”¨æˆ·ç™»å½•ç•Œé¢
+            //readbmp(182,128,"pic\\chongfu.bmp");//ÌáÊ¾ÓÃ»§ÃûÓĞÖØ¸´,ÖØĞÂÔØÈëÓÃ»§µÇÂ¼½çÃæ
             SVGA_Bar(6 * size, 228, 62 * size, 451, DARK_GRAY);
             SVGA_Bar(6 * size + 2, 228 + 2, 62 * size - 2, 451 - 2, LIGHT_GRAY);
-            dis_24hz(19 * size, 327, "è¯¥æ‰‹æœºå·å·²æ³¨å†Œ", 0);
-            // è¿™ä¸ªé€»è¾‘è‚¯å®šèµ°ä¸åˆ°,æˆ‘å°±çš®ä¸€ä¸‹
+            dis_24hz(19 * size, 327, "¸ÃÊÖ»úºÅÒÑ×¢²á", 0);
+            // Õâ¸öÂß¼­¿Ï¶¨×ß²»µ½,ÎÒ¾ÍÆ¤Ò»ÏÂ
             delay(100000);
-            //Regist(mouse,people);//è½½å…¥ç™»å½•ç•Œé¢
+            //Regist(mouse,people);//ÔØÈëµÇÂ¼½çÃæ
             return 0;
         } else {
             fclose(fp);
@@ -71,7 +72,7 @@ int R_check(char *txtname, char *key, char *key1) {
             //readbmp(182,128,"pic\\okay.bmp");
             SVGA_Bar(6 * size, 228, 62 * size, 451, DARK_GRAY);
             SVGA_Bar(6 * size + 2, 228 + 2, 62 * size - 2, 451 - 2, LIGHT_GRAY);
-            dis_24hz(19 * size, 327, "æ‚¨å·²ç»æ³¨å†ŒæˆåŠŸ", 0);
+            dis_24hz(19 * size, 327, "ÄúÒÑ¾­×¢²á³É¹¦", 0);
             delay(1500);
             //Begin_menu(mouse);
             return 1;
@@ -80,7 +81,7 @@ int R_check(char *txtname, char *key, char *key1) {
 }
 
 /**
- * åˆ›å»ºæ¶ˆæ¯è·¯å¾„
+ * ´´½¨ÏûÏ¢Â·¾¶
  *
  * @param fileName
  * @param path
@@ -92,7 +93,27 @@ void createMsgPath(char *fileName, char *path) {
 }
 
 /**
- * æ¶ˆæ¯å½•å…¥
+ * ´´½¨ÏûÏ¢Â·¾¶
+ *
+ * @param fileName
+ * @param path
+ */
+void createLoginPath(char *fileName, char *path) {
+    stpcpy(path, "txt\\login\\");
+    strcat(path, fileName);
+    strcat(path, ".txt");
+}
+
+void inputPeople(char *path, PEOPLE *PeopleP) {
+    FILE *fp = fopen(path, "r+");
+    char token[35];
+    loadDataWithLine(fp, 35, PeopleP->txtname);
+    strcpy(token, PeopleP->txtname);
+    fclose(fp);
+}
+
+/**
+ * ÏûÏ¢Â¼Èë
  *
  * @param path
  */
@@ -104,7 +125,7 @@ void inputMsg(char *path, MsgP msgP) {
     if (fp == NULL) {
         SVGA_Bar(6 * size, 228, 62 * size, 451, DARK_GRAY);
         SVGA_Bar(6 * size + 2, 228 + 2, 62 * size - 2, 451 - 2, LIGHT_GRAY);
-        dis_24hz(19 * size, 327, "æ‰“å¼€æ–‡ä»¶å¤±è´¥", 0);
+        dis_24hz(19 * size, 327, "´ò¿ªÎÄ¼şÊ§°Ü", 0);
     }
 
     int offset = 0;
@@ -132,7 +153,7 @@ void inputMsg(char *path, MsgP msgP) {
 }
 
 /**
- * å…·ä½“æ•°æ®å¯¼å…¥
+ * ¾ßÌåÊı¾İµ¼Èë
  *
  * @param fp
  * @param offset
@@ -154,16 +175,16 @@ int loadDataWithLine(FILE *fp, int length, char *sz) {
     char * find;
     if (!feof(fp)) {
         memset(sz, '\0', length);
-        // åŒ…å«äº†æ¢è¡Œç¬¦ Â Â 
+        // °üº¬ÁË»»ĞĞ·û ??
         fgets(sz, length - 1, fp);
         printf("%s + 0000 \n", sz);
     }
-    // æŸ¥æ‰¾æ¢è¡Œç¬¦
+    // ²éÕÒ»»ĞĞ·û
     find = strchr(sz, '\n');
-    // å¦‚æœfindä¸ä¸ºç©ºæŒ‡é’ˆ
+    // Èç¹ûfind²»Îª¿ÕÖ¸Õë
     if(find)
         *find = '\0';
-    // è¿”å›æ˜¯å¦æœ‰ä¸‹ä¸€è¡Œ
+    // ·µ»ØÊÇ·ñÓĞÏÂÒ»ĞĞ
     return !feof(fp);
 }
 

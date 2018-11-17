@@ -19,7 +19,7 @@ State circlePage(MOUSE *mouse, PEOPLE *people) {
 
             if (mouse->pos_y > 130 * SIZE && mouse->pos_y < 140 * SIZE) {
                 //当点击运动圈
-                if (mouse->pos_x > 14.5 * SIZE && mouse->pos_x < 27.5) {
+                if (mouse->pos_x > 14.5 * SIZE && mouse->pos_x < 27.5 * SIZE) {
 
                     return FIND;
                 }

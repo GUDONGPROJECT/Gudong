@@ -27,4 +27,9 @@ int getNextLinePos(FILE *p);
 void loadData(FILE * fp, int * offset, char * buffer);
 
 int loadDataWithLine(FILE *fp, int length, char *sz);
+
+void createLoginPath(char *fileName, char *path);
+
+void inputPeople(char *path, PEOPLE *PeopleP);
+
 #endif //GUDONG_IOUTIL_H

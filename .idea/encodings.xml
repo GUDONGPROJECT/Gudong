@@ -14,8 +14,11 @@
     <file url="file://$PROJECT_DIR$/cfile/things.cpp" charset="GB2312" />
     <file url="file://$PROJECT_DIR$/cfile/util/IoUtil.cpp" charset="GB2312" />
     <file url="file://$PROJECT_DIR$/header/headUtil.h" charset="GB2312" />
+    <file url="file://$PROJECT_DIR$/txt/login/wechat.TXT" charset="GB2312" />
     <file url="file://$PROJECT_DIR$/txt/things/1.TXT" charset="GB2312" />
     <file url="file://$PROJECT_DIR$/txt/things/2.TXT" charset="GB2312" />
     <file url="file://$PROJECT_DIR$/txt/things/3.TXT" charset="GB2312" />
+    <file url="file://$PROJECT_DIR$/txt/things/class1.TXT" charset="GB2312" />
+    <file url="file://$PROJECT_DIR$/txt/things/help2.TXT" charset="GB2312" />
   </component>
 </project>

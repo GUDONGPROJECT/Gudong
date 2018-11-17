@@ -66,6 +66,11 @@ void Begin(MOUSE *mouse) {
         if (state == UNDEFINED) {
             state = Begin_menu(mouse, &people);
             InitPeople(&people);
+            // 断点调试用
+            char token1[22];
+            char token2[22];
+            strcpy(token1, people.name);
+            strcpy(token2, people.key);
         }
         if (state == REGIST) {
 
@@ -203,7 +208,7 @@ State Begin_menu(MOUSE *mouse, PEOPLE *people) {
             return BACK;
         }
         // 微信登录
-        if (mouseDetector(2 * size, 97 * size, 66 * size, 107 * size, WHITE, getTrue, mouse, people)) {
+        if (mouseDetector(2 * size, 97 * size, 66 * size, 107 * size, WHITE, quickWechatLogin, mouse, people)) {
             return SPORTPAGE;
         }
         char * blankP = " ";
@@ -242,6 +247,21 @@ void flash(void) {
  * @return
  */
 bool getTrue(MOUSE *mouse, PEOPLE *people) {
+    return true;
+}
+
+//bool quickLogin(MOUSE *mouse, PEOPLE *peopleP, char *loginWay) {
+//    char path[35];
+//    createLoginPath(loginWay, path);
+//    inputPeople(path, PeopleP);
+//    return true;
+//}
+
+
+bool quickWechatLogin(MOUSE *mouse, PEOPLE *peopleP) {
+    char path[35];
+    createLoginPath("wechat", path);
+    inputPeople(path, peopleP);
     return true;
 }
 
@@ -389,7 +409,7 @@ bool Regist(MOUSE *mouse, PEOPLE *people) {
                 num2 = 0;
                 num3 = 0;
             }
-        } else if (mouse->pos_x > 577 && mouse->pos_y > 453 && mouse->pos_x < 686 && mouse->pos_y < 497 &&
+        } else if (mouse->pos_x > 4*size && mouse->pos_y > 8*size && mouse->pos_x < 6*size && mouse->pos_y < 12*size &&
                    mouse->button == 1) {
             // 按到返回按钮，则退回到上一层界面
             // 可以防止双击
@@ -413,7 +433,7 @@ bool Regist(MOUSE *mouse, PEOPLE *people) {
             //Begin_menu(mouse);
             mouse_recover(mouse);
             Begin_draw();
-            return true;
+            return false;
         }
     }
 }

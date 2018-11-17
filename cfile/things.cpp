@@ -15,6 +15,8 @@
  */
 State thingsPage(MOUSE *mouse, PEOPLE *people) {
     MsgP msgP = (MsgP) malloc(3 * sizeof(Msg));
+    MsgP helpMsgP = (MsgP) malloc(3 * sizeof(Msg));
+    MsgP helpTokenP = helpMsgP;
     Things state = RECOMMEND;
     mouse_reset(mouse);//重置鼠标
     while (1) {
@@ -95,21 +97,25 @@ State thingsPage(MOUSE *mouse, PEOPLE *people) {
                         //当点击运动圈
                         if (mouse->pos_x < 14.5 * SIZE) {
                             freeHeapMalloc(msgP);
+                            freeHeapMalloc(helpMsgP);
                             return CIRCLE;
                         }
                         //当点击发现
                         if (mouse->pos_x < 27.5 * SIZE && mouse->pos_x > 14.5 * SIZE) {
                             freeHeapMalloc(msgP);
+                            freeHeapMalloc(helpMsgP);
                             return FIND;
                         }
                         //当点击运动
                         if (mouse->pos_x > 27.5 * SIZE && mouse->pos_x < 40.5 * SIZE) {
                             freeHeapMalloc(msgP);
+                            freeHeapMalloc(helpMsgP);
                             return SPORTPAGE;
                         }
                         //当点击我的
                         if (mouse->pos_x > 53.5 * SIZE) {
                             freeHeapMalloc(msgP);
+                            freeHeapMalloc(helpMsgP);
                             return MINE;
                         }
                     }
@@ -146,22 +152,26 @@ State thingsPage(MOUSE *mouse, PEOPLE *people) {
                         //当点击运动圈
                         if (mouse->pos_x < 14.5 * SIZE) {
                             freeHeapMalloc(msgP);
+                            freeHeapMalloc(helpMsgP);
                             return CIRCLE;
                         }
                         //当点击发现
 
                         if (mouse->pos_x < 27.5 * SIZE && mouse->pos_x > 14.5 * SIZE) {
                             freeHeapMalloc(msgP);
+                            freeHeapMalloc(helpMsgP);
                             return FIND;
                         }
                         //当点击运动
                         if (mouse->pos_x > 27.5 * SIZE && mouse->pos_x < 40.5 * SIZE) {
                             freeHeapMalloc(msgP);
+                            freeHeapMalloc(helpMsgP);
                             return SPORTPAGE;
                         }
                         //当点击我的
                         if (mouse->pos_x > 53.5 * SIZE) {
                             freeHeapMalloc(msgP);
+                            freeHeapMalloc(helpMsgP);
                             return MINE;
                         }
                     }
@@ -173,7 +183,7 @@ State thingsPage(MOUSE *mouse, PEOPLE *people) {
         }
         //当位于攻略界面时
         if (state == HELP) {
-            helpDraw(mouse, people);
+            helpDraw(mouse, people, helpMsgP);
             //获取鼠标位置
             mouse_position(mouse);
             //画出鼠标
@@ -193,24 +203,42 @@ State thingsPage(MOUSE *mouse, PEOPLE *people) {
                         state = TRAIN;
                         break;
                     }
+
+                    // 是否点击第一个标签
+                    if (mouse->pos_x > 0 && mouse->pos_x < 4 * SIZE && mouse->pos_y > 33 * SIZE && mouse->pos_y < 104 * SIZE) {
+                        showHelpMsg(4 * SIZE, 31 * SIZE, helpTokenP = helpTokenP->last);
+                        delay(100);
+                    }
+                    // 是否点击第二个标签
+                    if (mouse->pos_x > 64 * SIZE && mouse->pos_x < 68 * SIZE && mouse->pos_y > 33 * SIZE && mouse->pos_y < 104 * SIZE) {
+                        showHelpMsg(4 * SIZE, 31 * SIZE, helpTokenP = helpTokenP->next);
+                        delay(100);
+                    }
+
                     //当鼠标点击区域为下方5栏
                     if (mouse->pos_y > 130 * SIZE && mouse->pos_y < 140 * SIZE) {
                         //当点击运动圈
                         if (mouse->pos_x < 14.5 * SIZE) {
+                            freeHeapMalloc(msgP);
+                            freeHeapMalloc(helpMsgP);
                             return CIRCLE;
                         }
                         //当点击发现
                         if (mouse->pos_x < 27.5 * SIZE && mouse->pos_x > 14.5 * SIZE) {
+                            freeHeapMalloc(msgP);
+                            freeHeapMalloc(helpMsgP);
                             return FIND;
                         }
                         //当点击运动
                         if (mouse->pos_x > 27.5 * SIZE && mouse->pos_x < 40.5 * SIZE) {
                             freeHeapMalloc(msgP);
+                            freeHeapMalloc(helpMsgP);
                             return SPORTPAGE;
                         }
                         //当点击我的
                         if (mouse->pos_x > 53.5 * SIZE) {
                             freeHeapMalloc(msgP);
+                            freeHeapMalloc(helpMsgP);
                             return MINE;
                         }
                     }
@@ -268,8 +296,9 @@ void trainDraw(MOUSE *mouse, PEOPLE *people) {
  * @param people 
  */
 
-void helpDraw(MOUSE *mouse, PEOPLE *people) {
+void helpDraw(MOUSE *mouse, PEOPLE *people, MsgP msgP) {
     thingsDraw(mouse, people);
+    drawHelpDetail(msgP);
     // 三个tab下方的绿线
     SVGA_Line(27 * SIZE, 26 * SIZE, 27 * SIZE + 32, 26 * SIZE, GREEN);
     SVGA_Line(27 * SIZE, 26 * SIZE - 1, 27 * SIZE + 32, 26 * SIZE - 1, GREEN);
@@ -353,20 +382,20 @@ void drawRecommendDetail(MsgP msgP) {
 //    msgP = (MsgP) malloc(3 * sizeof(Msg));
 
     MsgP msgP1 = msgP + 0;
-    createMsgPath("1", path);
+    createMsgPath("msg1", path);
     inputMsg(path, msgP1);
     msgP1->last = NULL;
 
     int color2[] = {SKY_BLUE, GAINSBORO};
     MsgP msgP2 = msgP + 1;
-    createMsgPath("2", path);
+    createMsgPath("msg2", path);
     inputMsg(path, msgP2);
     msgP2->last = msgP1;
     msgP1->next = msgP2;
 
     int color3[] = {BABY_PINK, SEASHELL};
     MsgP msgP3 = msgP + 2;
-    createMsgPath("3", path);
+    createMsgPath("msg3", path);
     inputMsg(path, msgP3);
     msgP3->last = msgP2;
     msgP2->next = msgP3;
@@ -395,6 +424,24 @@ void showRecommendMsg(float x, float y, int *color, MsgP msgP) {
     dis_16zf(x + 53 * SIZE, y + 16 * SIZE + 2, msgP->readNum, DARK_GRAY);
 }
 
+void showHelpMsg(float x, float y, MsgP msgP) {
+
+    SVGA_Bar(x, y, 64 * SIZE, 106 * SIZE, msgP->color);
+    SVGA_Bar(0, 33 * SIZE, 2 * SIZE, 104 * SIZE, msgP->last->color);
+    SVGA_Bar(66 * SIZE, 33 * SIZE, 68 * SIZE, 104 * SIZE, msgP->next->color);
+
+    dis_24hz(x + 2 * SIZE, y + 2 * SIZE, msgP->title, BLACK);
+    SVGA_Ball(x + 4 * SIZE, y + 11 * SIZE, 2 * SIZE, msgP->icon);
+    dis_16hz(x + 7 * SIZE, y + 10 * SIZE, msgP->author, BLACK);
+
+    SVGA_Bar(x + 2 * SIZE, y + 18 * SIZE, x + 58 * SIZE, y + 60 * SIZE, msgP->image);
+
+    SVGA_Bar(x + 2 * SIZE, y + 68 * SIZE, x + 31 * SIZE, y + 20 * SIZE, LIGHT_CYAN);
+    dis_16hz(x + 2 * SIZE + 4, y + 68 * SIZE + 2, msgP->type, GREEN);
+    dis_16hz(x + 42 * SIZE, y + 68 * SIZE + 2, "点赞", DARK_GRAY);
+    dis_16zf(x + 50 * SIZE, y + 68 * SIZE + 2, msgP->readNum, DARK_GRAY);
+}
+
 /**
  * 画训练界面的个各种细节
  */
@@ -405,8 +452,53 @@ void drawTrainDetail() {
 /**
  * 画出攻略界面的各种细节
  */
-void drawHelpDetail() {
+void drawHelpDetail(MsgP msgP) {
+    char *path;
+    path = (char *) malloc(50 * sizeof(char));
 
+//    // 转化指针指针为指针
+//    MsgP msgP = *msgPP;
+//    // 获取堆空间地址
+//    msgP = (MsgP) malloc(3 * sizeof(Msg));
+
+    MsgP msgP1 = msgP + 0;
+    createMsgPath("help1", path);
+    inputMsg(path, msgP1);
+
+    msgP1->color = LIGHT_GREEN;
+    msgP1->icon = MEDIUM_PURPLE;
+    msgP1->image = BABY_PINK;
+
+    msgP1->last = NULL;
+
+
+    MsgP msgP2 = msgP + 1;
+    createMsgPath("help2", path);
+    inputMsg(path, msgP2);
+
+    msgP2->color = LIGHT_BLUE;
+    msgP2->icon = SKY_BLUE;
+    msgP2->image = GAINSBORO;
+
+    msgP2->last = msgP1;
+    msgP1->next = msgP2;
+
+    MsgP msgP3 = msgP + 2;
+    createMsgPath("help3", path);
+    inputMsg(path, msgP3);
+
+    msgP3->color = LIGHT_PINK;
+    msgP3->icon = BABY_PINK;
+    msgP3->image = SEASHELL;
+
+    msgP3->last = msgP2;
+    msgP2->next = msgP3;
+    // 形成循环链表
+    msgP1->last = msgP3;
+    msgP3->next = msgP1;
+
+    // 标签1
+    showHelpMsg(4 * SIZE, 31 * SIZE, msgP1);
 }
 
 Jump showMsg(MsgP msgP, MOUSE *mouse) {
@@ -477,6 +569,9 @@ void showMsgDetail(MsgP msgP) {
 
 void freeHeapMalloc(MsgP msgP) {
     free(msgP);
-    free(msgP + 1);
-    free(msgP + 2);
+    msgP = NULL;
+    free(msgP += 1);
+    msgP = NULL;
+    free(msgP += 1);
+    msgP = NULL;
 }

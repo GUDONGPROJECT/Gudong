@@ -7,15 +7,10 @@
 #include "./header/headUtil.h"
 
 State findPage(MOUSE *mouse, PEOPLE *people) {
-
     findDraw(mouse, people);
     mouse_reset(mouse);
     int i = 0;
-    while (++i) {
-        drawSignal(i);
-        //获取鼠标位置
-        mouse_position(mouse);
-        mouse_reset(mouse);
+    while (1) {
         //当点击鼠标
         if (mouse->button == 1) {
 
@@ -45,12 +40,6 @@ State findPage(MOUSE *mouse, PEOPLE *people) {
         mouse_position(mouse);
         drawmouse(mouse);
         // 展示顶部时间
-        headDisplay(2, 5, BLACK, WHITE);
-
-        if (i > 55) {
-            i = 1;
-        }
-
     }
 }
 
@@ -71,6 +60,12 @@ void findDraw(MOUSE *mouse, PEOPLE *people) {
     SVGA_Line(0, 26 * SIZE + 1, 68 * SIZE, 26 * SIZE + 1, DARK_GRAY);
     // 五个选项上方的灰线
     SVGA_Line(0, 132 * SIZE, 68 * SIZE, 132 * SIZE, DARK_GRAY);
+
+    // 画3个选项
+    dis_16hz(5 * SIZE, 21 * SIZE, "附近的用户", GREEN);
+    // 三个tab下方的绿线
+    SVGA_Line(5 * SIZE, 26 * SIZE, 5 * SIZE + 96, 26 * SIZE, GREEN);
+    SVGA_Line(5 * SIZE, 26 * SIZE - 1, 5 * SIZE + 96, 26 * SIZE - 1, GREEN);
 
     // 画天气显示
     SVGA_Bar(2 * SIZE, 5 * SIZE, 60 * SIZE, 15 * SIZE, LIGHT_GRAY);
