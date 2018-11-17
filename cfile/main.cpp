@@ -50,7 +50,6 @@ void main() {
 //            break;
 //        }
 //        dis_24zf(500,250,"hhh",RED);
-        getch();
 //        Update(&people,WALK);
 //    }
 

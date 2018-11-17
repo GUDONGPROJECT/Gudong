@@ -197,7 +197,7 @@ State Begin_menu(MOUSE *mouse, PEOPLE *people) {
         float size = 5.5;
         // 用户注册
         if (mouseDetector(53*size-40,126*size-9, 53*size-40+16*5+4*4, 126*size-8+16, WHITE, Regist, mouse, people)) {
-            return REGIST;
+            return UNDEFINED;
         }
         // 用户登录
         if (mouseDetector(16*size-16*4,126*size-9, 16*size-16*4+16*3+4*2,126*size-8+16, WHITE, Login, mouse, people)) {
@@ -302,7 +302,7 @@ bool Regist(MOUSE *mouse, PEOPLE *people) {
         // 绘制鼠标
         drawmouse(mouse);
         // 如果用户将鼠标放置在用户名白框内
-        if (mouse->pos_x > 6*size && mouse->pos_y > 40*size-36 && mouse->pos_x < 62*size && mouse->pos_y < 62*size &&
+        if (mouse->pos_x > 6*size && mouse->pos_y > 40*size-36 && mouse->pos_x < 62*size && mouse->pos_y < 40*size &&
             mouse->button == 1) {
             // 可以防止双击
             delay(100);
@@ -399,7 +399,6 @@ bool Regist(MOUSE *mouse, PEOPLE *people) {
                     txtname = NULL;
                 }
                 mouse_recover(mouse);
-                Begin_draw();
                 return true;
             } else {
                 mouse_recover(mouse);
@@ -432,7 +431,6 @@ bool Regist(MOUSE *mouse, PEOPLE *people) {
             }
             //Begin_menu(mouse);
             mouse_recover(mouse);
-            Begin_draw();
             return false;
         }
     }

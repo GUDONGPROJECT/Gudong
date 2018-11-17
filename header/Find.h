@@ -23,4 +23,8 @@ void findDraw(MOUSE *mouse, PEOPLE *people);
 
 void drawSignal(int i);
 
+void showClassMsg(float x, float y, UsrP usrP);
+
+void getAllUsr(UsrP usrP);
+
 #endif //GUDONG_FIND_H

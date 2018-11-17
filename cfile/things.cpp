@@ -207,13 +207,21 @@ State thingsPage(MOUSE *mouse, PEOPLE *people) {
 
                     // 是否点击第一个标签
                     if (mouse->pos_x > 0 && mouse->pos_x < 4 * SIZE && mouse->pos_y > 33 * SIZE && mouse->pos_y < 104 * SIZE) {
-                        showHelpMsg(4 * SIZE, 31 * SIZE, helpTokenP = helpTokenP->last);
                         delay(100);
+                        // 屏蔽鼠标
+                        mouse_recover(mouse);
+                        showHelpMsg(4 * SIZE, 31 * SIZE, helpTokenP = helpTokenP->last);
+                        // 重置鼠标
+                        mouse_reset(mouse);
                     }
                     // 是否点击第二个标签
                     if (mouse->pos_x > 64 * SIZE && mouse->pos_x < 68 * SIZE && mouse->pos_y > 33 * SIZE && mouse->pos_y < 104 * SIZE) {
-                        showHelpMsg(4 * SIZE, 31 * SIZE, helpTokenP = helpTokenP->next);
                         delay(100);
+                        // 屏蔽鼠标
+                        mouse_recover(mouse);
+                        showHelpMsg(4 * SIZE, 31 * SIZE, helpTokenP = helpTokenP->next);
+                        // 重置鼠标
+                        mouse_reset(mouse);
                     }
 
                     //当鼠标点击区域为下方5栏
