@@ -109,7 +109,7 @@ void drawStatus(char * endurance, char * velocity, char * length, char * totalTi
     float x = 375;
     float y = 0;
     dis_24hz(x += 5, y += 8,"运动开始时间", DARK_GRAY);
-    drawClockOnce(x, y += 26, WHITE);
+    drawClock(x, y += 26, WHITE, LIGHT_GRAY);
 
     dis_24hz(x, y +=28,"运动结束时间", DARK_GRAY);
     drawClock(x, y += 26, WHITE, LIGHT_GRAY);

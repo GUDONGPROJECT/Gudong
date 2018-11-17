@@ -184,6 +184,7 @@ State thingsPage(MOUSE *mouse, PEOPLE *people) {
         //当位于攻略界面时
         if (state == HELP) {
             helpDraw(mouse, people, helpMsgP);
+            PageController(110*5.5,PINK,PINK);
             //获取鼠标位置
             mouse_position(mouse);
             //画出鼠标

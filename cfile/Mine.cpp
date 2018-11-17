@@ -26,7 +26,7 @@ State MineMain(MOUSE *mouse,PEOPLE *people) {
                     if (mouse->pos_x > 4 * size && mouse->pos_y > 84 * size - 12 * size &&
                         mouse->pos_x < 64 * size * size &&
                         mouse->pos_y < 84 * size + 12) {
-                        return BACK;
+                        return UNDEFINED;
                         //退出
                     }
                     //当鼠标点击区域为下方5栏

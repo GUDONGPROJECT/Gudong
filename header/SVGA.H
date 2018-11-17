@@ -61,4 +61,6 @@ void Arc(int x,int y, float stangle, float endangle,int radius,int color);
 
 void Pieslice(int x,int y, float stangle, float endangle,int radius,int color);
 
+void PageController(int h,int lColor,int rColor);
+
 #endif

@@ -1155,7 +1155,7 @@ Input：
 				int radius   扇形的半径
 				int color    填充的颜色
 
-Output：	    圆角实心矩形
+Output：	    圆角实心扇形
 
 Return：		NONE
 
@@ -1165,4 +1165,36 @@ void Pieslice(int x,int y,float stangle,float endangle,int radius, int color){
     for (R = 0; R <= radius; R++) {
         Arc(x, y,stangle,endangle, R, color);
     }
+}
+/**********************************************************
+Function：		PageController
+
+Description：	用于画出翻页控制器
+
+Input：
+				int h       控制器的位置高度
+				int lColor  左侧上翻页键的颜色
+				int rColor  右侧下翻页键的颜色
+
+Output：	    翻页控制器
+
+Return：		NONE
+
+**********************************************************/
+void PageController(int h,int lColor,int rColor){
+    const float size=5.5;
+    //画上翻页按钮
+    SVGA_Ball(25*size,h+7.5*size,5*size,lColor);//上翻页按钮圆背景
+    SVGA_Bar(22*size,h+5.5*size,28*size,h+8.5*size,WHITE);
+    Pieslice(25*size,h+5.5*size,PI,1.25*PI,4.5*size, lColor);
+    Pieslice(25*size,h+5.5*size,-0.25*PI,0,4.5*size, lColor);
+    //画下翻页按钮
+    SVGA_Ball(43*size,h+7.5*size,5*size,lColor);//下翻页按钮圆背景
+    SVGA_Bar(40*size,h+6.5*size,46*size,h+9.5*size,WHITE);
+    Pieslice(43*size,h+9.5*size,0,0.25*PI,4.5*size, rColor);
+    Pieslice(43*size,h+9.5*size,0.75*PI,PI,4.5*size, rColor);
+    /*
+     上翻页按钮范围：x:(20*size,30*size) y:(h+2.5*size,h+12.5*size)
+     下翻页按钮范围：x:(38*size,48*size) y:(h+2.5*size,h+12.5*size)
+     */
 }
