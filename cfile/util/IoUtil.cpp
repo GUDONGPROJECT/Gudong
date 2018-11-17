@@ -112,6 +112,8 @@ void inputPeople(char *path, PEOPLE *PeopleP) {
     fclose(fp);
 }
 
+
+
 /**
  * 消息录入
  *
@@ -149,6 +151,44 @@ void inputMsg(char *path, MsgP msgP) {
     printf("2 %s\n", msgP->title);
     printf("3 %s\n", msgP->type);
     printf("4 %s\n", msgP->readNum);
+    fclose(fp);
+}
+
+/**
+ * 消息录入
+ *
+ * @param path
+ */
+void inputUsr(char *path, UsrP usrP) {
+    float size = 5.5;
+    int i;
+    UsrP token = usrP;
+    UsrP temp = NULL;
+
+    FILE *fp = fopen(path, "r+");
+    if (fp == NULL) {
+        SVGA_Bar(6 * size, 228, 62 * size, 451, DARK_GRAY);
+        SVGA_Bar(6 * size + 2, 228 + 2, 62 * size - 2, 451 - 2, LIGHT_GRAY);
+        dis_24hz(19 * size, 327, "打开文件失败", 0);
+    }
+
+    int offset = 0;
+    int flag = 1;
+
+//    loadData(fp, &offset, msgP->author);
+//    loadData(fp, &offset, msgP->title);
+//    loadData(fp, &offset, msgP->type);
+//    loadData(fp, &offset, msgP->readNum);
+
+    for (i = 0; flag; i++) {
+        temp = token;
+        flag = loadDataWithLine(fp, 30, temp->name);
+        token = (UsrP) malloc(sizeof(Usr));
+        temp->next = token;
+        token->last = temp;
+    }
+    token->name[0] = 'n';
+
     fclose(fp);
 }
 

@@ -32,4 +32,6 @@ void createLoginPath(char *fileName, char *path);
 
 void inputPeople(char *path, PEOPLE *PeopleP);
 
+void inputUsr(char *path, UsrP usrP);
+
 #endif //GUDONG_IOUTIL_H

@@ -54,6 +54,14 @@ typedef struct Node{
     char text[20][100];
 }Msg, * MsgP;
 
+typedef struct User{
+    char name[20];
+    int color;
+    int icon;
+    User * next;
+    User * last;
+}Usr, * UsrP;
+
 
 typedef struct {
     char syllable[10];

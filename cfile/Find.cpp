@@ -5,11 +5,29 @@
 
 #include "./header/Find.h"
 #include "./header/headUtil.h"
+#include "./header/IoUtil.h"
 
 State findPage(MOUSE *mouse, PEOPLE *people) {
-    findDraw(mouse, people);
-    mouse_reset(mouse);
     int i = 0;
+    UsrP usrP = (UsrP) malloc(sizeof(Usr));
+
+    getAllUsr(usrP);
+
+    findDraw(mouse, people);
+
+//    showClassMsg(0, (i + 26) * SIZE, usrP);
+//    usrP = usrP->next;
+//
+//    i++;
+//    showClassMsg(0, (i + 26) * SIZE, usrP);
+
+
+    for (i = 0; usrP->name[0] != 'n' && i < 6; i++) {
+        showClassMsg(0, (i * 17 + 26) * SIZE, usrP);
+        usrP = usrP->next;
+    }
+
+    mouse_reset(mouse);
     while (1) {
         //当点击鼠标
         if (mouse->button == 1) {
@@ -40,6 +58,7 @@ State findPage(MOUSE *mouse, PEOPLE *people) {
         mouse_position(mouse);
         drawmouse(mouse);
         // 展示顶部时间
+        headDisplay(2, 5, BLACK, WHITE);
     }
 }
 
@@ -49,6 +68,11 @@ void drawSignal(int i) {
     SVGA_Ball(X, Y, 12 * SIZE, LIGHT_GRAY);
 //    void Arc(int x,int y,float stangle,float endangle,int radius,int color)
     Arc(X, Y, 60, -60, 20 * SIZE, LIGHT_GRAY);
+}
+
+void getAllUsr(UsrP usrP) {
+    char * path = "txt\\USERNAME.txt";
+    inputUsr( path, usrP);
 }
 
 void findDraw(MOUSE *mouse, PEOPLE *people) {
@@ -78,4 +102,13 @@ void findDraw(MOUSE *mouse, PEOPLE *people) {
     dis_16hz(34 * SIZE - 16, 136 * SIZE - 8, "运动", LIGHT_GRAY);
     dis_16hz(47 * SIZE - 16, 136 * SIZE - 8, "干货", LIGHT_GRAY);
     dis_16hz(60 * SIZE - 16, 136 * SIZE - 8, "我的", LIGHT_GRAY);
+
+}
+
+void showClassMsg(float x, float y, UsrP usrP) {
+
+    SVGA_Bar(x + 4 * SIZE, y + 4 * SIZE, 64 * SIZE, y + 4 * SIZE + 13.5 * SIZE, DARK_GRAY);
+    dis_24hz(x + 8 * SIZE, y + 6 * SIZE, "用户：", WHITE);
+    dis_16zf(x + 18 * SIZE, y + 12 * SIZE, usrP->name, WHITE);
+
 }
