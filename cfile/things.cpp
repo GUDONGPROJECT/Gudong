@@ -639,7 +639,7 @@ void freeHeapMalloc(MsgP msgP) {
     msgP = NULL;
 }
 
-void showClassMsg(float x, float y, bool hasAchieved, MsgP msgP) {
+void showAllMsg(float x, float y, bool hasAchieved, MsgP msgP) {
     int color = hasAchieved ? GREEN : DARK_GRAY;
 //    SVGA_Ball(x, y, 2 * SIZE, color[0]);
     SVGA_Bar(x + 4 * SIZE, y + 4 * SIZE, 64 * SIZE, y + 4 * SIZE + 27 * SIZE, color);

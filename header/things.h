@@ -55,4 +55,8 @@ Jump showMsg(MsgP msgP, MOUSE *mouse);
 
 void freeHeapMalloc(MsgP msgP);
 
+void showAllMsg(float x, float y, bool hasAchieved, MsgP msgP);
+
+//void showClassMsg(float x, float y, bool hasAchieved, MsgP msgP);
+
 #endif //GUDONG_THINGS_H
