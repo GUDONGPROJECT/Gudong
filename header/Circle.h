@@ -23,4 +23,6 @@ void circleDraw(MOUSE *mouse, PEOPLE *people);
 
 void showClassMsg(float x, float y, bool hasAchieved, MsgP msgP);
 
+void getSelectMsg(MsgP msgP, PEOPLE *peopleP);
+
 #endif //GUDONG_CIRCLE_H

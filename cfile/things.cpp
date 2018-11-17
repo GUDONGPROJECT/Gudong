@@ -15,8 +15,7 @@
  */
 State thingsPage(MOUSE *mouse, PEOPLE *people) {
     MsgP msgP = (MsgP) malloc(3 * sizeof(Msg));
-    MsgP msgP1 = (MsgP) malloc(3 * sizeof(Msg));
-    MsgP msgP2 = (MsgP) malloc(3 * sizeof(Msg));
+    MsgP classP = (MsgP) malloc(3 * sizeof(Msg));
 
     MsgP helpMsgP = (MsgP) malloc(3 * sizeof(Msg));
     MsgP helpTokenP = helpMsgP;
@@ -52,6 +51,7 @@ State thingsPage(MOUSE *mouse, PEOPLE *people) {
                         thingsDraw(mouse, people);
 
                         freeHeapMalloc(msgP);
+                        freeHeapMalloc(classP);
                         freeHeapMalloc(helpMsgP);
                         recommendDraw(mouse, people, msgP, 1);
                         continue;
@@ -64,6 +64,7 @@ State thingsPage(MOUSE *mouse, PEOPLE *people) {
                         thingsDraw(mouse, people);
 
                         freeHeapMalloc(msgP);
+                        freeHeapMalloc(classP);
                         freeHeapMalloc(helpMsgP);
                         recommendDraw(mouse, people, msgP, 2);
                         continue;
@@ -76,6 +77,7 @@ State thingsPage(MOUSE *mouse, PEOPLE *people) {
                         thingsDraw(mouse, people);
 
                         freeHeapMalloc(msgP);
+                        freeHeapMalloc(classP);
                         freeHeapMalloc(helpMsgP);
                         recommendDraw(mouse, people, msgP, 3);
                         continue;
@@ -124,24 +126,28 @@ State thingsPage(MOUSE *mouse, PEOPLE *people) {
                         //当点击运动圈
                         if (mouse->pos_x < 14.5 * SIZE) {
                             freeHeapMalloc(msgP);
+                            freeHeapMalloc(classP);
                             freeHeapMalloc(helpMsgP);
                             return CIRCLE;
                         }
                         //当点击发现
                         if (mouse->pos_x < 27.5 * SIZE && mouse->pos_x > 14.5 * SIZE) {
                             freeHeapMalloc(msgP);
+                            freeHeapMalloc(classP);
                             freeHeapMalloc(helpMsgP);
                             return FIND;
                         }
                         //当点击运动
                         if (mouse->pos_x > 27.5 * SIZE && mouse->pos_x < 40.5 * SIZE) {
                             freeHeapMalloc(msgP);
+                            freeHeapMalloc(classP);
                             freeHeapMalloc(helpMsgP);
                             return SPORTPAGE;
                         }
                         //当点击我的
                         if (mouse->pos_x > 53.5 * SIZE) {
                             freeHeapMalloc(msgP);
+                            freeHeapMalloc(classP);
                             freeHeapMalloc(helpMsgP);
                             return MINE;
                         }
@@ -160,9 +166,88 @@ State thingsPage(MOUSE *mouse, PEOPLE *people) {
             mouse_position(mouse);
             //画出鼠标
             mouse_reset(mouse);
+            // 画出训练界面
+            getClassMsg(classP, people);
             while (1) {
-                //当点击鼠标
+                //当点击鼠标26 61 96 132
                 if (mouse->button == 1) {
+                    if (mouse->pos_y > 26 * SIZE && mouse->pos_y < 61 * SIZE) {
+                        mouse->button = 0;
+                        delay(100);
+
+                        if (checkIfSelect(classP, people)) {
+                            addUsr(people, "class1");
+                            SVGA_Bar(6*SIZE, 228, 62*SIZE, 451, DARK_GRAY);
+                            SVGA_Bar(6*SIZE+2, 228+2, 62*SIZE-2, 451-2, LIGHT_GRAY);
+                            dis_24hz(19*SIZE, 327, "添加该课程成功", 0);
+                            delay(1500);
+                        }
+                        else {
+                            SVGA_Bar(6*SIZE, 228, 62*SIZE, 451, DARK_GRAY);
+                            SVGA_Bar(6*SIZE+2, 228+2, 62*SIZE-2, 451-2, LIGHT_GRAY);
+                            dis_24hz(19*SIZE, 327, "您已添加过该课程", 0);
+                            delay(1500);
+                        }
+
+                        // 屏蔽鼠标
+                        mouse_recover(mouse);
+                        trainDraw(mouse, people);
+                        getClassMsg(classP, people);
+                        // 重置鼠标
+                        mouse_reset(mouse);
+                    }
+
+                    if (mouse->pos_y > 61 * SIZE && mouse->pos_y < 96 * SIZE) {
+                        mouse->button = 0;
+                        delay(100);
+
+                        if (checkIfSelect(classP + 1, people)) {
+                            addUsr(people, "class2");
+                            SVGA_Bar(6*SIZE, 228, 62*SIZE, 451, DARK_GRAY);
+                            SVGA_Bar(6*SIZE+2, 228+2, 62*SIZE-2, 451-2, LIGHT_GRAY);
+                            dis_24hz(19*SIZE, 327, "添加该课程成功", 0);
+                            delay(1500);
+                        }
+                        else {
+                            SVGA_Bar(6*SIZE, 228, 62*SIZE, 451, DARK_GRAY);
+                            SVGA_Bar(6*SIZE+2, 228+2, 62*SIZE-2, 451-2, LIGHT_GRAY);
+                            dis_24hz(19*SIZE, 327, "您已添加过该课程", 0);
+                            delay(1500);
+                        }
+
+                        // 屏蔽鼠标
+                        mouse_recover(mouse);
+                        trainDraw(mouse, people);
+                        getClassMsg(classP, people);
+                        // 重置鼠标
+                        mouse_reset(mouse);
+                    }
+
+                    if (mouse->pos_y > 96 * SIZE && mouse->pos_y < 132 * SIZE) {
+                        mouse->button = 0;
+                        delay(100);
+
+                        if (checkIfSelect(classP + 2, people)) {
+                            addUsr(people, "class3");
+                            SVGA_Bar(6*SIZE, 228, 62*SIZE, 451, DARK_GRAY);
+                            SVGA_Bar(6*SIZE+2, 228+2, 62*SIZE-2, 451-2, LIGHT_GRAY);
+                            dis_24hz(19*SIZE, 327, "添加该课程成功", 0);
+                            delay(1500);
+                        }
+                        else {
+                            SVGA_Bar(6*SIZE, 228, 62*SIZE, 451, DARK_GRAY);
+                            SVGA_Bar(6*SIZE+2, 228+2, 62*SIZE-2, 451-2, LIGHT_GRAY);
+                            dis_24hz(19*SIZE, 327, "您已添加过该课程", 0);
+                            delay(1500);
+                        }
+
+                        // 屏蔽鼠标
+                        mouse_recover(mouse);
+                        trainDraw(mouse, people);
+                        getClassMsg(classP, people);
+                        // 重置鼠标
+                        mouse_reset(mouse);
+                    }
                     //是否点击推荐
                     if (mouse->pos_y > 18 * SIZE && mouse->pos_x < 10.5 * SIZE + 16 && mouse->pos_y < 26 * SIZE) {
                         state = RECOMMEND;
@@ -179,6 +264,7 @@ State thingsPage(MOUSE *mouse, PEOPLE *people) {
                         //当点击运动圈
                         if (mouse->pos_x < 14.5 * SIZE) {
                             freeHeapMalloc(msgP);
+                            freeHeapMalloc(classP);
                             freeHeapMalloc(helpMsgP);
                             return CIRCLE;
                         }
@@ -186,18 +272,21 @@ State thingsPage(MOUSE *mouse, PEOPLE *people) {
 
                         if (mouse->pos_x < 27.5 * SIZE && mouse->pos_x > 14.5 * SIZE) {
                             freeHeapMalloc(msgP);
+                            freeHeapMalloc(classP);
                             freeHeapMalloc(helpMsgP);
                             return FIND;
                         }
                         //当点击运动
                         if (mouse->pos_x > 27.5 * SIZE && mouse->pos_x < 40.5 * SIZE) {
                             freeHeapMalloc(msgP);
+                            freeHeapMalloc(classP);
                             freeHeapMalloc(helpMsgP);
                             return SPORTPAGE;
                         }
                         //当点击我的
                         if (mouse->pos_x > 53.5 * SIZE) {
                             freeHeapMalloc(msgP);
+                            freeHeapMalloc(classP);
                             freeHeapMalloc(helpMsgP);
                             return MINE;
                         }
@@ -262,24 +351,28 @@ State thingsPage(MOUSE *mouse, PEOPLE *people) {
                         //当点击运动圈
                         if (mouse->pos_x < 14.5 * SIZE) {
                             freeHeapMalloc(msgP);
+                            freeHeapMalloc(classP);
                             freeHeapMalloc(helpMsgP);
                             return CIRCLE;
                         }
                         //当点击发现
                         if (mouse->pos_x < 27.5 * SIZE && mouse->pos_x > 14.5 * SIZE) {
                             freeHeapMalloc(msgP);
+                            freeHeapMalloc(classP);
                             freeHeapMalloc(helpMsgP);
                             return FIND;
                         }
                         //当点击运动
                         if (mouse->pos_x > 27.5 * SIZE && mouse->pos_x < 40.5 * SIZE) {
                             freeHeapMalloc(msgP);
+                            freeHeapMalloc(classP);
                             freeHeapMalloc(helpMsgP);
                             return SPORTPAGE;
                         }
                         //当点击我的
                         if (mouse->pos_x > 53.5 * SIZE) {
                             freeHeapMalloc(msgP);
+                            freeHeapMalloc(classP);
                             freeHeapMalloc(helpMsgP);
                             return MINE;
                         }
@@ -474,6 +567,76 @@ void drawRecommendDetail(MsgP msgP, int whichTheme) {
     showRecommendMsg(6 * SIZE, 110 * SIZE, color3, msgP3);
 }
 
+void getClassMsg(MsgP msgP, PEOPLE *peopleP) {
+    char *path;
+    bool flag;
+    path = (char *) malloc(50 * sizeof(char));
+
+    MsgP msgP1 = msgP + 0;
+
+    createMsgPath("class1", path);
+
+
+    inputMsg(path, msgP1);
+
+    flag = !checkIfSelect(msgP1, peopleP);
+    if (flag) {
+        msgP1->color = GREEN;
+    }
+    else {
+        msgP1->color = DARK_GRAY;
+    }
+
+    msgP1->last = NULL;
+
+    int color2[] = {SKY_BLUE, GAINSBORO};
+    MsgP msgP2 = msgP + 1;
+
+    createMsgPath("class2", path);
+
+
+    inputMsg(path, msgP2);
+    flag = !checkIfSelect(msgP2, peopleP);
+    if (flag) {
+        msgP2->color = GREEN;
+    }
+    else {
+        msgP2->color = DARK_GRAY;
+    }
+    msgP2->last = msgP1;
+    msgP1->next = msgP2;
+
+    int color3[] = {BABY_PINK, SEASHELL};
+    MsgP msgP3 = msgP + 2;
+
+    createMsgPath("class3", path);
+
+    inputMsg(path, msgP3);
+
+    flag = !checkIfSelect(msgP3, peopleP);
+    if (flag) {
+        msgP3->color = GREEN;
+    }
+    else {
+        msgP3->color = DARK_GRAY;
+    }
+
+    msgP3->last = msgP2;
+    msgP2->next = msgP3;
+    // 形成循环链表
+    msgP1->last = msgP3;
+    msgP3->next = msgP1;
+
+    // 标签1
+    showAllMsg(0, 26 * SIZE, msgP1);
+
+    // 标签2
+    showAllMsg(0, 61 * SIZE, msgP2);
+
+    // 标签3
+    showAllMsg(0, 96 * SIZE, msgP3);
+}
+
 void showRecommendMsg(float x, float y, int *color, MsgP msgP) {
     SVGA_Ball(x, y, 2 * SIZE, color[0]);
     dis_16hz(x + 4 * SIZE, y - 1 * SIZE, msgP->author, BLACK);
@@ -509,6 +672,8 @@ void showHelpMsg(float x, float y, MsgP msgP) {
  * 画训练界面的个各种细节
  */
 void drawTrainDetail() {
+    char *path;
+    path = (char *) malloc(50 * sizeof(char));
 
 }
 
@@ -639,16 +804,16 @@ void freeHeapMalloc(MsgP msgP) {
     msgP = NULL;
 }
 
-void showAllMsg(float x, float y, bool hasAchieved, MsgP msgP) {
-    int color = hasAchieved ? GREEN : DARK_GRAY;
+void showAllMsg(float x, float y, MsgP msgP) {
+
 //    SVGA_Ball(x, y, 2 * SIZE, color[0]);
-    SVGA_Bar(x + 4 * SIZE, y + 4 * SIZE, 64 * SIZE, y + 4 * SIZE + 27 * SIZE, color);
-    dis_24hz(x + 8 * SIZE, y + 6 * SIZE, "迎新跑", WHITE);
-    dis_16hz(x + 8 * SIZE, y + 12 * SIZE, "零基础", WHITE);
-    dis_16zf(x + 20 * SIZE, y + 12 * SIZE, "21", WHITE);
+    SVGA_Bar(x + 4 * SIZE, y + 4 * SIZE, 64 * SIZE, y + 4 * SIZE + 27 * SIZE, msgP->color);
+    dis_24hz(x + 8 * SIZE, y + 6 * SIZE, msgP->author, WHITE);
+    dis_16hz(x + 8 * SIZE, y + 12 * SIZE, msgP->title, WHITE);
+    dis_16zf(x + 20 * SIZE, y + 12 * SIZE, msgP->type, WHITE);
     dis_16hz(x + 28 * SIZE, y + 12 * SIZE, "分钟", WHITE);
     dis_16hz(x + 8 * SIZE, y + 25 * SIZE, "参加人数", WHITE);
-    dis_16zf(x + 23 * SIZE, y + 25 * SIZE, "22342342", WHITE);
+    dis_16zf(x + 23 * SIZE, y + 25 * SIZE, msgP->readNum, WHITE);
 //    SVGA_Bar(x - 3 * SIZE, y + 4 * SIZE, x + 13 * SIZE, y + 20 * SIZE, color[1]);
 //    dis_24hz(x + 16 * SIZE, y + 4 * SIZE, msgP->title, BLACK);
 //    SVGA_Bar(x + 16 * SIZE, y + 16 * SIZE, x + 31 * SIZE, y + 20 * SIZE, LIGHT_CYAN);
@@ -656,3 +821,16 @@ void showAllMsg(float x, float y, bool hasAchieved, MsgP msgP) {
 //    dis_16hz(x + 45 * SIZE, y + 16 * SIZE + 2, "阅读", DARK_GRAY);
 //    dis_16zf(x + 53 * SIZE, y + 16 * SIZE + 2, msgP->readNum, DARK_GRAY);
 }
+
+bool checkIfSelect(MsgP msgP, PEOPLE *peopleP) {
+    for (int i = 0; msgP->text[i][0] != '\0'; ++i) {
+        char token[55];
+        strcpy(token, msgP->text[i]);
+        if (!strcmp(msgP->text[i], peopleP->name)) {
+            return false;
+        }
+    }
+    return true;
+}
+
+

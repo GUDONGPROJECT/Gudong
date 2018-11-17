@@ -65,15 +65,15 @@ void Begin(MOUSE *mouse) {
     while (1) {
         if (state == UNDEFINED) {
             state = Begin_menu(mouse, &people);
-            InitPeople(&people);
+            if (state != UNDEFINED) {
+                InitPeople(&people);
+            }
+
             // ¶Ïµãµ÷ÊÔÓÃ
             char token1[22];
             char token2[22];
             strcpy(token1, people.name);
             strcpy(token2, people.key);
-        }
-        if (state == REGIST) {
-
         }
         if (state == SPORTPAGE) {
 			state = SportMain(mouse, &people);
@@ -262,6 +262,7 @@ bool quickWechatLogin(MOUSE *mouse, PEOPLE *peopleP) {
     char path[35];
     createLoginPath("wechat", path);
     inputPeople(path, peopleP);
+    strcpy(peopleP->name, "17371266527");
     return true;
 }
 
@@ -429,7 +430,7 @@ bool Regist(MOUSE *mouse, PEOPLE *people) {
                 free(txtname);
                 txtname = NULL;
             }
-            //Begin_menu(mouse);
+//            Begin_menu(mouse);
             mouse_recover(mouse);
             return false;
         }

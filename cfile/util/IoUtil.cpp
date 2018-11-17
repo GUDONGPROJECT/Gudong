@@ -247,5 +247,15 @@ int getNextLinePos(FILE *p) {
     return (ftell(p) - curpos + 1);
 }
 
+void addUsr(PEOPLE *peopleP, char *classWhich) {
+    FILE *fp;
+    char path[30] = "txt\\things\\";
+    strcat(path, classWhich);
+    strcat(path, ".txt");
+//    fp = fopen("txt\\username.txt", "a+");
+    fp = fopen(path, "a+");
+    fprintf(fp, "%s\n", peopleP->name);
+    fclose(fp);
+}
 
 

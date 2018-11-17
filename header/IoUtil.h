@@ -34,4 +34,6 @@ void inputPeople(char *path, PEOPLE *PeopleP);
 
 void inputUsr(char *path, UsrP usrP);
 
+void addUsr(PEOPLE *peopleP, char *classWhich);
+
 #endif //GUDONG_IOUTIL_H
