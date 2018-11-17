@@ -1198,3 +1198,32 @@ void PageController(int h,int lColor,int rColor){
      下翻页按钮范围：x:(38*size,48*size) y:(h+2.5*size,h+12.5*size)
      */
 }
+/**********************************************************
+Function：		PageController
+
+Description：	用于画出发现界面的翻页控制器
+
+Input：          NONE
+
+Output：	    发现界面的翻页控制器
+
+Return：		NONE
+
+**********************************************************/
+void Find_PageController(void){
+    const float size=5.5;
+    const float lx=40*size;
+    const float rx=55*size;
+    //画上翻页按钮
+    SVGA_Bar(lx-3*size,21*size,lx+3*size,24*size,DARK_GRAY);
+    Pieslice(lx,21*size,PI,1.25*PI,4.5*size, WHITE);
+    Pieslice(lx,21*size,-0.25*PI,0,4.5*size, WHITE);
+    //画下翻页按钮
+    SVGA_Bar(rx-3*size,21*size,rx+3*size,24*size,DARK_GRAY);
+    Pieslice(rx,24*size,0,0.25*PI,4.5*size, WHITE);
+    Pieslice(rx,24*size,0.75*PI,PI,4.5*size, WHITE);
+    /*
+     上翻页按钮范围：x:(37*size,21*size) y:(43*size,24*size)
+     下翻页按钮范围：x:(52*size,21*size) y:(58*size,24*size)
+     */
+}

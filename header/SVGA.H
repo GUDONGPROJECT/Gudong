@@ -63,4 +63,6 @@ void Pieslice(int x,int y, float stangle, float endangle,int radius,int color);
 
 void PageController(int h,int lColor,int rColor);
 
+void Find_PageController(void);
+
 #endif
