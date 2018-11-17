@@ -1189,7 +1189,7 @@ void PageController(int h,int lColor,int rColor){
     Pieslice(25*size,h+5.5*size,PI,1.25*PI,4.5*size, lColor);
     Pieslice(25*size,h+5.5*size,-0.25*PI,0,4.5*size, lColor);
     //画下翻页按钮
-    SVGA_Ball(43*size,h+7.5*size,5*size,lColor);//下翻页按钮圆背景
+    SVGA_Ball(43*size,h+7.5*size,5*size,rColor);//下翻页按钮圆背景
     SVGA_Bar(40*size,h+6.5*size,46*size,h+9.5*size,WHITE);
     Pieslice(43*size,h+9.5*size,0,0.25*PI,4.5*size, rColor);
     Pieslice(43*size,h+9.5*size,0.75*PI,PI,4.5*size, rColor);
