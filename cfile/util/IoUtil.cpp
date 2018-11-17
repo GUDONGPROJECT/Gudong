@@ -187,7 +187,10 @@ void inputUsr(char *path, UsrP usrP) {
         temp->next = token;
         token->last = temp;
     }
-    token->name[0] = 'n';
+    free(token);
+    temp->next = NULL;
+    token = NULL;
+    usrP->last = NULL;
 
     fclose(fp);
 }

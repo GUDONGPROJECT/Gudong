@@ -27,4 +27,6 @@ void showClassMsg(float x, float y, UsrP usrP);
 
 void getAllUsr(UsrP usrP);
 
+void freeAll(UsrP usrP);
+
 #endif //GUDONG_FIND_H

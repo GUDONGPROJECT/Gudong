@@ -1193,10 +1193,7 @@ void PageController(int h,int lColor,int rColor){
     SVGA_Bar(40*size,h+6.5*size,46*size,h+9.5*size,WHITE);
     Pieslice(43*size,h+9.5*size,0,0.25*PI,4.5*size, rColor);
     Pieslice(43*size,h+9.5*size,0.75*PI,PI,4.5*size, rColor);
-    /*
-     上翻页按钮范围：x:(20*size,30*size) y:(h+2.5*size,h+12.5*size)
-     下翻页按钮范围：x:(38*size,48*size) y:(h+2.5*size,h+12.5*size)
-     */
+
 }
 /**********************************************************
 Function：		PageController
@@ -1222,8 +1219,5 @@ void Find_PageController(void){
     SVGA_Bar(rx-3*size,21*size,rx+3*size,24*size,DARK_GRAY);
     Pieslice(rx,24*size,0,0.25*PI,4.5*size, WHITE);
     Pieslice(rx,24*size,0.75*PI,PI,4.5*size, WHITE);
-    /*
-     上翻页按钮范围：x:(37*size,21*size) y:(43*size,24*size)
-     下翻页按钮范围：x:(52*size,21*size) y:(58*size,24*size)
-     */
+
 }

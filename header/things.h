@@ -29,7 +29,7 @@ enum Jump {
 
 void thingsDraw(MOUSE *mouse,PEOPLE *people);
 
-void recommendDraw(MOUSE *mouse, PEOPLE *people, MsgP MsgP);
+void recommendDraw(MOUSE *mouse, PEOPLE *people, MsgP MsgP, int which);
 
 void trainDraw(MOUSE *mouse, PEOPLE * people);
 
@@ -37,7 +37,7 @@ void helpDraw(MOUSE *mouse, PEOPLE * people, MsgP msgP);
 
 State thingsPage(MOUSE *mouse,PEOPLE *people);
 
-void drawRecommendDetail(MsgP MsgP);
+void drawRecommendDetail(MsgP MsgP, int whichTheme);
 
 void drawTrainDetail();
 

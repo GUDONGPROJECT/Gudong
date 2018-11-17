@@ -15,6 +15,9 @@
  */
 State thingsPage(MOUSE *mouse, PEOPLE *people) {
     MsgP msgP = (MsgP) malloc(3 * sizeof(Msg));
+    MsgP msgP1 = (MsgP) malloc(3 * sizeof(Msg));
+    MsgP msgP2 = (MsgP) malloc(3 * sizeof(Msg));
+
     MsgP helpMsgP = (MsgP) malloc(3 * sizeof(Msg));
     MsgP helpTokenP = helpMsgP;
     Things state = RECOMMEND;
@@ -22,7 +25,7 @@ State thingsPage(MOUSE *mouse, PEOPLE *people) {
     while (1) {
         //当位于推荐界面时
         if (state == RECOMMEND) {
-            recommendDraw(mouse, people, msgP);
+            recommendDraw(mouse, people, msgP, 1);
             //获取鼠标位置
             mouse_position(mouse);
             mouse_reset(mouse);
@@ -43,15 +46,39 @@ State thingsPage(MOUSE *mouse, PEOPLE *people) {
                     }
                     // 是否点击人物故事
                     if (mouse->pos_x > 0 && mouse->pos_x < 22 * SIZE && mouse->pos_y > 26 * SIZE && mouse->pos_y < 49 * SIZE) {
+                        mouse->button = 0;
+                        delay(100);
 
+                        thingsDraw(mouse, people);
+
+                        freeHeapMalloc(msgP);
+                        freeHeapMalloc(helpMsgP);
+                        recommendDraw(mouse, people, msgP, 1);
+                        continue;
                     }
                     // 是否点击运动干货
                     if (mouse->pos_x > 22 && mouse->pos_x < 44 * SIZE && mouse->pos_y > 26 * SIZE && mouse->pos_y < 49 * SIZE) {
+                        mouse->button = 0;
+                        delay(100);
 
+                        thingsDraw(mouse, people);
+
+                        freeHeapMalloc(msgP);
+                        freeHeapMalloc(helpMsgP);
+                        recommendDraw(mouse, people, msgP, 2);
+                        continue;
                     }
                     // 是否点击装备评测
                     if (mouse->pos_x > 44 && mouse->pos_x < 66 * SIZE && mouse->pos_y > 26 * SIZE && mouse->pos_y < 49 * SIZE) {
+                        mouse->button = 0;
+                        delay(100);
 
+                        thingsDraw(mouse, people);
+
+                        freeHeapMalloc(msgP);
+                        freeHeapMalloc(helpMsgP);
+                        recommendDraw(mouse, people, msgP, 3);
+                        continue;
                     }
                     // 是否点击第一个标签
                     if (mouse->pos_x > 0 && mouse->pos_x < 68 * SIZE && mouse->pos_y > 49 * SIZE && mouse->pos_y < 78 * SIZE) {
@@ -184,7 +211,6 @@ State thingsPage(MOUSE *mouse, PEOPLE *people) {
         //当位于攻略界面时
         if (state == HELP) {
             helpDraw(mouse, people, helpMsgP);
-            PageController(110*5.5,PINK,PINK);
             //获取鼠标位置
             mouse_position(mouse);
             //画出鼠标
@@ -205,8 +231,14 @@ State thingsPage(MOUSE *mouse, PEOPLE *people) {
                         break;
                     }
 
+                    /*
+                     上翻页按钮范围：x:(20*size,30*size) y:(h+2.5*size,h+12.5*size)
+                     下翻页按钮范围：x:(38*size,48*size) y:(h+2.5*size,h+12.5*size)
+                     */
+
                     // 是否点击第一个标签
-                    if (mouse->pos_x > 0 && mouse->pos_x < 4 * SIZE && mouse->pos_y > 33 * SIZE && mouse->pos_y < 104 * SIZE) {
+                    if ((mouse->pos_x > 0 && mouse->pos_x < 4 * SIZE && mouse->pos_y > 33 * SIZE && mouse->pos_y < 104 * SIZE)
+                    || (mouse->pos_x > 20 * SIZE && mouse->pos_x < 30 * SIZE) && mouse->pos_y > 112.5 * SIZE && mouse->pos_y < 122.5 * SIZE) {
                         delay(100);
                         // 屏蔽鼠标
                         mouse_recover(mouse);
@@ -215,7 +247,8 @@ State thingsPage(MOUSE *mouse, PEOPLE *people) {
                         mouse_reset(mouse);
                     }
                     // 是否点击第二个标签
-                    if (mouse->pos_x > 64 * SIZE && mouse->pos_x < 68 * SIZE && mouse->pos_y > 33 * SIZE && mouse->pos_y < 104 * SIZE) {
+                    if ((mouse->pos_x > 64 * SIZE && mouse->pos_x < 68 * SIZE && mouse->pos_y > 33 * SIZE && mouse->pos_y < 104 * SIZE)
+                    || (mouse->pos_x > 38 * SIZE && mouse->pos_x < 48 * SIZE) && mouse->pos_y > 112.5 * SIZE && mouse->pos_y < 122.5 * SIZE) {
                         delay(100);
                         // 屏蔽鼠标
                         mouse_recover(mouse);
@@ -267,7 +300,7 @@ State thingsPage(MOUSE *mouse, PEOPLE *people) {
  * @param people
  */
 
-void recommendDraw(MOUSE *mouse, PEOPLE *people, MsgP msgP) {
+void recommendDraw(MOUSE *mouse, PEOPLE *people, MsgP msgP, int which) {
     thingsDraw(mouse, people);
     // 三个tab下方的绿线
     SVGA_Line(5 * SIZE, 26 * SIZE, 5 * SIZE + 32, 26 * SIZE, GREEN);
@@ -277,7 +310,7 @@ void recommendDraw(MOUSE *mouse, PEOPLE *people, MsgP msgP) {
     dis_16hz(16 * SIZE, 21 * SIZE, "训练", LIGHT_GRAY);
     dis_16hz(27 * SIZE, 21 * SIZE, "攻略", LIGHT_GRAY);
 
-    drawRecommendDetail(msgP);
+    drawRecommendDetail(msgP, which);
 }
 
 /**
@@ -351,7 +384,7 @@ void thingsDraw(MOUSE *mouse, PEOPLE *people) {
 /**
  * 画推荐界面的各种细节
  */
-void drawRecommendDetail(MsgP msgP) {
+void drawRecommendDetail(MsgP msgP, int whichTheme) {
     char *path;
     path = (char *) malloc(50 * sizeof(char));
     // 人物故事
@@ -391,20 +424,39 @@ void drawRecommendDetail(MsgP msgP) {
 //    msgP = (MsgP) malloc(3 * sizeof(Msg));
 
     MsgP msgP1 = msgP + 0;
-    createMsgPath("msg1", path);
+    if (whichTheme == 1) {
+        createMsgPath("msg1", path);
+    } else if (whichTheme == 2) {
+        createMsgPath("story1", path);
+    } else {
+        createMsgPath("test1", path);
+    }
+
     inputMsg(path, msgP1);
     msgP1->last = NULL;
 
     int color2[] = {SKY_BLUE, GAINSBORO};
     MsgP msgP2 = msgP + 1;
-    createMsgPath("msg2", path);
+    if (whichTheme == 1) {
+        createMsgPath("msg2", path);
+    } else if (whichTheme == 2) {
+        createMsgPath("story2", path);
+    } else {
+        createMsgPath("test2", path);
+    }
     inputMsg(path, msgP2);
     msgP2->last = msgP1;
     msgP1->next = msgP2;
 
     int color3[] = {BABY_PINK, SEASHELL};
     MsgP msgP3 = msgP + 2;
-    createMsgPath("msg3", path);
+    if (whichTheme == 1) {
+        createMsgPath("msg3", path);
+    } else if (whichTheme == 2) {
+        createMsgPath("story3", path);
+    } else {
+        createMsgPath("test3", path);
+    }
     inputMsg(path, msgP3);
     msgP3->last = msgP2;
     msgP2->next = msgP3;
@@ -438,6 +490,8 @@ void showHelpMsg(float x, float y, MsgP msgP) {
     SVGA_Bar(x, y, 64 * SIZE, 106 * SIZE, msgP->color);
     SVGA_Bar(0, 33 * SIZE, 2 * SIZE, 104 * SIZE, msgP->last->color);
     SVGA_Bar(66 * SIZE, 33 * SIZE, 68 * SIZE, 104 * SIZE, msgP->next->color);
+
+    PageController(110 * SIZE, msgP->last->color, msgP->next->color);
 
     dis_24hz(x + 2 * SIZE, y + 2 * SIZE, msgP->title, BLACK);
     SVGA_Ball(x + 4 * SIZE, y + 11 * SIZE, 2 * SIZE, msgP->icon);
@@ -583,4 +637,22 @@ void freeHeapMalloc(MsgP msgP) {
     msgP = NULL;
     free(msgP += 1);
     msgP = NULL;
+}
+
+void showClassMsg(float x, float y, bool hasAchieved, MsgP msgP) {
+    int color = hasAchieved ? GREEN : DARK_GRAY;
+//    SVGA_Ball(x, y, 2 * SIZE, color[0]);
+    SVGA_Bar(x + 4 * SIZE, y + 4 * SIZE, 64 * SIZE, y + 4 * SIZE + 27 * SIZE, color);
+    dis_24hz(x + 8 * SIZE, y + 6 * SIZE, "迎新跑", WHITE);
+    dis_16hz(x + 8 * SIZE, y + 12 * SIZE, "零基础", WHITE);
+    dis_16zf(x + 20 * SIZE, y + 12 * SIZE, "21", WHITE);
+    dis_16hz(x + 28 * SIZE, y + 12 * SIZE, "分钟", WHITE);
+    dis_16hz(x + 8 * SIZE, y + 25 * SIZE, "参加人数", WHITE);
+    dis_16zf(x + 23 * SIZE, y + 25 * SIZE, "22342342", WHITE);
+//    SVGA_Bar(x - 3 * SIZE, y + 4 * SIZE, x + 13 * SIZE, y + 20 * SIZE, color[1]);
+//    dis_24hz(x + 16 * SIZE, y + 4 * SIZE, msgP->title, BLACK);
+//    SVGA_Bar(x + 16 * SIZE, y + 16 * SIZE, x + 31 * SIZE, y + 20 * SIZE, LIGHT_CYAN);
+//    dis_16hz(x + 16 * SIZE + 4, y + 16 * SIZE + 2, msgP->type, GREEN);
+//    dis_16hz(x + 45 * SIZE, y + 16 * SIZE + 2, "阅读", DARK_GRAY);
+//    dis_16zf(x + 53 * SIZE, y + 16 * SIZE + 2, msgP->readNum, DARK_GRAY);
 }

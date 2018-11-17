@@ -10,7 +10,9 @@
 State findPage(MOUSE *mouse, PEOPLE *people) {
     int i = 0;
     UsrP usrP = (UsrP) malloc(sizeof(Usr));
-
+    UsrP freeP = usrP;
+    UsrP headP = usrP;
+    UsrP page1P = usrP;
     getAllUsr(usrP);
 
     findDraw(mouse, people);
@@ -32,25 +34,66 @@ State findPage(MOUSE *mouse, PEOPLE *people) {
         //当点击鼠标
         if (mouse->button == 1) {
 
+            /*
+             上翻页按钮范围：x:(37*size,21*size) y:(43*size,24*size)
+             下翻页按钮范围：x:(52*size,21*size) y:(58*size,24*size)
+             */
+            if (mouse->pos_x > 37 * SIZE && mouse->pos_x < 43 * SIZE && mouse->pos_y > 21 * SIZE && mouse->pos_y < 24 * SIZE) {
+                if (headP->last == NULL) {
+                    mouse->button = 0;
+                    delay(100);
+                    continue;
+                }
+                SVGA_Bar(0, 26 * SIZE + 3, 68 * SIZE, (6 * 17 + 26) * SIZE + 4, WHITE);
+//                for (int j = 0; j < 6; j++)
+//                    headP = headP->last;
+                headP = page1P;
+                usrP = headP;
+                delay(100);
+                for (i = 0; usrP->next != NULL && i < 6; i++) {
+                    showClassMsg(0, (i * 17 + 26) * SIZE, usrP);
+                    usrP = usrP->next;
+                }
+                headP = usrP;
+            }
+
+            if (mouse->pos_x > 52 * SIZE && mouse->pos_x < 58 * SIZE && mouse->pos_y > 21 * SIZE && mouse->pos_y < 24 * SIZE) {
+                if (usrP->next == NULL) {
+                    mouse->button = 0;
+                    delay(100);
+                    continue;
+                }
+                headP = usrP;
+                SVGA_Bar(0, 26 * SIZE + 3, 68 * SIZE, (6 * 17 + 26) * SIZE + 4, WHITE);
+                delay(100);
+                for (i = 0; usrP->next != NULL && i < 6; i++) {
+                    showClassMsg(0, (i * 17 + 26) * SIZE, usrP);
+                    usrP = usrP->next;
+                }
+                if (i == 6) {
+                    headP = usrP;
+                }
+            }
+
             if (mouse->pos_y > 130 * SIZE && mouse->pos_y < 140 * SIZE) {
                 //当点击运动圈
                 if (mouse->pos_x < 14.5 * SIZE) {
-
+                    freeAll(freeP);
                     return CIRCLE;
                 }
                 //当点击发现
                 if (mouse->pos_x > 40.5 * SIZE && mouse->pos_x < 53.5 * SIZE) {
-
+                    freeAll(freeP);
                     return THINGS;
                 }
                 //当点击运动
                 if (mouse->pos_x > 27.5 * SIZE && mouse->pos_x < 40.5 * SIZE) {
-
+                    freeAll(freeP);
                     return SPORTPAGE;
                 }
                 //当点击我的
                 if (mouse->pos_x > 53.5 * SIZE) {
-
+                    freeAll(freeP);
                     return MINE;
                 }
             }
@@ -78,6 +121,7 @@ void getAllUsr(UsrP usrP) {
 void findDraw(MOUSE *mouse, PEOPLE *people) {
     // 循环变量
     int i;
+
     // 画上下的绿白背景
     SVGA_Bar(0, 0, 68 * SIZE, 140 * SIZE, WHITE);
     // 三个tab下方的灰线
@@ -103,6 +147,7 @@ void findDraw(MOUSE *mouse, PEOPLE *people) {
     dis_16hz(47 * SIZE - 16, 136 * SIZE - 8, "干货", LIGHT_GRAY);
     dis_16hz(60 * SIZE - 16, 136 * SIZE - 8, "我的", LIGHT_GRAY);
 
+    Find_PageController();
 }
 
 void showClassMsg(float x, float y, UsrP usrP) {
@@ -112,3 +157,12 @@ void showClassMsg(float x, float y, UsrP usrP) {
     dis_16zf(x + 18 * SIZE, y + 12 * SIZE, usrP->name, WHITE);
 
 }
+
+void freeAll(UsrP usrP) {
+    if (usrP != NULL) {
+        free(usrP);
+        usrP = usrP->next;
+    }
+}
+
+
